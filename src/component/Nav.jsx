@@ -6,6 +6,7 @@ import { IoSearchSharp } from "react-icons/io5";
 import { IoNotificationsSharp } from "react-icons/io5";
 import { BsCart4 } from "react-icons/bs";
 import { MdFavoriteBorder } from "react-icons/md";
+import LinkCategories from "./LinkCategories";
 
 const Nav = () => {
   const { watchListLinks, myShopLinks, allCategories } = NavBarLinkListNames();
@@ -27,7 +28,7 @@ const Nav = () => {
             <p>
               Hi
               <span className="text-[#021cff] underline">
-                <Link to="profile"> Sign in </Link>
+                <Link to="/profile"> Sign in </Link>
               </span>
               or
               <span className="text-[#021cff] underline">
@@ -37,17 +38,17 @@ const Nav = () => {
           </div>
 
           <div className="flex space-x-4 ml-5">
-            <Link to="giftCards">Gift Cards</Link>
-            <Link to="brandOutlet">Brand Outlet</Link>
-            <Link to="deals">Deals</Link>
-            <Link to="customerService">Customer Service</Link>
-            <Link to="helpContact">Help & Contact</Link>
+            <Link to="/giftCards">Gift Cards</Link>
+            <Link to="/brandOutlet">Brand Outlet</Link>
+            <Link to="/deals">Deals</Link>
+            <Link to="/customerService">Customer Service</Link>
+            <Link to="/helpContact">Help & Contact</Link>
           </div>
         </article>
 
         {/* Second group */}
         <article className="flex space-x-4 ml-5">
-          <Link to="sell">Sell</Link>
+          <Link to="/sell" >Sell</Link>
           <ArrowDropDown title="Watch List" watchListLinks={watchListLinks} />
           <ArrowDropDown title="My shop" watchListLinks={myShopLinks} />
         </article>
@@ -73,7 +74,7 @@ const Nav = () => {
               type="text"
               value={searchResult}
               onChange={(e) => setSearchResult(e.target.value)}
-              placeholder="Search Anyting"
+              placeholder="Search Anything"
             />
 
             <button className="py-1 w-10 h-10 absolute left-3 top-[50%] -translate-y-[50%]" type="submit">
@@ -108,17 +109,7 @@ const Nav = () => {
       </section>
 
       {/* Third Section */}
-      <section className="flex space-x-12 mb-5 mt-2 py-2 px-5 items-center justify-center bg-slate-200">
-        <Link to="deals">Saved</Link>
-        <Link to="brandOutlet">Electronics</Link>
-        <Link to="giftCards">Motors</Link>
-        <Link to="helpContact">Fashion</Link>
-        <Link to="customerService">Collectables & Art</Link>
-        <Link to="customerService">Sports</Link>
-        <Link to="customerService">Health & Beauty</Link>
-        <Link to="customerService">Industrial Equipment</Link>
-        <Link to="customerService">Home & Garden</Link>
-      </section>
+      <LinkCategories />
     </nav>
   );
 };

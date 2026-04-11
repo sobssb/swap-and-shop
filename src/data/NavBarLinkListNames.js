@@ -13,7 +13,7 @@ const NavBarLinkListNames = () => {
   ];
 
   const allCategories = [
-    { name: "Deals", url: "deals" },
+    { name: "Saved", url: "/" },
     { name: "Electronics", url: "/" },
     { name: "Motors", url: "/" },
     { name: "Fashion", url: "/" },
@@ -22,9 +22,180 @@ const NavBarLinkListNames = () => {
     { name: "Health & Beauty", url: "/" },
     { name: "Industrial Equipment", url: "/" },
     { name: "Home & Garden", url: "/" },
-  ]
+  ];
 
-  return { watchListLinks, myShopLinks, allCategories };
+  const navCategories = [
+    {
+      name: "Electronics",
+      url: "/",
+      categories: [
+        "Apple",
+        "Samsung",
+        "Portable audio and headphones",
+        "Smart watches",
+        "Deals",
+        "Sell on ebay",
+      ],
+      popular: [
+        "Smartphones and accessories",
+        "Video games and consoles",
+        "Computers and tablets",
+        "Cameras and photo",
+        "Camera drones",
+        "Refurbished",
+        "Smart home",
+      ],
+    },
+    {
+      name: "Motors",
+      url: "/",
+      categories: [
+        "Apple",
+        "Samsung",
+        "Portable audio and headphones",
+        "Smart watches",
+        "Deals",
+        "Sell on ebay",
+      ],
+      popular: [
+        "Smartphones and accessories",
+        "Video games and consoles",
+        "Computers and tablets",
+        "Cameras and photo",
+        "Camera drones",
+        "Refurbished",
+        "Smart home",
+      ],
+    },
+    {
+      name: "Fashion",
+      url: "/",
+      categories: [
+        "Apple",
+        "Samsung",
+        "Portable audio and headphones",
+        "Smart watches",
+        "Deals",
+        "Sell on ebay",
+      ],
+      popular: [
+        "Smartphones and accessories",
+        "Video games and consoles",
+        "Computers and tablets",
+        "Cameras and photo",
+        "Camera drones",
+        "Refurbished",
+        "Smart home",
+      ],
+    },
+    {
+      name: "Collectablles & Art",
+      url: "/",
+      categories: [
+        "Apple",
+        "Samsung",
+        "Portable audio and headphones",
+        "Smart watches",
+        "Deals",
+        "Sell on ebay",
+      ],
+      popular: [
+        "Smartphones and accessories",
+        "Video games and consoles",
+        "Computers and tablets",
+        "Cameras and photo",
+        "Camera drones",
+        "Refurbished",
+        "Smart home",
+      ],
+    },
+    {
+      name: "Sports",
+      url: "/",
+      categories: [
+        "Apple",
+        "Samsung",
+        "Portable audio and headphones",
+        "Smart watches",
+        "Deals",
+        "Sell on ebay",
+      ],
+      popular: [
+        "Smartphones and accessories",
+        "Video games and consoles",
+        "Computers and tablets",
+        "Cameras and photo",
+        "Camera drones",
+        "Refurbished",
+        "Smart home",
+      ],
+    },
+    {
+      name: "Health & Beauty",
+      url: "/",
+      categories: [
+        "Apple",
+        "Samsung",
+        "Portable audio and headphones",
+        "Smart watches",
+        "Deals",
+        "Sell on ebay",
+      ],
+      popular: [
+        "Smartphones and accessories",
+        "Video games and consoles",
+        "Computers and tablets",
+        "Cameras and photo",
+        "Camera drones",
+        "Refurbished",
+        "Smart home",
+      ],
+    },
+    {
+      name: "Industrial Equipment",
+      url: "/",
+      categories: [
+        "Apple is here",
+        "Samsung",
+        "Portable audio and headphones",
+        "Smart watches",
+        "Deals",
+        "Sell on ebay",
+      ],
+      popular: [
+        "Smartphones and accessories isn't it",
+        "Video games and consoles",
+        "Computers and tablets",
+        "Cameras and photo",
+        "Camera drones",
+        "Refurbished",
+        "Smart home",
+      ],
+    },
+    {
+      name: "Home & Garden",
+      url: "/",
+      categories: [
+        "Apple is not",
+        "Samsung",
+        "Portable audio and headphones",
+        "Smart watches",
+        "Deals",
+        "Sell on ebay",
+      ],
+      popular: [
+        "Smartphones and accessories for try",
+        "Video games and consoles",
+        "Computers and tablets",
+        "Cameras and photo",
+        "Camera drones",
+        "Refurbished",
+        "Smart home",
+      ],
+    },
+  ];
+
+  return { watchListLinks, myShopLinks, allCategories, navCategories };
 };
 
 export default NavBarLinkListNames;

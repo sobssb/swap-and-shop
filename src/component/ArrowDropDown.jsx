@@ -10,11 +10,11 @@ const ArrowDropDown = ({ title, watchListLinks }) => {
   const dropdownRef = useDetectOutsideClick(() => setShowSelect(false));
 
   return (
-    <div className="relative flex w-fit" ref={dropdownRef}>
+    <div className="relative flex w-fit z-10" ref={dropdownRef}>
       <button className="flex items-center justify-center cursor-pointer" onClick={() => setShowSelect(!showSelect)}>{title} <FaAngleDown /></button>
 
           {showSelect && (
-            <div className="absolute top-7.5 -left-10 bg-white -m-1 flex flex-col w-fit py-2 items-center justify-center z-10 rounded-1xl shadow-2xl">
+            <div className="absolute top-7.5 -left-10 bg-white -m-1 flex flex-col w-fit py-2 items-center justify-center z-5 rounded-1xl shadow-2xl">
               {watchListLinks.map((links, index) => (
                 <Link
                   className="block hover:bg-[#021cff] hover:text-white w-full px-3"
