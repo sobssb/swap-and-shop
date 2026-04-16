@@ -1,42 +1,50 @@
-import axios from 'axios'
-import {useState, useEffect} from 'react'
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 const useFetchData = (dataUrl) => {
-  const [data, setData] = useState([])
-  const [fetchError, setFetchError] = useState(null)
-  const [isLoading, setIsLoading] = useState(false)
+  const [data, setData] = useState([]);
+  const [fetchError, setFetchError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() =>{
+  useEffect(() => {
     const controller = new AbortController();
+    let isMounted = true;
 
-    const handleFetch = async (url) =>{
-      setIsLoading(true)
+    const handleFetch = async (url) => {
+      setIsLoading(true);
       try {
         const response = await axios.get(url, {
-          signal : controller.signal
-        })
-        setData(response.data)
+          signal: controller.signal,
+        });
+        if (isMounted) {
+          setData(response.data);
+          setFetchError(null);
+        }
       } catch (error) {
-        if (error.name === "CancelledError"){
-          setFetchError("Request Cancelled")
-        } else{
-          setFetchError(error.message);
+        if (isMounted) {
+          if (error.name === "CancelledError") {
+            setFetchError("Request Cancelled");
+          } else {
+            setFetchError(error.message);
+            setData([]);
+          }
         }
       } finally {
-        setIsLoading(false)
+        if (isMounted) {
+          setIsLoading(false);
+        }
       }
-    }
+    };
 
     handleFetch(dataUrl);
 
     return () => {
-      controller.abort()
-    }
-    
-  }, [dataUrl])
+      isMounted = false;
+      controller.abort();
+    };
+  }, [dataUrl]);
 
-  return {data, fetchError, isLoading}
-  
-}
+  return { data, fetchError, isLoading };
+};
 
-export default useFetchData
+export default useFetchData;

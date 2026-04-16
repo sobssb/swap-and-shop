@@ -1,5 +1,5 @@
 import React from 'react'
-import UnderContruction from '../component/UnderContruction'
+import UnderContruction from '../component/UnderConstruction'
 
 const BrandOutlet = () => {
   return (

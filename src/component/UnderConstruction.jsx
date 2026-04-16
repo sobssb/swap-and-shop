@@ -1,6 +1,6 @@
 import React from "react";
 
-const UnderContruction = ({ title }) => {
+const UnderConstruction = ({ title }) => {
   return (
     <main className="undercont min-h-screen">
       <h1 className="text-5xl my-5 text-center px-5 font-bold text-black">
@@ -13,4 +13,4 @@ const UnderContruction = ({ title }) => {
   );
 };
 
-export default UnderContruction;
+export default UnderConstruction;

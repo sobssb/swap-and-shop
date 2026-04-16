@@ -17,7 +17,7 @@ body {
   display: none;
 }
 
-.no-srollbar{
+.no-scrollbar{
   -ms-overflow-style:none;
   scrollbar-width: none
 }

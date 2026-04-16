@@ -1,10 +1,10 @@
 import React from 'react'
-import UnderContruction from '../component/UnderContruction'
+import UnderConstruction from '../component/UnderConstruction'
 
 const HelpContact = () => {
   return (
     <>
-      <UnderContruction title="Help and Contact" />
+      <UnderConstruction title="Help and Contact" />
     </>
   )
 }

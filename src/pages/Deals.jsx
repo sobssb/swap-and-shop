@@ -1,10 +1,10 @@
 import React from 'react'
-import UnderContruction from '../component/UnderContruction'
+ import UnderConstruction from '../component/UnderConstruction'
 
 const Deals = () => {
   return (
     <>
-      <UnderContruction title={"Deals"} />
+      <UnderConstruction title={"Deals"} />
     </>
   )
 }

@@ -1,11 +1,11 @@
 import React from "react";
-import Nav from "../component/Nav";
+import HeroSection from "../layout/HeroSection";
 
-const Home = () => {
+const Home = ({ data, fetchError, isLoading }) => {
   return (
-    <div>
-
-    </div>
+    <main>
+      <HeroSection data={data} fetchError={fetchError} isLoading={isLoading} />
+    </main>
   );
 };
 

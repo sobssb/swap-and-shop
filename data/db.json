@@ -1,3 +1,37 @@
 {
-  "products": []
+  "products": [
+    {
+      "id": "1",
+      "serialNo": 1,
+      "name": "banner",
+      "hashTag": "carousel",
+      "title": "List Your Items In Seconds",
+      "buttonTitle": "Start Swapping",
+      "subTitle": "Sell or swap with real people instantly.",
+      "img": "../assets/watchBanner1.png",
+      "background": "../assets/backgroundBanner.png"
+    },
+    {
+      "id": "2",
+      "serialNo": 2,
+      "name": "banner",
+      "hashTag": "carousel",
+      "title": "Swap, Shop & Save More",
+      "buttonTitle": "Start Swapping",
+      "subTitle": "Turn what you don’t need into what you love.",
+      "img": "../assets/productBanner3.png",
+      "background": "../assets/backgroundBanner.png"
+    },
+    {
+      "id": "3",
+      "serialNo": 3,
+      "name": "banner",
+      "hashTag": "carousel",
+      "title": "Find Amazing Deals Near You",
+      "buttonTitle": "Browse Categories",
+      "subTitle": "Electronics, fashion, baby items & more.",
+      "img": "../assets/gameBanner2.png",
+      "background": "../assets/backgroundBanner.png"
+    }
+  ]
 }

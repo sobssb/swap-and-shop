@@ -6,7 +6,6 @@ import NavBarLinkListNames from "../data/NavBarLinkListNames";
 import { IoSearchSharp } from "react-icons/io5";
 import { IoNotificationsSharp } from "react-icons/io5";
 import { BsCart4 } from "react-icons/bs";
-import { MdFavoriteBorder } from "react-icons/md";
 import LinkCategories from "./LinkCategories";
 import { CiLocationOn, CiMoneyCheck1 } from "react-icons/ci";
 import { RiContactsLine } from "react-icons/ri";

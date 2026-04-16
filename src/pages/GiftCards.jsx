@@ -1,10 +1,10 @@
 import React from 'react'
-import UnderContruction from '../component/UnderContruction'
+import UnderConstruction from '../component/UnderConstruction'
 
 const GiftCards = () => {
   return (
     <>
-      <UnderContruction title="Gift Cards" />
+      <UnderConstruction title="Gift Cards" />
     </>
   )
 }
