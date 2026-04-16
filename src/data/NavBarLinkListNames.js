@@ -193,6 +193,7 @@ const NavBarLinkListNames = () => {
         "Smart home",
       ],
     },
+    
   ];
 
   return { watchListLinks, myShopLinks, allCategories, navCategories };

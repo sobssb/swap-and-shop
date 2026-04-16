@@ -2,90 +2,184 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import ArrowDropDown from "./ArrowDropDown";
 import NavBarLinkListNames from "../data/NavBarLinkListNames";
+// icons
 import { IoSearchSharp } from "react-icons/io5";
 import { IoNotificationsSharp } from "react-icons/io5";
 import { BsCart4 } from "react-icons/bs";
 import { MdFavoriteBorder } from "react-icons/md";
 import LinkCategories from "./LinkCategories";
+import { CiLocationOn, CiMoneyCheck1 } from "react-icons/ci";
+import { RiContactsLine } from "react-icons/ri";
+import { RxHamburgerMenu } from "react-icons/rx";
+// ///////////////////////////
 
 const Nav = () => {
   const { watchListLinks, myShopLinks, allCategories } = NavBarLinkListNames();
   const [searchResult, setSearchResult] = useState("");
 
   return (
-    // TODO: add nav links and styling
-    // This contains the logo and the nav links and a search bar
-    <nav className="flex justify-between flex-col">
-      {/* This has three sections. First for the links. Second for the logo, location, search bar, some categories, currency and some icons. Third contains some categories navigation */}
+    // For bigger screens
+    <div>
+      {/* TODO: add nav links and styling 
+      These contains the logo and the nav
+      links and a search bar */}
+      <nav className="hidden lg:flex justify-between flex-col">
+        {/* This has three sections. First for the links. Second for the logo, location, search bar, some categories, currency and some icons. Third contains some categories navigation */}
 
-      {/* First Section */}
-      <section className="mt-5 mb-1 flex justify-between items-center px-5 text-[#1A1D2F]">
-        {/* First section has two group of links which are justigied between them */}
+        {/* First Section */}
+        <section className="mt-5 mb-1 flex justify-between items-center px-5 text-[#1A1D2F]">
+          {/* First section has two group of links which are justified between them */}
 
-        {/* first group */}
-        <article className="flex gap-2 ">
-          <div>
-            <p>
-              Hi
-              <span className="text-[#021cff] underline">
-                <Link to="/profile"> Sign in </Link>
-              </span>
-              or
-              <span className="text-[#021cff] underline">
-                <Link to="/profile/createAccount"> Create Account</Link>
-              </span>
-            </p>
+          {/* first group */}
+          <article className="flex gap-2 ">
+            <div>
+              <p>
+                Hi
+                <span className="text-[#021cff] underline">
+                  <Link to="/profile"> Sign in </Link>
+                </span>
+                or
+                <span className="text-[#021cff] underline">
+                  <Link to="/profile/createAccount"> Create Account</Link>
+                </span>
+              </p>
+            </div>
+
+            <div className="flex space-x-4 ml-5">
+              <Link to="/giftCards">Gift Cards</Link>
+              <Link to="/brandOutlet">Brand Outlet</Link>
+              <Link to="/deals">Deals</Link>
+              <Link to="/customerService">Customer Service</Link>
+              <Link to="/helpContact">Help & Contact</Link>
+            </div>
+          </article>
+
+          {/* Second group */}
+          <article className="flex space-x-4 ml-5">
+            <Link to="/sell">Sell</Link>
+            <ArrowDropDown title="Watch List" watchListLinks={watchListLinks} />
+            <ArrowDropDown title="My shop" watchListLinks={myShopLinks} />
+          </article>
+        </section>
+
+        {/* Second Section */}
+
+        <section className="flex gap-3 items-center border-y-[.5px] border-slate-200 py-3.5 px-5">
+          {/* this is the logo */}
+          <button className="rounded-2xl border border-solid border-slate-200 px-4 py-1 w-35 h-13">
+            My Logo
+          </button>
+
+          <button className="w-9 h-9">
+            <CiLocationOn className="w-full h-full" />
+          </button>
+
+          {/* search bar */}
+          <div className="flex grow relative">
+            <form action="" className=" flex grow">
+              <input
+                className="border border-slate-500 w-full pr-49 pl-13 text-2xl focus:outline-none h-10  rounded-2xl"
+                type="text"
+                value={searchResult}
+                onChange={(e) => setSearchResult(e.target.value)}
+                placeholder="Search Anything"
+              />
+
+              <button
+                className="py-1 w-10 h-10 absolute left-3 top-[50%] -translate-y-[50%]"
+                type="submit"
+              >
+                <IoSearchSharp className="w-full h-full" />
+              </button>
+            </form>
+
+            <div className="absolute right-3 top-[50%] -translate-y-[50%]">
+              <ArrowDropDown
+                title="All Categories"
+                watchListLinks={allCategories}
+              />
+            </div>
           </div>
 
-          <div className="flex space-x-4 ml-5">
-            <Link to="/giftCards">Gift Cards</Link>
-            <Link to="/brandOutlet">Brand Outlet</Link>
-            <Link to="/deals">Deals</Link>
-            <Link to="/customerService">Customer Service</Link>
-            <Link to="/helpContact">Help & Contact</Link>
-          </div>
-        </article>
+          <button className="w-9 h-9">
+            <CiMoneyCheck1 className="w-full h-full" />
+          </button>
 
-        {/* Second group */}
-        <article className="flex space-x-4 ml-5">
-          <Link to="/sell" >Sell</Link>
-          <ArrowDropDown title="Watch List" watchListLinks={watchListLinks} />
-          <ArrowDropDown title="My shop" watchListLinks={myShopLinks} />
-        </article>
-      </section>
+          <button className="w-9 h-9 relative">
+            <IoNotificationsSharp className="w-full h-full text-center" />
+            <div className="w-6 h-6 bg-[#F0C808] rounded-[50%] p-1 absolute -top-3.5 -right-1.5 grid place-content-center font-bold text-white">
+              1+
+            </div>
+          </button>
 
-      {/* Second Section */}
+          <button className="w-9 h-9 relative">
+            <BsCart4 className="w-full h-full text-center" />
+            <div className="w-6 h-6 bg-[#F0C808] rounded-[50%] p-1 absolute -top-3.5 -right-1.5 grid place-content-center font-bold text-white">
+              1+
+            </div>
+          </button>
+        </section>
 
-      <section className="flex gap-3 items-center border-y-[.5px] border-slate-200 py-3.5 px-5">
-        {/* this is the logo */}
-        <button className="rounded-2xl border border-solid border-slate-200 px-4 py-1 w-35 h-13">
-          My Logo
-        </button>
+        {/* Third Section */}
+        <LinkCategories />
+      </nav>
 
-        <button className="w-10 h-10">
-          <MdFavoriteBorder className="w-full h-full" />
-        </button>
+      {/* For mobile view */}
+      <nav className="lg:hidden flex justify-between flex-col">
+        <section className="mt-5 mb-1 flex justify-between items-center px-5 text-[#1A1D2F]">
+          {/* First section has two group of links which are justified between them */}
+          <article className="flex gap-2 items-center">
+            <button className="w-7 h-7 relative">
+              <RxHamburgerMenu className="w-full h-full text-center" />
+            </button>
+
+            <button className="rounded-2xl border border-solid border-slate-200 px-4 py-1 w-35 h-9">
+              My Logo
+            </button>
+          </article>
+
+          {/* Second segment */}
+          <article className="flex gap-2 items-center">
+            <button className="w-7 h-7">
+              <RiContactsLine className="w-full h-full" />
+            </button>
+
+            <button className="w-7 h-7 relative">
+              <IoNotificationsSharp className="w-full h-full text-center" />
+              <div className="w-6 h-6 bg-[#F0C808] rounded-[50%] p-1 absolute -top-3.5 -right-1.5 grid place-content-center font-bold text-white">
+                1+
+              </div>
+            </button>
+
+            <button className="w-7 h-7 relative">
+              <BsCart4 className="w-full h-full text-center" />
+              <div className="w-6 h-6 bg-[#F0C808] rounded-[50%] p-1 absolute -top-3.5 -right-1.5 grid place-content-center font-bold text-white">
+                1+
+              </div>
+            </button>
+          </article>
+        </section>
 
         {/* search bar */}
-        <div className="flex grow relative">
+        <div className="px-5 flex grow relative my-1 border-y-[.5px] border-slate-200 py-2">
           <form action="" className=" flex grow">
             <input
-              className="border border-slate-500 h-13 w-full pr-49 pl-13 rounded-4xl text-3xl focus:outline-none"
+              className="border border-slate-500 h-10 w-full pr-35 pl-13 rounded-2xl focus:outline-none"
               type="text"
               value={searchResult}
               onChange={(e) => setSearchResult(e.target.value)}
               placeholder="Search Anything"
             />
 
-            <button className="py-1 w-10 h-10 absolute left-3 top-[50%] -translate-y-[50%]" type="submit">
-              <IoSearchSharp
-                className="w-full h-full"
-              />
+            <button
+              className="py-1 w-10 h-9 absolute left-6 top-[50%] -translate-y-[50%]"
+              type="submit"
+            >
+              <IoSearchSharp className="w-full h-full" />
             </button>
           </form>
-          
 
-          <div className="absolute right-3 top-[50%] -translate-y-[50%] text-2xl">
+          <div className="absolute right-7 top-[50%] -translate-y-[50%]">
             <ArrowDropDown
               title="All Categories"
               watchListLinks={allCategories}
@@ -93,24 +187,12 @@ const Nav = () => {
           </div>
         </div>
 
-        <button className="w-10 h-10">
-          <MdFavoriteBorder className="w-full h-full" />
-        </button>
+        {/* Third Section */}
+        <LinkCategories />
+      </nav>
+    </div>
 
-        <button className="w-10 h-10 relative">
-          <IoNotificationsSharp className="w-full h-full text-center" />
-          <div className="w-6 h-6 bg-[#F0C808] rounded-[50%] p-1 absolute -top-3.5 -right-1.5 grid place-content-center font-bold text-white">1+</div>
-        </button>
-
-        <button className="w-10 h-10 relative">
-          <BsCart4 className="w-full h-full text-center" />
-          <div className="w-6 h-6 bg-[#F0C808] rounded-[50%] p-1 absolute -top-3.5 -right-1.5 grid place-content-center font-bold text-white">1+</div>
-        </button>
-      </section>
-
-      {/* Third Section */}
-      <LinkCategories />
-    </nav>
+    // Mobile view
   );
 };
 
