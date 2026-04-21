@@ -8,8 +8,8 @@
       "title": "List Your Items In Seconds",
       "buttonTitle": "Start Swapping",
       "subTitle": "Sell or swap with real people instantly.",
-      "img": "../assets/watchBanner1.png",
-      "background": "../assets/backgroundBanner.png"
+      "img": "/assets/watchBanner1.png",
+      "background": "/assets/backgroundBanner.png"
     },
     {
       "id": "2",
@@ -19,8 +19,8 @@
       "title": "Swap, Shop & Save More",
       "buttonTitle": "Start Swapping",
       "subTitle": "Turn what you don’t need into what you love.",
-      "img": "../assets/productBanner3.png",
-      "background": "../assets/backgroundBanner.png"
+      "img": "/assets/productsBanner3.png",
+      "background": "/assets/backgroundBanner.png"
     },
     {
       "id": "3",
@@ -30,8 +30,370 @@
       "title": "Find Amazing Deals Near You",
       "buttonTitle": "Browse Categories",
       "subTitle": "Electronics, fashion, baby items & more.",
-      "img": "../assets/gameBanner2.png",
-      "background": "../assets/backgroundBanner.png"
+      "img": "/assets/gameBanner2.png",
+      "background": "/assets/backgroundBanner.png"
+    },
+    {
+      "id": "4",
+      "serialNo": 4,
+      "name": "homeCard",
+      "hashTag": "homecard",
+      "title": "Get your game on",
+      "subTitle": "Shop gaming",
+      "img": [
+        { "img": "/assets/watchBanner1.png", "text": "Game Pad" },
+        { "img": "/assets/watchBanner1.png", "text": "Play Station" },
+        { "img": "/assets/watchBanner1.png", "text": "Air Fan" },
+        { "img": "/assets/watchBanner1.png", "text": "Game Pad" }
+      ],
+      "background": "bg-gray-500"
+    },
+    {
+      "id": "5",
+      "serialNo": 5,
+      "name": "homeCard",
+      "hashTag": "homecard",
+      "title": "New home arrivals under $50",
+      "subTitle": "Shop the latest from Home",
+      "img": [
+        { "img": "/assets/watchBanner1.png", "text": "Kitchen & Dining" },
+        { "img": "/assets/watchBanner1.png", "text": "Home Improvement" },
+        { "img": "/assets/watchBanner1.png", "text": "Dicor" },
+        { "img": "/assets/watchBanner1.png", "text": "Bedding & Bath" }
+      ],
+      "background": "bg-green-500"
+    },
+    {
+      "id": "6",
+      "serialNo": 6,
+      "name": "homeCard",
+      "hashTag": "homecard",
+      "title": "Find gifts for parents",
+      "subTitle": "Shop parent's gifts",
+      "img": [
+        { "img": "/assets/watchBanner1.png", "text": "Apparel" },
+        { "img": "/assets/watchBanner1.png", "text": "Shoes" },
+        { "img": "/assets/watchBanner1.png", "text": "Jewelry" },
+        { "img": "/assets/watchBanner1.png", "text": "Handbags" }
+      ],
+      "background": "bg-pink-500"
+    },
+    {
+      "id": "7",
+      "serialNo": 7,
+      "name": "homeCard",
+      "hashTag": "homecard",
+      "title": "Gift for techie parents",
+      "subTitle": "Explore Parent's gift",
+      "img": [
+        { "img": "/assets/watchBanner1.png", "text": "Headphones" },
+        {
+          "img": "/assets/watchBanner1.png",
+          "text": "Security & surveillance"
+        },
+        { "img": "/assets/watchBanner1.png", "text": "Wearable tech" },
+        { "img": "/assets/watchBanner1.png", "text": "Computer & accessories" }
+      ],
+      "background": "bg-green-500"
+    },
+    {
+      "id": "8",
+      "serialNo": 8,
+      "name": "homeCard",
+      "hashTag": "homecard",
+      "title": "Top categories in Kitchen appliances",
+      "subTitle": "Explore all products in kitchen",
+      "img": [
+        { "img": "/assets/watchBanner1.png", "text": "Cooker" },
+        { "img": "/assets/watchBanner1.png", "text": "Kettles" },
+        { "img": "/assets/watchBanner1.png", "text": "Pots" },
+        { "img": "/assets/watchBanner1.png", "text": "Coffee" }
+      ],
+      "background": "bg-gray-500"
+    },
+    {
+      "id": "9",
+      "serialNo": 9,
+      "name": "homeCard",
+      "hashTag": "homecard",
+      "title": "Shop Fashion for less",
+      "subTitle": "See all deals",
+      "img": [
+        { "img": "/assets/watchBanner1.png", "text": "Top under $25" },
+        { "img": "/assets/watchBanner1.png", "text": "Jeans under $50" },
+        { "img": "/assets/watchBanner1.png", "text": "Dresses under $30" },
+        { "img": "/assets/watchBanner1.png", "text": "Shoes under $50" }
+      ],
+      "background": "bg-green-500"
+    },
+    {
+      "id": "10",
+      "serialNo": 10,
+      "name": "homeCard",
+      "hashTag": "homecard",
+      "title": "Gifts Parent wants",
+      "subTitle": "Shop Parent's gifts",
+      "img": [
+        {
+          "img": "/assets/watchBanner1.png",
+          "text": "Beauty & self care gifts"
+        },
+        { "img": "/assets/watchBanner1.png", "text": "Fashion gifts" },
+        { "img": "/assets/watchBanner1.png", "text": "Tech gifts" },
+        { "img": "/assets/watchBanner1.png", "text": "Home & kitchen gifts" }
+      ],
+      "background": "bg-pink-500"
+    },
+    {
+      "id": "11",
+      "serialNo": 11,
+      "name": "homeCard",
+      "hashTag": "homecard",
+      "title": "Fashion trends you like",
+      "subTitle": "Explore more",
+      "img": [
+        { "img": "/assets/watchBanner1.png", "text": "Dresses" },
+        { "img": "/assets/watchBanner1.png", "text": "Knits" },
+        { "img": "/assets/watchBanner1.png", "text": "Jackets" },
+        { "img": "/assets/watchBanner1.png", "text": "Jewelry" }
+      ],
+      "background": "bg-gray-500"
+    },
+    {
+      "id": "12",
+      "serialNo": 12,
+      "name": "homeCard",
+      "hashTag": "homecard",
+      "title": "Have more fun with family",
+      "subTitle": "See more",
+      "img": [
+        { "img": "/assets/watchBanner1.png", "text": "Outdoor Play Sets" },
+        { "img": "/assets/watchBanner1.png", "text": "Action figures" },
+        { "img": "/assets/watchBanner1.png", "text": "Learning Toys" },
+        { "img": "/assets/watchBanner1.png", "text": "Pretend Play Tooys" }
+      ],
+      "background": "bg-orange-500"
+    },
+    {
+      "id": "13",
+      "serialNo": 13,
+      "name": "homeCard",
+      "hashTag": "homecard",
+      "title": "Level up your gaming",
+      "subTitle": "Shop the latest in gaming",
+      "img": [
+        { "img": "/assets/watchBanner1.png", "text": "PC gaming" },
+        { "img": "/assets/watchBanner1.png", "text": "Xbox" },
+        { "img": "/assets/watchBanner1.png", "text": "PlayStation" },
+        { "img": "/assets/watchBanner1.png", "text": "Nintendo Switch" }
+      ],
+      "background": "bg-green-500"
+    },
+    {
+      "id": "14",
+      "serialNo": 14,
+      "name": "homeCard",
+      "hashTag": "homecard",
+      "title": "Gear up to fet fit",
+      "subTitle": "Siscover more",
+      "img": [
+        { "img": "/assets/watchBanner1.png", "text": "Clothing" },
+        { "img": "/assets/watchBanner1.png", "text": "Equipment" },
+        { "img": "/assets/watchBanner1.png", "text": "Trackers" },
+        { "img": "/assets/watchBanner1.png", "text": "Deals" }
+      ],
+      "background": "bg-yellow-500"
+    },
+    {
+      "id": "15",
+      "serialNo": 15,
+      "name": "homeCard",
+      "hashTag": "homecard",
+      "title": "Most-loved travel essentials",
+      "subTitle": "Discover more",
+      "img": [
+        { "img": "/assets/watchBanner1.png", "text": "Backpacks" },
+        { "img": "/assets/watchBanner1.png", "text": "Accessories" },
+        { "img": "/assets/watchBanner1.png", "text": "Handbags" },
+        { "img": "/assets/watchBanner1.png", "text": "Suitcases" }
+      ],
+      "background": "bg-green-500"
+    },
+    {
+      "id": "16",
+      "serialNo": 16,
+      "name": "homeCard",
+      "hashTag": "homecard",
+      "title": "Level up your beauty routine",
+      "subTitle": "See more",
+      "img": [
+        { "img": "/assets/watchBanner1.png", "text": "Makeup" },
+        { "img": "/assets/watchBanner1.png", "text": "Sponges" },
+        { "img": "/assets/watchBanner1.png", "text": "Brushes" },
+        { "img": "/assets/watchBanner1.png", "text": "Mirrors" }
+      ],
+      "background": "bg-gray-500"
+    },
+    {
+      "id": "17",
+      "serialNo": 17,
+      "name": "homeCard",
+      "hashTag": "homecard",
+      "title": "Score the top PCs & Accessories",
+      "subTitle": "See more",
+      "img": [
+        { "img": "/assets/watchBanner1.png", "text": "Desktops" },
+        { "img": "/assets/watchBanner1.png", "text": "Laptops" },
+        { "img": "/assets/watchBanner1.png", "text": "Hard Drives" },
+        { "img": "/assets/watchBanner1.png", "text": "PC Accessories" }
+      ],
+      "background": "bg-green-500"
+    },
+    {
+      "id": "18",
+      "serialNo": 18,
+      "name": "homeCard",
+      "hashTag": "homecard",
+      "title": "Gaming merchandise",
+      "subTitle": "See more",
+      "img": [
+        { "img": "/assets/watchBanner1.png", "text": "Apparel" },
+        { "img": "/assets/watchBanner1.png", "text": "Action figures" },
+        { "img": "/assets/watchBanner1.png", "text": "Hats" },
+        { "img": "/assets/watchBanner1.png", "text": "Mugs" }
+      ],
+      "background": "bg-yellow-500"
+    },
+    {
+      "id": "19",
+      "serialNo": 19,
+      "name": "homeCard",
+      "hashTag": "homecard",
+      "title": "Level up your PC here",
+      "subTitle": "Discover more",
+      "img": [
+        { "img": "/assets/watchBanner1.png", "text": "Laptops" },
+        { "img": "/assets/watchBanner1.png", "text": "PCs" },
+        { "img": "/assets/watchBanner1.png", "text": "Hard Drives" },
+        { "img": "/assets/watchBanner1.png", "text": "Monitors" }
+      ],
+      "background": "bg-orange-500"
+    },
+    {
+      "id": "20",
+      "serialNo": 20,
+      "name": "homeCard",
+      "hashTag": "homecard",
+      "title": "Most-loved watches",
+      "subTitle": "Discover more",
+      "img": [
+        { "img": "/assets/watchBanner1.png", "text": "Women" },
+        { "img": "/assets/watchBanner1.png", "text": "Men" },
+        { "img": "/assets/watchBanner1.png", "text": "Girls" },
+        { "img": "/assets/watchBanner1.png", "text": "Boys" }
+      ],
+      "background": "bg-green-500"
+    },
+    {
+      "id": "21",
+      "serialNo": 21,
+      "name": "homeCard",
+      "hashTag": "homecard",
+      "title": "Plug in with our electronics",
+      "subTitle": "Shop more",
+      "img": [
+        { "img": "/assets/watchBanner1.png", "text": "Headphones" },
+        { "img": "/assets/watchBanner1.png", "text": "Tablets" },
+        { "img": "/assets/watchBanner1.png", "text": "Gaming" },
+        { "img": "/assets/watchBanner1.png", "text": "Speakers" }
+      ],
+      "background": "bg-green-500"
+    },
+    {
+      "id": "22",
+      "serialNo": 22,
+      "name": "banner",
+      "hashTag": "homeslide",
+      "title": "More items to consider",
+      "subTitle": "See more",
+      "img": [
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png"
+      ]
+    },
+    {
+      "id": "23",
+      "serialNo": 23,
+      "name": "banner",
+      "hashTag": "homeslide2",
+      "title": "Best Sellers in Toy & Games",
+      "img": [
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png"
+      ]
+    },
+    {
+      "id": "24",
+      "serialNo": 24,
+      "name": "banner",
+      "hashTag": "homeslide3",
+      "title": "Top picks close to you",
+      "img": [
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png"
+      ]
+    },
+    {
+      "id": "25",
+      "serialNo": 25,
+      "name": "banner",
+      "hashTag": "homeslide3",
+      "title": "Best seller in Computers & Accessories",
+      "img": [
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png"
+      ]
+    },
+    {
+      "id": "26",
+      "serialNo": 26,
+      "name": "banner",
+      "hashTag": "homeslide3",
+      "title": "Best Sellers in Books",
+      "img": [
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png",
+        "/assets/watchBanner1.png"
+      ]
     }
   ]
 }

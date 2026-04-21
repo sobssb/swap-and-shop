@@ -4,13 +4,14 @@ import useDetectOutsideClick from "../hooks/useDetectOutsideClick";
 import { FaAngleDown } from "react-icons/fa";
 
 // Created this reuseable component for the purpose of the watch list and my shop which has some multiple values. 
+// it also used in the all categories aspect
 
 const ArrowDropDown = ({ title, watchListLinks }) => {
   const [showSelect, setShowSelect] = useState(false);
   const dropdownRef = useDetectOutsideClick(() => setShowSelect(false));
 
   return (
-    <div className="relative flex w-fit z-20" ref={dropdownRef}>
+    <div className="relative flex w-fit z-10" ref={dropdownRef}>
       <button className="flex items-center justify-center cursor-pointer" onClick={() => setShowSelect(!showSelect)}>{title} <FaAngleDown /></button>
 
           {showSelect && (

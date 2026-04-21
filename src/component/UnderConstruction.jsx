@@ -2,7 +2,7 @@ import React from "react";
 
 const UnderConstruction = ({ title }) => {
   return (
-    <main className="undercont min-h-screen">
+    <main className="undercont">
       <h1 className="text-5xl my-5 text-center px-5 font-bold text-black">
         {title}
       </h1>

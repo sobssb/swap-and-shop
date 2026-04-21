@@ -9,21 +9,18 @@ module.exports = {
         primary: "white",
         hover: "#20B2AA",
         secondary: "#021cff",
-        secondary: "green",
       },
       screens: {
-        widescreen: { raw: "(min-aspect-ratio: 3/2)" },
-        tallscreen: { raw: "(max-aspect-ratio: 13/20)" },
+        lg: "1047px",
       },
       keyframes: {
-        "open-menu": {
-          "0%": { transform: "scaleY(0)" },
-          "80%": { transform: "scaleY(1.2)" },
-          "100%": { transform: "scaleY(1)" },
+        background: {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
         },
       },
       animation: {
-        "open-menu": "open-menu 0.5s ease-in-out forwards",
+        background: "background 10.5s linear infinite",
       },
     },
   },
