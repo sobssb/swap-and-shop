@@ -28,6 +28,7 @@ const NavBarLinkListNames = () => {
     {
       name: "Electronics",
       url: "/",
+      img: "/assets/backgroundBanner.png",
       categories: [
         "Apple",
         "Samsung",
@@ -49,6 +50,7 @@ const NavBarLinkListNames = () => {
     {
       name: "Motors",
       url: "/",
+      img: "/assets/backgroundBanner.png",
       categories: [
         "Apple",
         "Samsung",
@@ -70,6 +72,7 @@ const NavBarLinkListNames = () => {
     {
       name: "Fashion",
       url: "/",
+      img: "/assets/backgroundBanner.png",
       categories: [
         "Apple",
         "Samsung",
@@ -91,6 +94,7 @@ const NavBarLinkListNames = () => {
     {
       name: "Collectablles & Art",
       url: "/",
+      img: "/assets/backgroundBanner.png",
       categories: [
         "Apple",
         "Samsung",
@@ -112,6 +116,7 @@ const NavBarLinkListNames = () => {
     {
       name: "Sports",
       url: "/",
+      img: "/assets/backgroundBanner.png",
       categories: [
         "Apple",
         "Samsung",
@@ -133,6 +138,7 @@ const NavBarLinkListNames = () => {
     {
       name: "Health & Beauty",
       url: "/",
+      img: "/assets/backgroundBanner.png",
       categories: [
         "Apple",
         "Samsung",
@@ -154,6 +160,7 @@ const NavBarLinkListNames = () => {
     {
       name: "Industrial Equipment",
       url: "/",
+      img: "/assets/backgroundBanner.png",
       categories: [
         "Apple is here",
         "Samsung",
@@ -175,6 +182,7 @@ const NavBarLinkListNames = () => {
     {
       name: "Home & Garden",
       url: "/",
+      img: "/assets/backgroundBanner.png",
       categories: [
         "Apple is not",
         "Samsung",
@@ -193,7 +201,6 @@ const NavBarLinkListNames = () => {
         "Smart home",
       ],
     },
-    
   ];
 
   return { watchListLinks, myShopLinks, allCategories, navCategories };

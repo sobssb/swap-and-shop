@@ -15,7 +15,7 @@ const LinkCategories = () => {
   return (
     <div>
       <section
-        className="hidden lg:flex space-x-8 py-2 px-5 items-center justify-center bg-slate-200 relative z-1 w-full"
+        className="hidden lg:flex space-x-8 py-2 px-5 items-center justify-center bg-slate-200 relative z-0 w-full"
         onMouseLeave={() => setShowCategory(null)}
       >
         <Link to="/deals" onMouseEnter={() => setShowCategory(null)}>
@@ -35,7 +35,7 @@ const LinkCategories = () => {
         {showCategory && showCategoryHidden && (
           <div
             onMouseLeave={() => setShowCategory(null)}
-            className="absolute bg-white shadow-2xl w-[90%] p-5 flex flex-row gap-3 items-start  rounded-3xl top-9 left-1/2 -translate-x-1/2"
+            className="absolute bg-white shadow-2xl w-[90%] p-5 flex flex-row gap-3 items-start  rounded-3xl top-9 left-1/2 -translate-x-1/2 "
           >
             <div className="flex flex-col w-[25%]">
               <h2 className="mb-2 text-2xl">The Most Popular</h2>
@@ -65,13 +65,15 @@ const LinkCategories = () => {
               ))}
             </div>
 
-            <div className="w-[50%] h-fit border border-solid-2 border-blue-300"></div>
+            <div className="w-[50%] border border-solid border-blue-300">
+              <img className="w-full" src={showCategory.img} alt="category images" />
+            </div>
           </div>
         )}
       </section>
 
       {/* mobile */}
-      <section className="lg:hidden flex gap-4 py-2 px-3 items-center bg-slate-200 relative w-full overflow-x-auto flex-nowrap no-scrollbar justify-between">
+      <section className="lg:hidden flex gap-4 py-2 px-3 items-center bg-slate-200 relative w-full overflow-auto flex-nowrap no-scrollbar justify-between">
         <Link to="/deals">Saved</Link>
         {navCategories.map((linkName, index) => (
           <Link className="whitespace-nowrap" to={linkName.url} key={index}>

@@ -206,9 +206,8 @@ const Nav = () => {
         {/* ////////////////// */}
 
         {/* side menu bar */}
-        <div className="absolute bg-white h-screen shadow-2xl">
           {sideMenubar && (
-            <section className="flex w-75 flex-col p-5">
+            <section className="absolute bg-white h-screen shadow-2xl flex w-75 flex-col p-5">
               <article
                 className="flex items-center justify-between mb-10"
                 onClick={() => setSideMenubar(!sideMenubar)}
@@ -272,7 +271,6 @@ const Nav = () => {
               </article>
             </section>
           )}
-        </div>
       </nav>
     </div>
 

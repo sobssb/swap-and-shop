@@ -68,7 +68,7 @@
       "serialNo": 6,
       "name": "homeCard",
       "hashTag": "homecard",
-      "title": "Find gifts for parents",
+      "title": "Find gifts for parent",
       "subTitle": "Shop parent's gifts",
       "img": [
         { "img": "/assets/watchBanner1.png", "text": "Apparel" },
@@ -83,7 +83,7 @@
       "serialNo": 7,
       "name": "homeCard",
       "hashTag": "homecard",
-      "title": "Gift for techie parents",
+      "title": "Gift for techie parent",
       "subTitle": "Explore Parent's gift",
       "img": [
         { "img": "/assets/watchBanner1.png", "text": "Headphones" },
@@ -365,7 +365,7 @@
       "id": "25",
       "serialNo": 25,
       "name": "banner",
-      "hashTag": "homeslide3",
+      "hashTag": "homeslide4",
       "title": "Best seller in Computers & Accessories",
       "img": [
         "/assets/watchBanner1.png",
@@ -382,7 +382,7 @@
       "id": "26",
       "serialNo": 26,
       "name": "banner",
-      "hashTag": "homeslide3",
+      "hashTag": "homeslide5",
       "title": "Best Sellers in Books",
       "img": [
         "/assets/watchBanner1.png",

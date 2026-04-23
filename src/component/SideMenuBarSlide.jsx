@@ -1,5 +1,4 @@
 import { useState } from "react";
-import useDetectOutsideClick from "../hooks/useDetectOutsideClick";
 import NavBarLinkListNames from "../data/NavBarLinkListNames";
 import { Link } from "react-router-dom";
 // icons
