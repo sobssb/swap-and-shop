@@ -8,10 +8,12 @@ import { IoIosPlay } from "react-icons/io";
 // /////////
 
 const HeroSection = ({ data, fetchError, isLoading }) => {
-  // This is where the carousel is i.e banner
+  // This is for the carousel in the banner
   // This file only contains the banner
   // Data is the product fetched from the api
-  const carousel = data ? data.filter((item) => item.hashTag === "carousel") : [];
+  const carousel = data
+    ? data.filter((item) => item.hashTag === "carousel")
+    : [];
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [isAutoPlay, setIsAutoPlay] = useState(true);
 
@@ -44,64 +46,61 @@ const HeroSection = ({ data, fetchError, isLoading }) => {
       <div className="flex overflow-auto no-scrollbar">
         {!isLoading &&
           !fetchError &&
-          (carousel.length ? (
+            carousel.length > 0 &&
             carousel.map((item, index) => (
-              // This is the list of each items i.e banner
-              <div
-                key={index}
-                className="h-150 lg:h-100 bg-cover w-full flex flex-col lg:flex-row lg:items-center lg:justify-between p-5 relative shrink-0 transition-transform duration-500 ease-in-out"
-                style={{
-                  backgroundImage: `url(${item.background})`,
-                  transform: `translateX(-${carouselIndex * 100}%)`,
-                }}
-              >
-                {/* The content of each banner */}
-                <div className="lg:w-1/2 w-full">
-                  <h2 className="lg:text-7xl text-5xl text-white font-bold">
-                    {item.title}
-                  </h2>
-                  <p className="text-white text-2xl my-1">{item.subTitle}</p>
-                  <Button
-                    buttonTitle={item.buttonTitle}
-                    className="bg-white text-black px-4 py-2"
-                  />
-                </div>
-
-                {/* The image of each banner */}
-                <div className="lg:w-1/2 w-full mx-5 lg:mx-0 text-center ml-20">
-                  <img
-                    className="lg:w-[80%] min-w-[75%] max-w-[75%] 
-                     lg:ml-30"
-                    src={item.img}
-                    alt="item picture"
-                  />
-                </div>
-
-                <div className="absolute bottom-2 right-[5%] gap-3">
-                  <button onClick={prevSlide}>
-                    <IoIosArrowBack className="cursor-pointer text-5xl" />
-                  </button>
-                  <button onClick={nextSlide}>
-                    <IoIosArrowForward className="cursor-pointer text-5xl" />
-                  </button>
-                  <button>
-                    {isAutoPlay ? (
-                      <AiOutlinePause
-                        className="cursor-pointer text-5xl"
-                        onClick={() => setIsAutoPlay(false)}
-                      />
-                    ) : (
-                      <IoIosPlay
-                        className="cursor-pointer text-5xl"
-                        onClick={() => setIsAutoPlay(true)}
-                      />
-                    )}
-                  </button>
-                </div>
+            // This is the list of each items i.e banner
+            <div
+              key={index}
+              className="h-150 lg:h-100 bg-cover w-full flex flex-col lg:flex-row lg:items-center lg:justify-between p-5 relative shrink-0 transition-transform duration-500 ease-in-out"
+              style={{
+                backgroundImage: `url(${item.background})`,
+                transfowrm: `translateX(-${carouselIndex * 100}%)`,
+              }}
+            >
+              {/* The content of each banner */}
+              <div className="lg:w-1/2 w-full">
+                <h2 className="lg:text-7xl text-5xl text-white font-bold">
+                  {item.title}
+                </h2>
+                <p className="text-white text-2xl my-1">{item.subTitle}</p>
+                <Button
+                  buttonTitle={item.buttonTitle}
+                  className="bg-white text-black px-4 py-2"
+                />
               </div>
-            ))
-          ) : (
-            <p>No carousel items found.</p>
+
+              {/* The image of each banner */}
+              <div className="lg:w-1/2 w-full mx-5 lg:mx-0 text-center ml-20">
+                <img
+                  className="lg:w-[80%] min-w-[75%] max-w-[75%] 
+                     lg:ml-30"
+                  src={item.img}
+                  alt="item picture"
+                />
+              </div>
+
+              <div className="absolute bottom-2 right-[5%] gap-3">
+                <button onClick={prevSlide}>
+                  <IoIosArrowBack className="cursor-pointer text-5xl" />
+                </button>
+                <button onClick={nextSlide}>
+                  <IoIosArrowForward className="cursor-pointer text-5xl" />
+                </button>
+                <button>
+                  {isAutoPlay ? (
+                    <AiOutlinePause
+                      className="cursor-pointer text-5xl"
+                      onClick={() => setIsAutoPlay(false)}
+                    />
+                  ) : (
+                    <IoIosPlay
+                      className="cursor-pointer text-5xl"
+                      onClick={() => setIsAutoPlay(true)}
+                    />
+                  )}
+                </button>
+              </div>
+            </div>
           ))}
       </div>
     </section>

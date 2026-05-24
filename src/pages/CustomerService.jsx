@@ -1,11 +1,13 @@
 import React from 'react'
 import UnderConstruction from '../component/UnderConstruction'
+import Header from '../layout/Header'
 
 const CustomerService = () => {
   return (
-    <>
-      <UnderConstruction title="Customer Service" />
-    </>
+    <main>
+      <Header />
+      <h2>this is customer service</h2>
+    </main>
   )
 }
 

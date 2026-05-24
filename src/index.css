@@ -33,3 +33,7 @@ button {
   cursor: pointer;
 }
 
+.inhd{
+  width: min(500px, 100%);
+}
+

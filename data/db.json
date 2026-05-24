@@ -56,10 +56,13 @@
       "title": "New home arrivals under $50",
       "subTitle": "Shop the latest from Home",
       "img": [
-        { "img": "/assets/watchBanner1.png", "text": "Kitchen & Dining" },
-        { "img": "/assets/watchBanner1.png", "text": "Home Improvement" },
-        { "img": "/assets/watchBanner1.png", "text": "Dicor" },
-        { "img": "/assets/watchBanner1.png", "text": "Bedding & Bath" }
+        {
+          "img": "/assets/pending1777314335pngwing.com.png",
+          "text": "Kitchen & Dining"
+        },
+        { "img": "/assets/pngwing.com1)1).png", "text": "Home Improvement" },
+        { "img": "/assets/pngwing.com (1) (2).png", "text": "Dicor" },
+        { "img": "/assets/pngwing.com (1) (4).png", "text": "Bedding & Bath" }
       ],
       "background": "bg-green-500"
     },
@@ -71,10 +74,10 @@
       "title": "Find gifts for parent",
       "subTitle": "Shop parent's gifts",
       "img": [
-        { "img": "/assets/watchBanner1.png", "text": "Apparel" },
-        { "img": "/assets/watchBanner1.png", "text": "Shoes" },
-        { "img": "/assets/watchBanner1.png", "text": "Jewelry" },
-        { "img": "/assets/watchBanner1.png", "text": "Handbags" }
+        { "img": "/assets/pngwing.com (1) (16).png", "text": "Apparel" },
+        { "img": "/assets/pngwing.com (1) (5).png", "text": "Shoes" },
+        { "img": "/assets/pngwing.com (1) (6).png", "text": "Jewelry" },
+        { "img": "/assets/pngwing.com (1) (7).png", "text": "Handbags" }
       ],
       "background": "bg-pink-500"
     },

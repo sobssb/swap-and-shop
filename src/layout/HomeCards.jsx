@@ -39,9 +39,9 @@ const HomeCards = ({ data, fetchError, isLoading }) => {
   ];
 
   return (
-    <section className="bg-white lg:bg-gray-200 pt-5 lg:px-5 px-3">
+    <section className="bg-white mt-5 lg:bg-gray-200 lg:px-5 px-3">
       {isLoading && (
-        <section className="grid md:grid-cols-2 lg:grid lg:grid-cols-3 gap-3. ">
+        <section className="grid lg:grid-cols-3 gap-3 ">
           {/* Skeletion Loading */}
           <article className="h-100 w-full bg-gray-400 animate-pulse"></article>
           <article className="h-100 w-full bg-gray-400 animate-pulse "></article>
@@ -56,7 +56,7 @@ const HomeCards = ({ data, fetchError, isLoading }) => {
       )}
 
       {!isLoading && fetchError && (
-        <p className="text-2xl mb-5">{fetchError}</p>
+        <p className="text-2xl py-2">{fetchError}</p>
       )}
 
       <HomeCardSection
