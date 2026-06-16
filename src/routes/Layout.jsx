@@ -1,10 +1,9 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import Header from "../layout/Header";
 
 const Layout = () => {
   return (
-    <div className="min-h-screen w-full">
+    <div className="min-h-screen w-full relative">
       <main>
         <Outlet />
       </main>

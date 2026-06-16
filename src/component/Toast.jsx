@@ -11,16 +11,19 @@ const Toast = ({
   buttonIcon,
   handleFirstClick,
   handleSecondClick,
+  className,
 }) => {
   return (
     // Toast component for different confirmation
-    <main className="absolute w-73 h-fit bg-white shadow-2xl top-1/2 left-1/2 -translate-1/2 text-black p-2 z-10 grid place-content-center rounded-lg">
+    <main
+      className={`fixed w-73 h-fit bg-white shadow-2xl top-1/2 left-1/2 -translate-1/2 text-black p-2 z-10 grid place-content-center rounded-lg ${className}`}
+    >
       {/* Count down */}
-      <div className="justify-self-end mt-2 -mb-5 bg-red-800  w-6 h-6 text-center text-white font-semibold rounded-[50%]">
+      <div className="justify-self-end mt-2 -mb-5 bg-red-800  w-6 h-6 text-center text-white  rounded-[50%]">
         {countDown}
       </div>
       <button className="mx-auto w-7 mt-3">{icon}</button>
-      <h2 className="text-2xl font-bold text-center">{header}</h2>
+      <h2 className="text-[1rem] font-bold text-center">{header}</h2>
 
       <p className="mx-auto">{phrase}</p>
 

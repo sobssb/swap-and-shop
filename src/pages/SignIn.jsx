@@ -16,6 +16,8 @@ const SignIn = ({
   countDown,
   toast,
   setToast,
+  setAddToCart,
+  setCartList,
 }) => {
   // States
   const [signInUserNameEmail, setSignInUserNameEmail] = useState("");
@@ -27,8 +29,10 @@ const SignIn = ({
   // Find user details from create account details
   const findUserDetails = createAccount.find(
     (user) =>
-      user.email === signInUserNameEmail.trim().toLocaleLowerCase() ||
-      user.userName === signInUserNameEmail.trim().toLocaleLowerCase(),
+      user.email.trim().toLocaleLowerCase() ===
+        signInUserNameEmail.trim().toLocaleLowerCase() ||
+      user.userName.trim().toLocaleLowerCase() ===
+        signInUserNameEmail.trim().toLocaleLowerCase(),
   );
 
   // Store user details in local storage after sign in
@@ -82,8 +86,8 @@ const SignIn = ({
     setSigninToastSuccessful(true);
 
     // reset states
-      setSignInUserNameEmail("");
-      setSignInPassword("");
+    setSignInUserNameEmail("");
+    setSignInPassword("");
   };
 
   const handleStopSignIn = () => {
@@ -94,9 +98,16 @@ const SignIn = ({
   const handleLogOut = () => {
     localStorage.removeItem("user");
     setIsSignedIn(false);
-    logoutToastSuccessful
-    // navigate("/");
-    // setToast(false);
+    setAddToCart(0);
+    setCartList([]);
+    setLogoutToast(false);
+    setToast(true);
+    setLogoutToastSuccessful(true);
+  };
+
+  const handleSuccessFullLogOut = () => {
+    setToast(false);
+    navigate("/");
   };
 
   const handleSuccesfullSignIn = () => {
@@ -138,7 +149,7 @@ const SignIn = ({
           phrase={`Click "OK" to go back to home page`}
           title1={"Ok"}
           icon={<IoSearchSharp className="m-auto mb-3 w-full h-full" />}
-          handleFirstClick={handleSuccesfullSignIn}
+          handleFirstClick={handleSuccessFullLogOut}
         />
       )}
       <button className="rounded-2xl w-25 mt-1">

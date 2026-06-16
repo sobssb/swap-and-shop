@@ -9,12 +9,14 @@ import Deals from "./pages/Deals";
 import BrandOutlet from "./pages/BrandOutlet";
 import GiftCards from "./pages/GiftCards";
 import HelpContact from "./pages/HelpContact";
-import CustomerService from "./pages/CustomerService";
 import Sell from "./pages/Sell";
+import Cart from "./pages/Cart";
+import Saved from "./pages/Saved";
 import useFetchData from "./hooks/useFetchData";
 import Product from "./pages/Product";
 import SearchedProduct from "./pages/SearchedProduct";
-import { GrDocumentUser } from "react-icons/gr";
+import AllProducts from "./data/AllProducts";
+import useDetectOutsideClick from "./hooks/useDetectOutsideClick";
 import { useNavigate } from "react-router-dom";
 import img from "./assets/pending1777314335pngwing.com.png";
 
@@ -34,11 +36,122 @@ function App() {
     JSON.parse(localStorage.getItem("user")) || null,
   );
 
+  // for the deals page
+  const { todayDeals } = AllProducts();
+
   const navigate = useNavigate();
 
   // This is for the toast alerts
   const [toast, setToast] = useState(false);
   const [countDown, setCountDown] = useState(3);
+
+  // This is to the addition of carts
+  const [addToCart, setAddToCart] = useState(
+    getUserAfterSignIN ? getUserAfterSignIN.cart : 0,
+  );
+  const [cartList, setCartList] = useState(
+    getUserAfterSignIN ? getUserAfterSignIN.cartList : [],
+  );
+  const [addCartSuccessfully, setAddCartSuccessfully] = useState(false);
+  const [addCartExist, setAddCartExist] = useState(false);
+
+  // saved products
+  const [saved, setSaved] = useState(
+    getUserAfterSignIN ? getUserAfterSignIN.saved : [],
+  );
+
+  // for the nav
+  const [searchResult, setSearchResult] = useState("");
+  const [sideMenubar, setSideMenubar] = useState(false);
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchResult === "") return;
+    navigate("/searchedProduct");
+  };
+
+  const getUserName = getUserAfterSignIN?.userName?.trim()?.toUpperCase() || "";
+
+  const sideMenu = useDetectOutsideClick(() => setSideMenubar(false));
+  //  ///////////////
+
+  // Load cart data from signed-in user when they sign in
+  useEffect(() => {
+    if (!getUserAfterSignIN) return;
+    setAddToCart(getUserAfterSignIN ? getUserAfterSignIN.cart : 0);
+    setCartList(getUserAfterSignIN ? getUserAfterSignIN.cartList : []);
+  }, [getUserAfterSignIN]);
+
+  // Adding cart and cartList to the user details, showing the details of cart or cartList based on the user that signed in
+  const handleUpdateUserDetails = (newCart, newCartList) => {
+    // if user doesn't sign in, return i.e stop
+    if (!getUserAfterSignIN) return;
+
+    const userFullDetails = createAccount.map((user) => {
+      if (
+        user.email.trim().toLowerCase() ===
+        getUserAfterSignIN.email.trim().toLowerCase()
+      ) {
+        return {
+          ...user,
+          cart: newCart,
+          cartList: newCartList,
+        };
+      }
+      return user;
+    });
+
+    // Saved the latest account details  to localStorage
+    localStorage.setItem("currentUser", JSON.stringify(userFullDetails));
+    setCreateAccount(userFullDetails);
+
+    // update the current user signed in
+    const updateSpecificUser = {
+      ...getUserAfterSignIN,
+      cart: newCart,
+      cartList: newCartList,
+    };
+
+    localStorage.setItem("user", JSON.stringify(updateSpecificUser));
+    setGetUserAfterSignIN(updateSpecificUser);
+  };
+
+  // adding product to cartlist and updating the number of cart i.e increasing
+  const handleAddCart = (id) => {
+    // if product is now found stop
+    if (!id) return;
+
+    // Get the full details of the product
+    const findProduct = todayDeals.find((product) => product.id === id);
+
+    // check if product added to cart exist already
+    const productExist = cartList.find(
+      (product) => product.id === findProduct.id,
+    );
+
+    // Cart number increasement if card doesn't exist and less than 10
+    let nextCart = addToCart;
+    if (!productExist && getUserAfterSignIN && addToCart < 9) {
+      nextCart = nextCart + 1;
+      setAddToCart(nextCart);
+    }
+    if (!productExist && !getUserAfterSignIN && addToCart < 9) {
+      setAddToCart((prev) => prev + 1);
+    }
+
+    if (!productExist) {
+      const updatedList = [findProduct, ...cartList];
+      handleUpdateUserDetails(nextCart, updatedList);
+      setCartList(updatedList);
+      setToast(true);
+      setAddCartSuccessfully(true);
+      setAddCartExist(false);
+    } else {
+      setToast(true);
+      setAddCartExist(true);
+      setAddCartSuccessfully(false);
+    }
+  };
 
   // Reset countdown when toast opens
   useEffect(() => {
@@ -47,12 +160,12 @@ function App() {
 
     const count = setInterval(() => {
       setCountDown((prev) => (prev > 0 ? prev - 1 : 1));
-    }, 1000);
+    }, 500);
 
     const timer = setTimeout(() => {
       setToast(false);
       // navigate("/profile");
-    }, 3000);
+    }, 1500);
 
     // cleanUp when toast closes or component unmounts
     return () => {
@@ -60,130 +173,6 @@ function App() {
       clearTimeout(timer);
     };
   }, [toast, navigate]);
-
-  // for the deals page
-  const todayDeals = [
-    {
-      image: img,
-      shortDetails:
-        "Inpire Black Nitrile Disposable Gloves | 4.5 Nitrle for more info",
-      id: 1,
-      brand: "inspire",
-      linkText: "Shop Inspire deals",
-      type: "List",
-      text: "Limited time deal",
-      price: "41,113",
-      currency: "NGN",
-      priceRise: 59,
-      oldPrice: "60, 240.04",
-      percentage: "30% off",
-    },
-    {
-      image: img,
-      shortDetails:
-        "Inpire Black Nitrile Disposable Gloves | 4.5 Nitrle for more info",
-      id: 2,
-      brand: "levoit",
-      linkText: "Shop Inspire deals",
-      type: "List",
-      text: "Limited time deal",
-      price: "81,113",
-      currency: "NGN",
-      priceRise: 99,
-      oldPrice: "90, 260.04",
-      percentage: "34% off",
-    },
-    {
-      image: img,
-      shortDetails:
-        "Inpire Black Nitrile Disposable Gloves | 4.5 Nitrle for more info",
-      id: 3,
-      brand: "lenovo",
-      linkText: "Shop Inspire deals",
-      type: "Typical",
-      text: "Limited time deal",
-      price: "41,113",
-      currency: "NGN",
-      priceRise: 59,
-      oldPrice: "60, 240.04",
-      percentage: "36% off",
-    },
-    {
-      image: img,
-      shortDetails:
-        "Inpire Black Nitrile Disposable Gloves | 4.5 Nitrle for more info",
-      id: 4,
-      brand: "ring",
-      linkText: "Shop Inspire deals",
-      type: "List",
-      text: "Limited time deal",
-      price: "41,113",
-      currency: "NGN",
-      priceRise: 59,
-      oldPrice: "60, 240.04",
-      percentage: "30% off",
-    },
-    {
-      image: img,
-      shortDetails:
-        "Inpire Black Nitrile Disposable Gloves | 4.5 Nitrle for more info",
-      id: 5,
-      brand: "iphone",
-      linkText: "Shop Inspire deals",
-      type: "Typical",
-      text: "Limited time deal",
-      price: "41,113",
-      currency: "NGN",
-      priceRise: 59,
-      oldPrice: "60, 240.04",
-      percentage: "20% off",
-    },
-    {
-      image: img,
-      shortDetails:
-        "Inpire Black Nitrile Disposable Gloves | 4.5 Nitrle for more info",
-      id: 6,
-      brand: "samsung",
-      linkText: "Shop Inspire deals",
-      type: "List",
-      text: "Limited time deal",
-      price: "41,113",
-      currency: "NGN",
-      priceRise: 59,
-      oldPrice: "60, 240.04",
-      percentage: "25% off",
-    },
-    {
-      image: img,
-      shortDetails:
-        "Inpire Black Nitrile Disposable Gloves | 4.5 Nitrle for more info",
-      id: 7,
-      brand: "inspire",
-      linkText: "Shop Inspire deals",
-      type: "List",
-      text: "Limited time deal",
-      price: "41,113",
-      currency: "NGN",
-      priceRise: 59,
-      oldPrice: "60, 240.04",
-      percentage: "40% off",
-    },
-    {
-      image: img,
-      shortDetails:
-        "Inpire Black Nitrile Disposable Gloves | 4.5 Nitrle for more info",
-      id: 8,
-      brand: "levoit",
-      linkText: "Shop Inspire deals",
-      type: "Typical",
-      text: "Limited time deal",
-      price: "41,113",
-      currency: "NGN",
-      priceRise: 59,
-      oldPrice: "60, 240.04",
-      percentage: "50% off",
-    },
-  ];
 
   return (
     <Routes>
@@ -197,9 +186,19 @@ function App() {
               data={data}
               fetchError={fetchError}
               isLoading={isLoading}
+              addToCart={addToCart}
+              cartList={cartList}
+              searchResult={searchResult}
+              setSearchResult={setSearchResult}
+              sideMenubar={sideMenubar}
+              setSideMenubar={setSideMenubar}
+              handleSearchSubmit={handleSearchSubmit}
+              getUserName={getUserName}
+              sideMenu={sideMenu}
             />
           }
         />
+
         <Route path="profile">
           <Route
             index
@@ -215,6 +214,8 @@ function App() {
                 setIsCompleteLogin={setIsCompleteLogin}
                 setIsSignedIn={setIsSignedIn}
                 setGetUserAfterSignIN={setGetUserAfterSignIN}
+                setAddToCart={setAddToCart}
+                setCartList={setCartList}
               />
             }
           />
@@ -231,10 +232,13 @@ function App() {
                 setIsCompleteLogin={setIsCompleteLogin}
                 toast={toast}
                 setToast={setToast}
+                addToCart={addToCart}
+                cartList={cartList}
               />
             }
           />
         </Route>
+
         <Route
           path="deals"
           element={
@@ -242,14 +246,112 @@ function App() {
               isSignedIn={isSignedIn}
               getUserAfterSignIN={getUserAfterSignIN}
               todayDeals={todayDeals}
+              addToCart={addToCart}
+              handleAddCart={handleAddCart}
+              countDown={countDown}
+              toast={toast}
+              setToast={setToast}
+              addCartSuccessfully={addCartSuccessfully}
+              addCartExist={addCartExist}
+              cartList={cartList}
+              getUserName={getUserName}
+              sideMenubar={sideMenubar}
+              setSideMenubar={setSideMenubar}
             />
           }
         />
-        <Route path="brandOutlet" element={<BrandOutlet />} />
+
+        <Route
+          path="cart"
+          element={
+            <Cart
+              isSignedIn={isSignedIn}
+              getUserAfterSignIN={getUserAfterSignIN}
+              addToCart={addToCart}
+              cartList={cartList}
+              setCartList={setCartList}
+              createAccount={createAccount}
+              setCreateAccount={setCreateAccount}
+              setGetUserAfterSignIN={setGetUserAfterSignIN}
+              setAddToCart={setAddToCart}
+              countDown={countDown}
+              toast={toast}
+              setToast={setToast}
+              todayDeals={todayDeals}
+              saved={saved}
+              setSaved={setSaved}
+              getUserName={getUserName}
+              sideMenubar={sideMenubar}
+              setSideMenubar={setSideMenubar}
+            />
+          }
+        />
+
+        <Route
+          path="saved"
+          element={
+            <Saved
+              isSignedIn={isSignedIn}
+              getUserAfterSignIN={getUserAfterSignIN}
+              addToCart={addToCart}
+              saved={saved}
+              setSaved={setSaved}
+              cartList={cartList}
+              getUserName={getUserName}
+              sideMenubar={sideMenubar}
+              setSideMenubar={setSideMenubar}
+              handleAddCart={handleAddCart}
+              createAccount={createAccount}
+              setCreateAccount={setCreateAccount}
+              setGetUserAfterSignIN={setGetUserAfterSignIN}
+            />
+          }
+        />
+
+        <Route
+          path="brandOutlet"
+          element={
+            <BrandOutlet
+              isSignedIn={isSignedIn}
+              getUserAfterSignIN={getUserAfterSignIN}
+              todayDeals={todayDeals}
+              addToCart={addToCart}
+              handleAddCart={handleAddCart}
+              countDown={countDown}
+              toast={toast}
+              setToast={setToast}
+              addCartSuccessfully={addCartSuccessfully}
+              addCartExist={addCartExist}
+              cartList={cartList}
+              getUserName={getUserName}
+              sideMenubar={sideMenubar}
+              setSideMenubar={setSideMenubar}
+            />
+          }
+        />
+
         <Route path="giftCards" element={<GiftCards />} />
-        <Route path="helpContact" element={<HelpContact />} />
-        <Route path="customerService" element={<CustomerService />} />
+
+        <Route
+          path="helpContact"
+          element={
+            <HelpContact
+              getUserName={getUserName}
+              isSignedIn={isSignedIn}
+              getUserAfterSignIN={getUserAfterSignIN}
+              addToCart={addToCart}
+              cartList={cartList}
+              sideMenubar={sideMenubar}
+              setSideMenubar={setSideMenubar}
+              sideMenu={sideMenu}
+              sideMenubar={sideMenubar}
+              setSideMenubar={setSideMenubar}
+            />
+          }
+        />
+
         <Route path="sell" element={<Sell />} />
+
         <Route
           path="/product/:id"
           element={
@@ -257,9 +359,21 @@ function App() {
               isSignedIn={isSignedIn}
               getUserAfterSignIN={getUserAfterSignIN}
               todayDeals={todayDeals}
+              addToCart={addToCart}
+              handleAddCart={handleAddCart}
+              countDown={countDown}
+              toast={toast}
+              setToast={setToast}
+              addCartSuccessfully={addCartSuccessfully}
+              addCartExist={addCartExist}
+              cartList={cartList}
+              getUserName={getUserName}
+              sideMenubar={sideMenubar}
+              setSideMenubar={setSideMenubar}
             />
           }
         />
+
         <Route path="searchedProduct" element={<SearchedProduct />} />
 
         <Route path="*" element={<NotFound404 />} />

@@ -17,14 +17,14 @@ const Footer = () => {
         <p>Back to top</p>
       </section>
 
-      <div className="bg-gray-950 grid place-content-center lg:p-5 p-3">
-        <section className="text-white grid lg:grid-cols-4 grid-cols-2 gap-10">
+      <section className="bg-gray-950 grid sm:place-content-center lg:p-5 p-3">
+        <article className="text-white grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-x-10 gap-y-5">
           <FooterLinkNames names={knowUs} />
           <FooterLinkNames names={makeMoney} />
           <FooterLinkNames names={paymentProducts} />
           <FooterLinkNames names={letHelpYou} />
-        </section>
-      </div>
+        </article>
+      </section>
     </footer>
   );
 };

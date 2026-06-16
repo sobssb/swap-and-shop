@@ -18,7 +18,7 @@ const LinkCategories = () => {
         className="hidden lg:flex space-x-8 py-2 px-5 items-center justify-center bg-slate-200 relative z-0 w-full mb-2"
         onMouseLeave={() => setShowCategory(null)}
       >
-        <Link to="/deals" onMouseEnter={() => setShowCategory(null)}>
+        <Link to="/saved" onMouseEnter={() => setShowCategory(null)}>
           Saved
         </Link>
         {navCategories.map((linkName, index) => (
@@ -74,7 +74,7 @@ const LinkCategories = () => {
 
       {/* mobile */}
       <section className="lg:hidden flex gap-4 py-2 px-3 items-center bg-slate-200 relative w-full overflow-auto flex-nowrap no-scrollbar justify-between mb-2">
-        <Link to="/deals">Saved</Link>
+        <Link to="/saved">Saved</Link>
         {navCategories.map((linkName, index) => (
           <Link className="whitespace-nowrap" to={linkName.url} key={index}>
             {linkName.name}

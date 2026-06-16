@@ -22,6 +22,15 @@ const NavBarLinkListNames = () => {
     { name: "Health & Beauty", url: "/" },
     { name: "Industrial Equipment", url: "/" },
     { name: "Home & Garden", url: "/" },
+    { name: "Saved", url: "/" },
+    { name: "Electronics", url: "/" },
+    { name: "Motors", url: "/" },
+    { name: "Fashion", url: "/" },
+    { name: "Collectablles & Art", url: "/" },
+    { name: "Sports", url: "/" },
+    { name: "Health & Beauty", url: "/" },
+    { name: "Industrial Equipment", url: "/" },
+    { name: "Home & Garden", url: "/" },
   ];
 
   const navCategories = [

@@ -1,25 +1,30 @@
-import {useState} from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import ArrowDropDown from "../ArrowDropDown";
 import NavBarLinkListNames from "../../data/NavBarLinkListNames";
+import background from "../../assets/logo.png";
 // icons
 import { IoSearchSharp } from "react-icons/io5";
 import { IoNotificationsSharp } from "react-icons/io5";
 import { BsCart4 } from "react-icons/bs";
 import { CiLocationOn, CiMoneyCheck1 } from "react-icons/ci";
-import { RiContactsLine } from "react-icons/ri";
-import { RxHamburgerMenu } from "react-icons/rx";
-import { FaTimes } from "react-icons/fa";
 // ///////////////////////////
 
-const LogoSearchbarNoti = () => {
-  const {allCategories } = NavBarLinkListNames();
-  const [searchResult, setSearchResult] = useState("");
+const LogoSearchbarNoti = ({
+  addToCart,
+  cartList,
+  searchResult,
+  setSearchResult,
+  handleSearchSubmit,
+}) => {
+  const { allCategories } = NavBarLinkListNames();
   return (
-    <section className="flex gap-3 items-center border-y-[.5px] border-slate-200 py-3.5 px-5 my-2">
+    <section className="flex gap-3 items-center border-y-[.5px] border-slate-200 py-3.5 px-5 my-1">
       {/* this is the logo */}
-      <button className="rounded-2xl border border-solid border-slate-200 px-4 py-1 w-35 h-13">
-        <Link to={"/"}>My Logo</Link>
+      <button className="rounded-2xl w-25">
+        <Link to={"/"}>
+          <img src={background} alt="logo" />
+        </Link>
       </button>
 
       <button className="w-9 h-9">
@@ -28,7 +33,7 @@ const LogoSearchbarNoti = () => {
 
       {/* search bar */}
       <div className="flex grow relative">
-        <form action="" className=" flex grow">
+        <form action="" className=" flex grow" onSubmit={handleSearchSubmit}>
           <input
             className="border border-slate-500 w-full pr-49 pl-13 text-2xl focus:outline-none h-10  rounded-2xl"
             type="text"
@@ -59,15 +64,18 @@ const LogoSearchbarNoti = () => {
 
       <button className="w-9 h-9 relative">
         <IoNotificationsSharp className="w-full h-full text-center" />
-        <div className="w-6 h-6 bg-[#F0C808] rounded-[50%] p-1 absolute -top-3.5 -right-1.5 grid place-content-center font-bold text-white">
+        <div className="w-6 h-6 bg-[#F0C808] text-[0.8rem] rounded-[50%] p-1 absolute -top-3.5 -right-1.5 grid place-content-center font-bold text-white">
           1+
         </div>
       </button>
 
       <button className="w-9 h-9 relative">
-        <BsCart4 className="w-full h-full text-center" />
-        <div className="w-6 h-6 bg-[#F0C808] rounded-[50%] p-1 absolute -top-3.5 -right-1.5 grid place-content-center font-bold text-white">
-          1+
+        <Link to="/cart">
+          <BsCart4 className="w-full h-full text-center" />
+        </Link>
+        <div className="w-6 h-6 bg-[#F0C808] text-[0.8rem] rounded-[50%] p-1 absolute -top-3.5 -right-1.5 grid place-content-center font-bold text-white">
+          {addToCart}
+          {cartList?.length > 9 && "+"}
         </div>
       </button>
     </section>

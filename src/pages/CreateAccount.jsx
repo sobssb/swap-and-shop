@@ -16,6 +16,8 @@ const CreateAccount = ({
   toast,
   setToast,
   countDown,
+  addToCart,
+  cartList,
 }) => {
   // States
   const [logInUserName, setLogInUserName] = useState("");
@@ -92,11 +94,15 @@ const CreateAccount = ({
       userName: logInUserName,
       email: logInEmail,
       password: logInPassword,
+      cart: 0,
+      cartList: [],
+      totalPrice: 0,
+      saved: [],
     };
     const erros = handleDetailsError();
     if (!erros) return;
 
-    const newAccountList = [...createAccount, accountDetails];
+    const newAccountList = [accountDetails, ...createAccount];
     localStorage.setItem("currentUser", JSON.stringify(newAccountList));
     setCreateAccount(newAccountList);
     setToast(true);
