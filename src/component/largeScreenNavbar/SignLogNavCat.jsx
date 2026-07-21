@@ -51,6 +51,7 @@ const SignLogNavCat = ({ isSignedIn, getUserAfterSignIN, getUserName }) => {
           <Link to="/brandOutlet">Brand Outlet</Link>
           <Link to="/deals">Deals</Link>
           <Link to="/helpContact">Help & Contact</Link>
+          <Link to="/swap">Swap</Link>
         </div>
       </article>
 

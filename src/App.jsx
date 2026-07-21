@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
+import Toast from "./component/Toast";
 import Layout from "./routes/Layout";
 import Home from "./pages/Home";
 import SignIn from "./pages/SignIn";
@@ -9,9 +10,11 @@ import Deals from "./pages/Deals";
 import BrandOutlet from "./pages/BrandOutlet";
 import GiftCards from "./pages/GiftCards";
 import HelpContact from "./pages/HelpContact";
+import Swap from "./pages/Swap";
 import Sell from "./pages/Sell";
 import Cart from "./pages/Cart";
 import Saved from "./pages/Saved";
+import ListItem from "./pages/ListItem";
 import useFetchData from "./hooks/useFetchData";
 import Product from "./pages/Product";
 import SearchedProduct from "./pages/SearchedProduct";
@@ -41,9 +44,8 @@ function App() {
 
   const navigate = useNavigate();
 
-  // This is for the toast alerts
-  const [toast, setToast] = useState(false);
-  const [countDown, setCountDown] = useState(3);
+  // null means hidden; an object contains the complete toast configuration.
+  const [toast, setToast] = useState(null);
 
   // This is to the addition of carts
   const [addToCart, setAddToCart] = useState(
@@ -80,6 +82,7 @@ function App() {
     if (!getUserAfterSignIN) return;
     setAddToCart(getUserAfterSignIN ? getUserAfterSignIN.cart : 0);
     setCartList(getUserAfterSignIN ? getUserAfterSignIN.cartList : []);
+    setSaved(getUserAfterSignIN ? getUserAfterSignIN.saved : []);
   }, [getUserAfterSignIN]);
 
   // Adding cart and cartList to the user details, showing the details of cart or cartList based on the user that signed in
@@ -117,65 +120,67 @@ function App() {
   };
 
   // adding product to cartlist and updating the number of cart i.e increasing
-  const handleAddCart = (id) => {
+  const handleAddCart = (product) => {
     // if product is now found stop
-    if (!id) return;
-
-    // Get the full details of the product
-    const findProduct = todayDeals.find((product) => product.id === id);
+    if (!product) return;
 
     // check if product added to cart exist already
-    const productExist = cartList.find(
-      (product) => product.id === findProduct.id,
-    );
+    const productExist = cartList.find((cart) => cart.id === product.id);
 
     // Cart number increasement if card doesn't exist and less than 10
     let nextCart = addToCart;
-    if (!productExist && getUserAfterSignIN && addToCart < 9) {
+    if (!productExist && addToCart < 9) {
       nextCart = nextCart + 1;
       setAddToCart(nextCart);
     }
-    if (!productExist && !getUserAfterSignIN && addToCart < 9) {
-      setAddToCart((prev) => prev + 1);
-    }
-
     if (!productExist) {
-      const updatedList = [findProduct, ...cartList];
+      const updatedList = [product, ...cartList];
       handleUpdateUserDetails(nextCart, updatedList);
       setCartList(updatedList);
-      setToast(true);
+      setToast({
+        countDown: 3,
+        header: "Added to cart successfully!",
+        message: "The product was added to your cart.",
+        title1: "OK",
+      });
       setAddCartSuccessfully(true);
       setAddCartExist(false);
     } else {
-      setToast(true);
+      setToast({
+        countDown: 3,
+        header: "Product already in cart",
+        message: "This product is already in your cart.",
+        title1: "OK",
+      });
       setAddCartExist(true);
       setAddCartSuccessfully(false);
     }
   };
 
-  // Reset countdown when toast opens
+  // Each new toast gets its own timer. Replacing the toast also cancels the old timer.
   useEffect(() => {
     if (!toast) return;
-    setCountDown(3);
 
-    const count = setInterval(() => {
-      setCountDown((prev) => (prev > 0 ? prev - 1 : 1));
-    }, 500);
+    const timer = setInterval(() => {
+      setToast((currentToast) => {
+        if (!currentToast) return null;
+        if (currentToast.countDown <= 1) {
+          if (currentToast.navigateTo) navigate(currentToast.navigateTo);
+          return null;
+        }
+        return {
+          ...currentToast,
+          countDown: currentToast.countDown - 1,
+        };
+      });
+    }, 1000);
 
-    const timer = setTimeout(() => {
-      setToast(false);
-      // navigate("/profile");
-    }, 1500);
-
-    // cleanUp when toast closes or component unmounts
-    return () => {
-      clearInterval(count);
-      clearTimeout(timer);
-    };
+    return () => clearInterval(timer);
   }, [toast, navigate]);
 
   return (
-    <Routes>
+    <>
+      <Routes>
       <Route path="/" element={<Layout />}>
         <Route
           index
@@ -204,8 +209,6 @@ function App() {
             index
             element={
               <SignIn
-                countDown={countDown}
-                toast={toast}
                 setToast={setToast}
                 showPassword={showPassword}
                 setShowPassword={setShowPassword}
@@ -223,14 +226,12 @@ function App() {
             path="/profile/createAccount"
             element={
               <CreateAccount
-                countDown={countDown}
                 showPassword={showPassword}
                 setShowPassword={setShowPassword}
                 setCreateAccount={setCreateAccount}
                 createAccount={createAccount}
                 isCompleteLogin={isCompleteLogin}
                 setIsCompleteLogin={setIsCompleteLogin}
-                toast={toast}
                 setToast={setToast}
                 addToCart={addToCart}
                 cartList={cartList}
@@ -248,8 +249,6 @@ function App() {
               todayDeals={todayDeals}
               addToCart={addToCart}
               handleAddCart={handleAddCart}
-              countDown={countDown}
-              toast={toast}
               setToast={setToast}
               addCartSuccessfully={addCartSuccessfully}
               addCartExist={addCartExist}
@@ -257,6 +256,7 @@ function App() {
               getUserName={getUserName}
               sideMenubar={sideMenubar}
               setSideMenubar={setSideMenubar}
+              sideMenu={sideMenu}
             />
           }
         />
@@ -274,8 +274,6 @@ function App() {
               setCreateAccount={setCreateAccount}
               setGetUserAfterSignIN={setGetUserAfterSignIN}
               setAddToCart={setAddToCart}
-              countDown={countDown}
-              toast={toast}
               setToast={setToast}
               todayDeals={todayDeals}
               saved={saved}
@@ -283,6 +281,7 @@ function App() {
               getUserName={getUserName}
               sideMenubar={sideMenubar}
               setSideMenubar={setSideMenubar}
+              sideMenu={sideMenu}
             />
           }
         />
@@ -304,6 +303,10 @@ function App() {
               createAccount={createAccount}
               setCreateAccount={setCreateAccount}
               setGetUserAfterSignIN={setGetUserAfterSignIN}
+              setAddToCart={setAddToCart}
+              setCartList={setCartList}
+              setToast={setToast}
+              sideMenu={sideMenu}
             />
           }
         />
@@ -317,8 +320,6 @@ function App() {
               todayDeals={todayDeals}
               addToCart={addToCart}
               handleAddCart={handleAddCart}
-              countDown={countDown}
-              toast={toast}
               setToast={setToast}
               addCartSuccessfully={addCartSuccessfully}
               addCartExist={addCartExist}
@@ -326,6 +327,7 @@ function App() {
               getUserName={getUserName}
               sideMenubar={sideMenubar}
               setSideMenubar={setSideMenubar}
+              sideMenu={sideMenu}
             />
           }
         />
@@ -350,7 +352,18 @@ function App() {
           }
         />
 
-        <Route path="sell" element={<Sell />} />
+        <Route path="sell" element={<Sell 
+          addToCart={addToCart}
+                isSignedIn={isSignedIn}
+                getUserAfterSignIN={getUserAfterSignIN}
+                cartList={cartList}
+                getUserName={getUserName}
+                sideMenubar={sideMenubar}
+                    setSideMenubar={setSideMenubar}
+                    sideMenu={sideMenu}
+        />} />
+
+        <Route path="/swap" element={<Swap />} />
 
         <Route
           path="/product/:id"
@@ -361,8 +374,6 @@ function App() {
               todayDeals={todayDeals}
               addToCart={addToCart}
               handleAddCart={handleAddCart}
-              countDown={countDown}
-              toast={toast}
               setToast={setToast}
               addCartSuccessfully={addCartSuccessfully}
               addCartExist={addCartExist}
@@ -370,16 +381,21 @@ function App() {
               getUserName={getUserName}
               sideMenubar={sideMenubar}
               setSideMenubar={setSideMenubar}
+              sideMenu={sideMenu}
             />
           }
         />
+
+        <Route path="/listItem" element={<ListItem />}/>
 
         <Route path="searchedProduct" element={<SearchedProduct />} />
 
         <Route path="*" element={<NotFound404 />} />
         {/* <Route path="about" element={<About />} /> */}
       </Route>
-    </Routes>
+      </Routes>
+      <Toast toast={toast} onClose={() => setToast(null)} />
+    </>
   );
 }
 

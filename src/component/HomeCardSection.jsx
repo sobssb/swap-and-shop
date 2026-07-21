@@ -23,10 +23,10 @@ const HomeCardSection = ({
                 {card.img.map((image, index) => (
                   <div key={index} className="w-full ">
                     <div
-                      className={`w-full ${card.background} grid place-content-center p-5`}
+                      className={`w-full ${card.background} grid place-content-center p-5 min-h-60`}
                     >
                       <img
-                        className="w-full"
+                        className=" w-full"
                         src={image.img}
                         alt="item picture"
                       />

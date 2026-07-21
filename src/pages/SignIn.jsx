@@ -3,18 +3,16 @@ import background from "../assets/logo.png";
 import { Link } from "react-router-dom";
 import { IoSearchSharp } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
-import Toast from "../component/Toast";
 
 const SignIn = ({
   showPassword,
   setShowPassword,
   createAccount,
+  setCreateAccount,
   isCompleteLogin,
   setIsCompleteLogin,
   setGetUserAfterSignIN,
   setIsSignedIn,
-  countDown,
-  toast,
   setToast,
   setAddToCart,
   setCartList,
@@ -22,9 +20,6 @@ const SignIn = ({
   // States
   const [signInUserNameEmail, setSignInUserNameEmail] = useState("");
   const [signInPassword, setSignInPassword] = useState("");
-  const [logoutToast, setLogoutToast] = useState(false);
-  const [signinToastSuccessful, setSigninToastSuccessful] = useState(false);
-  const [logoutToastSuccessful, setLogoutToastSuccessful] = useState(false);
 
   // Find user details from create account details
   const findUserDetails = createAccount.find(
@@ -36,9 +31,6 @@ const SignIn = ({
   );
 
   // Store user details in local storage after sign in
-  if (findUserDetails) {
-    localStorage.setItem("user", JSON.stringify(findUserDetails));
-  }
 
   const navigate = useNavigate();
 
@@ -80,18 +72,28 @@ const SignIn = ({
     const isValid = handleCheckDetails();
     if (!isValid) return;
 
-    setGetUserAfterSignIN(findUserDetails);
+    // Update signed-in user in state and persist to localStorage
+
+    if (!findUserDetails) return;
+    const userDetials = {
+      ...findUserDetails,
+      password: "******",
+    };
+    localStorage.setItem("user", JSON.stringify(userDetials));
+    setGetUserAfterSignIN(userDetials);
     setIsSignedIn(true);
-    setToast(true);
-    setSigninToastSuccessful(true);
+    setToast({
+      countDown: 3,
+      header: "Sign in successfully!",
+      message: "Click OK to go back to the home page.",
+      title1: "OK",
+      onFirstClick: () => navigate("/"),
+      navigateTo: "/",
+    });
 
     // reset states
     setSignInUserNameEmail("");
     setSignInPassword("");
-  };
-
-  const handleStopSignIn = () => {
-    setToast(false);
   };
 
   // Handle log out
@@ -100,58 +102,29 @@ const SignIn = ({
     setIsSignedIn(false);
     setAddToCart(0);
     setCartList([]);
-    setLogoutToast(false);
-    setToast(true);
-    setLogoutToastSuccessful(true);
+    setToast({
+      countDown: 3,
+      header: "Logged out successfully!",
+      message: "Click OK to go back to the home page.",
+      title1: "OK",
+      navigateTo: "/",
+    });
   };
 
-  const handleSuccessFullLogOut = () => {
-    setToast(false);
-    navigate("/");
-  };
-
-  const handleSuccesfullSignIn = () => {
-    navigate("/");
-    setToast(false);
+  const handleLogoutRequest = () => {
+    setToast({
+      countDown: 5,
+      header: "Log out account?",
+      message: "Are you sure you want to logout?",
+      title1: "Cancel",
+      title2: "Logout",
+      buttonIcon: <IoSearchSharp />,
+      onSecondClick: handleLogOut,
+    });
   };
 
   return (
     <main className="p-3 lg:p-5 flex flex-col min-h-screen">
-      {toast && signinToastSuccessful && (
-        <Toast
-          countDown={countDown}
-          header={"Sign in successfully!"}
-          phrase={`Click "OK" to go back to home page`}
-          title1={"OK"}
-          icon={<IoSearchSharp className="m-auto mb-3 w-full h-full" />}
-          handleFirstClick={handleSuccesfullSignIn}
-        />
-      )}
-
-      {toast && logoutToast && (
-        <Toast
-          countDown={countDown}
-          header={"Log out Account?"}
-          phrase={"Are you sure you want to logout?"}
-          title1={"Cancle"}
-          title2={"Logout"}
-          icon={<IoSearchSharp className="m-auto mb-3 w-full h-full" />}
-          buttonIcon={<IoSearchSharp />}
-          handleFirstClick={handleStopSignIn}
-          handleSecondClick={handleLogOut}
-        />
-      )}
-
-      {toast && logoutToastSuccessful && (
-        <Toast
-          countDown={countDown}
-          header={"Log out successfully!"}
-          phrase={`Click "OK" to go back to home page`}
-          title1={"Ok"}
-          icon={<IoSearchSharp className="m-auto mb-3 w-full h-full" />}
-          handleFirstClick={handleSuccessFullLogOut}
-        />
-      )}
       <button className="rounded-2xl w-25 mt-1">
         <Link to={"/"}>
           <img src={background} alt="logo" />
@@ -249,10 +222,7 @@ const SignIn = ({
       </section>
 
       <button
-        onClick={() => {
-          setToast(true);
-          setLogoutToast(true);
-        }}
+        onClick={handleLogoutRequest}
         className="mt-5"
       >
         Log Out

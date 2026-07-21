@@ -36,7 +36,7 @@ const SearchBar = ({ searchResult, setSearchResult, handleSearchSubmit }) => {
         <ArrowDropDown
           title="All Categories"
           watchListLinks={allCategories}
-          className="overflow-y-scroll z-100"
+          className="overflow-y-scroll [&::-webkit-scrollbar]:w-0.5 [&::-webkit-scrollbar-thumb]:bg-gray-400  z-1000 -left-15 min-w-50"
         />
       </div>
     </div>

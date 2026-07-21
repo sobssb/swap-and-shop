@@ -11,7 +11,7 @@ const ArrowDropDown = ({ title, watchListLinks, className }) => {
   const dropdownRef = useDetectOutsideClick(() => setShowSelect(false));
 
   return (
-    <div className="relative flex w-fit z-100" ref={dropdownRef}>
+    <div className="relative flex w-fit z-900" ref={dropdownRef}>
       <button
         className="flex items-center justify-center cursor-pointer"
         onClick={() => setShowSelect(!showSelect)}
@@ -21,7 +21,7 @@ const ArrowDropDown = ({ title, watchListLinks, className }) => {
 
       {showSelect && (
         <div
-          className={`absolute z-20 top-7.5 -left-10 bg-white -m-1 flex flex-col w-fit py-2 items-center justify-center rounded-1xl shadow-2xl ${className}`}
+          className={`absolute z-1000 top-7.5 -left-10 bg-white -m-1 flex flex-col w-fit py-2 items-center justify-center rounded-1xl shadow-2xl ${className}`}
         >
           {watchListLinks.map((links, index) => (
             <Link

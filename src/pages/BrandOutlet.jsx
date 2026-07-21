@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+
+import { useState, useEffect, useRef } from "react";
 import UnderConstruction from "../component/UnderConstruction";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
@@ -6,13 +7,13 @@ import H2_Element from "../component/H2_Element";
 import Button from "../component/Button";
 import DealsArrayProducts from "../data/DealsArrayProducts";
 import { Link, useParams } from "react-router-dom";
-import Toast from "../component/Toast";
 // import H2_Ele
 // icons
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { FaAngleDown } from "react-icons/fa";
 import { IoSearchSharp } from "react-icons/io5";
+import { FaTimes } from "react-icons/fa";
 
 const BrandOutlet = ({
   addToCart,
@@ -21,14 +22,13 @@ const BrandOutlet = ({
   getUserAfterSignIN,
   todayDeals,
   handleAddCart,
-  countDown,
-  toast,
   setToast,
   addCartExist,
   addCartSuccessfully,
   getUserName,
   sideMenubar,
-              setSideMenubar
+  setSideMenubar,
+  sideMenu,
 }) => {
   const {
     imgArray,
@@ -44,6 +44,32 @@ const BrandOutlet = ({
   const [brandNames, setBrandNames] = useState(initialBrandNames);
   const [sortedProduct, setSortedProduct] = useState(todayDeals);
   const [mobileFilter, setMobileFilter] = useState(false);
+  const [mobileFilterOptionDrop, setMobileFilterOptionDrop] = useState({
+    container1 : false,
+    container2 : false,
+    container3 : false,
+    container4 : false,
+  });
+
+  const handleFilterCategory = (containerId) => {
+    setMobileFilterOptionDrop((prev) => ({
+      ...prev,
+      [containerId] : !mobileFilterOptionDrop[containerId]
+    }))
+  }
+
+  const scrollContainerRef = useRef(null);
+
+  const handleScroll = (direction) => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = 150;
+
+      scrollContainerRef.current.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  };
 
   const handleSortingByRadioAndCheckbox = (
     id,
@@ -79,32 +105,13 @@ const BrandOutlet = ({
     setSortedProduct(listProducts);
   }, [brandNames, todayDeals]);
 
-  // Closes "Toast" after the "OK" button was clicked
-  const handleClosesToast = () => {
-    setToast(false);
-  };
   return (
-    <main>
-      {addCartSuccessfully && toast && (
-        <Toast
-          countDown={countDown}
-          header={"Added to cart successfully!"}
-          phrase={`Click "OK" to continue exploring`}
-          title1={"Ok"}
-          icon={<IoSearchSharp className="m-auto mb-3 w-full h-full" />}
-          handleFirstClick={handleClosesToast}
-        />
-      )}
-
-      {addCartExist && toast && (
-        <Toast
-          countDown={countDown}
-          header={"Product has been added before!"}
-          phrase={`Click "OK" to continue exploring`}
-          title1={"Ok"}
-          icon={<IoSearchSharp className="m-auto mb-3 w-full h-full" />}
-          handleFirstClick={handleClosesToast}
-        />
+    <main className="relative">
+      {mobileFilter && (
+        <div
+          className="bg-black min-h-screen w-full opacity-60 fixed top-0 z-90"
+          onClick={() => setMobileFilter(false)}
+        ></div>
       )}
 
       {
@@ -115,15 +122,14 @@ const BrandOutlet = ({
           cartList={cartList}
           getUserName={getUserName}
           sideMenubar={sideMenubar}
-              setSideMenubar={setSideMenubar}
+          setSideMenubar={setSideMenubar}
+          sideMenu={sideMenu}
         />
       }
 
       {/* list of deals and sorting of deals */}
-      <section className="lg:px-5 px-3 py-7">
-        <H2_Element text="Brand Outlet" />
-
-        {/* sorting type radio and checkbox */}
+      <section className="lg:px-5 px-3">
+        <H2_Element text={"BrandOutlet"} className={"mt-3"}/>
 
         {/* type radio */}
         <article className="my-5 sm:flex gap-2.5 relative">
@@ -131,85 +137,111 @@ const BrandOutlet = ({
 
           {/* mobile view */}
           <div className="sm:hidden">
-            <p
-              className="text-blue-800"
+            <button
+              className="text-[1.2rem] mb-3 bg-blue-800 w-fit px-2 py-1 rounded-lg text-white"
               onClick={() => setMobileFilter((prev) => !prev)}
             >
-              Filtered
-            </p>
+              All Filters
+            </button>
 
             {mobileFilter && (
-              <div className="fixed bottom-0 h-100 w-full bg-white z-100 left-0 shadow-2xs lg:px-5 px-3 py-2 overflow-y-scroll">
+              <div className="fixed bottom-0 h-[95vh] w-[94%] bg-white z-100 left-1/2 top-1/2 -translate-1/2 shadow-2xs px-4  py-2 overflow-y-scroll rounded-3xl">
                 <p
-                  className="text-blue-800"
+                  className="font-semibold text-[1.5rem] flex justify-between items-center mt-2 border-b-[.5px] border-slate-300 pb-2 gap-2"
                   onClick={() => setMobileFilter(!mobileFilter)}
                 >
-                  Filtered
+                  All Filters
+                  <span className="text-2xl">
+                    <FaTimes />
+                  </span>
                 </p>
-                <div className="min-w-[20%]">
-                  <div>
-                    <h2 className="font-bold">Department</h2>
-                    <form action="" className="text-[.9rem]">
-                      {!seeMoreRadio
-                        ? departmentRadioType.slice(0, 6).map((list) => (
-                            <label
-                              key={list.id}
-                              htmlFor={list.id}
-                              className="flex items-center gap-1.5 accent-blue-700"
-                            >
-                              <input
-                                type="radio"
-                                name="department"
-                                id={list.id}
-                                checked={list.checked}
-                                onChange={() =>
-                                  handleSortingByRadioAndCheckbox(
-                                    list.id,
-                                    departmentRadioType,
-                                    setDepartmentRadioType,
-                                    true,
-                                  )
-                                }
-                              />
-                              {list.text}
-                            </label>
-                          ))
-                        : departmentRadioType.map((list) => (
-                            <label
-                              key={list.id}
-                              htmlFor={list.id}
-                              className="flex items-center gap-1.5 accent-blue-700"
-                            >
-                              <input
-                                checked={list.checked}
-                                type="radio"
-                                name="department"
-                                id={list.id}
-                                onChange={() =>
-                                  handleSortingByRadioAndCheckbox(
-                                    list.id,
-                                    departmentRadioType,
-                                    setDepartmentRadioType,
-                                    true,
-                                  )
-                                }
-                              />
-                              {list.text}
-                            </label>
-                          ))}
-                    </form>
-                    <p
-                      className="flex items-center gap-1.5 cursor-pointer my-2"
-                      onClick={() => setSeeMoreRadio(!seeMoreRadio)}
-                    >
-                      <FaAngleDown />{" "}
-                      <span className="text-blue-700">See more</span>
-                    </p>
+                <div className="min-w-[20%] ">
+                  <div className="border-b-[.5px] border-slate-300">
+                    <h2 className="font-bold text-[1rem] flex gap-2 items-center justify-between my-2"
+                    
+                    onClick={() => handleFilterCategory("container1")}>
+                      Department
+                      <span>
+                        <FaAngleDown />
+                      </span>
+                    </h2>
+
+                    {mobileFilterOptionDrop.container1 && (
+                      <div>
+                        <form action="" className="text-[.9rem]">
+                          {!seeMoreRadio
+                            ? departmentRadioType.slice(0, 6).map((list) => (
+                                <label
+                                  key={list.id}
+                                  htmlFor={list.id}
+                                  className="flex items-center gap-1.5 accent-blue-700"
+                                >
+                                  <input
+                                    type="radio"
+                                    name="department"
+                                    id={list.id}
+                                    checked={list.checked}
+                                    onChange={() =>
+                                      handleSortingByRadioAndCheckbox(
+                                        list.id,
+                                        departmentRadioType,
+                                        setDepartmentRadioType,
+                                        true,
+                                      )
+                                    }
+                                  />
+                                  {list.text}
+                                </label>
+                              ))
+                            : departmentRadioType.map((list) => (
+                                <label
+                                  key={list.id}
+                                  htmlFor={list.id}
+                                  className="flex items-center gap-1.5 accent-blue-700"
+                                >
+                                  <input
+                                    checked={list.checked}
+                                    type="radio"
+                                    name="department"
+                                    id={list.id}
+                                    onChange={() =>
+                                      handleSortingByRadioAndCheckbox(
+                                        list.id,
+                                        departmentRadioType,
+                                        setDepartmentRadioType,
+                                        true,
+                                      )
+                                    }
+                                  />
+                                  {list.text}
+                                </label>
+                              ))}
+                        </form>
+
+                        <p
+                          className="flex items-center gap-1.5 cursor-pointer my-2"
+                          onClick={() => setSeeMoreRadio(!seeMoreRadio)}
+                        >
+                          <FaAngleDown />{" "}
+                          <span className="text-blue-700">See more</span>
+                        </p>
+                      </div>
+                    )}
                   </div>
 
                   {/* type checkbox */}
-                  <div>
-                    <h2 className="font-bold">Brands</h2>
+                  <div className="border-b-[.5px] border-slate-300">
+                    <h2 className="font-bold text-[1rem] flex gap-2 items-center justify-between my-2"
+                    
+                    onClick={() => handleFilterCategory("container2")}>
+                      Brands
+                      <span>
+                        <FaAngleDown />
+                      </span>
+                    </h2>
+                    
+                    {mobileFilterOptionDrop.container2 && (
+                      <div>
                     <form action="" className="text-[.9rem]">
                       {!seeMoreCheckbox
                         ? brandNames.slice(0, 6).map((list) => (
@@ -264,10 +296,23 @@ const BrandOutlet = ({
                       <FaAngleDown />{" "}
                       <span className="text-blue-700">See more</span>
                     </p>
+                    </div>
+                    )}
                   </div>
 
-                  <div>
-                    <h2 className="font-bold">Customer Reviews</h2>
+                  <div className="border-b-[.5px] border-slate-300">
+                    <h2 className="font-bold text-[1rem] flex gap-2 items-center justify-between my-2"
+                    
+                    onClick={() => handleFilterCategory("container3")}>
+                      Customer Reviews
+                      <span>
+                        <FaAngleDown />
+                      </span>
+                    </h2>
+                    
+
+                    {mobileFilterOptionDrop.container3 && (
+                      
                     <form action="" className="text-[.9rem]">
                       <label
                         htmlFor="all"
@@ -284,14 +329,27 @@ const BrandOutlet = ({
                         All & up (later work)
                       </label>
                     </form>
+                    )}
                   </div>
 
-                  <div>
-                    <h2 className="font-bold mt-2">Discount</h2>
+                  <div className="border-b-[.5px] border-slate-300">
+                    <h2 className="font-bold text-[1rem] flex gap-2 items-center justify-between my-2"
+                    
+                    onClick={() => handleFilterCategory("container4")}>
+                      Discount
+                      <span>
+                        <FaAngleDown />
+                      </span>
+                    </h2>
+                    
+                    {mobileFilterOptionDrop.container4 && (
+                      <div>
                     <p>10% - 100%</p>
 
                     {/* range */}
                     <div></div>
+                    </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -476,7 +534,7 @@ const BrandOutlet = ({
                   <div className="my-2 text-[.8rem]">
                     <p className="flex">
                       <span className="text-[.6rem]">{item.currency}</span>
-                      {item.price}
+                      {item.price.toLocaleString()}
                       <span className="text-[.6rem]">{item.priceRise}</span>
                     </p>
 
@@ -503,7 +561,7 @@ const BrandOutlet = ({
                 <Button
                   buttonTitle="Add to cart"
                   className="bg-amber-300 w-full py-1.5 text-[1.3rem] mb-3 font-medium rounded-lg"
-                  handleClick={() => handleAddCart(item.id)}
+                  handleClick={() => handleAddCart(item)}
                 />
               </section>
             ))}
@@ -517,3 +575,4 @@ const BrandOutlet = ({
 };
 
 export default BrandOutlet;
+

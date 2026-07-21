@@ -4,7 +4,6 @@ import background from "../assets/logo.png";
 import { v4 as uuid } from "uuid";
 import { IoSearchSharp } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
-import Toast from "../component/Toast";
 
 const CreateAccount = ({
   showPassword,
@@ -13,9 +12,7 @@ const CreateAccount = ({
   isCompleteLogin,
   setIsCompleteLogin,
   createAccount,
-  toast,
   setToast,
-  countDown,
   addToCart,
   cartList,
 }) => {
@@ -96,7 +93,6 @@ const CreateAccount = ({
       password: logInPassword,
       cart: 0,
       cartList: [],
-      totalPrice: 0,
       saved: [],
     };
     const erros = handleDetailsError();
@@ -105,37 +101,24 @@ const CreateAccount = ({
     const newAccountList = [accountDetails, ...createAccount];
     localStorage.setItem("currentUser", JSON.stringify(newAccountList));
     setCreateAccount(newAccountList);
-    setToast(true);
+    setToast({
+      countDown: 3,
+      header: "Account created successfully!",
+      message: "Click OK to go to the sign-in page.",
+      title1: "OK",
+      onFirstClick: () => navigate("/profile"),
+      navigateTo: "/profile",
+    });
 
     // reset states
     setLogInUserName("");
     setLogInFirstLastName("");
     setLogInEmail("");
     setLogInPassword("");
-    if (countDown === 0 && toast) {
-      navigate("/profile");
-    }
-  };
-
-  const handleSuccessfulLogin = () => {
-    navigate("/profile");
-    setToast(false);
   };
 
   return (
     <main className="relative p-3 lg:p-5 flex flex-col min-h-screen">
-      {toast && (
-        <Toast
-          countDown={countDown}
-          header={"Account created successfully!"}
-          phrase={`Click "OK" to go back to sign in page`}
-          title1={"OK"}
-          // title2={"Logout"}
-          icon={<IoSearchSharp className="m-auto mb-3 w-full h-full" />}
-          handleFirstClick={handleSuccessfulLogin}
-        />
-      )}
-
       <section className="flex flex-row justify-between items-center mt-1">
         <button className="rounded-2xl w-25">
           <Link to={"/"}>

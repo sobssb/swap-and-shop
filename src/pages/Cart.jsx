@@ -6,7 +6,6 @@ import H2_Element from "../component/H2_Element";
 import noCartimg from "../assets/pngwing.com (2) (5).png";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../layout/Footer";
-import Toast from "../component/Toast";
 import Saved from "./Saved";
 // icons
 import { IoSearchSharp } from "react-icons/io5";
@@ -23,8 +22,6 @@ const Cart = ({
   createAccount,
   setCreateAccount,
   setGetUserAfterSignIN,
-  countDown,
-  toast,
   setToast,
   todayDeals,
   saved,
@@ -32,22 +29,26 @@ const Cart = ({
   getUserName,
   sideMenubar,
   setSideMenubar,
+  sideMenu
 }) => {
   const navigate = useNavigate();
 
   const [deleteCart, setDeleteCart] = useState(false);
   const [stockById, setStockById] = useState({});
+  const [stockMaxById, setStockMaxById] = useState({});
   const [successfullSaved, setSuccessfullSaved] = useState(false);
   const [savedExist, setSavedExist] = useState(false);
-  const [totalPrice, setTotalPrice] = useState(
-    getUserAfterSignIN ? getUserAfterSignIN.totalPrice : 0,
-  );
+  const [totalPrice, setTotalPrice] = useState(0);
   const max = 10;
 
   useEffect(() => {
     const initialStock = Object.fromEntries(
       cartList.map((product) => [product.id, product.stock ?? 1]),
     );
+    const initialStockMax = Object.fromEntries(
+      cartList.map((product) => [product.id, product.max ?? 1]),
+    );
+    setStockMaxById(initialStockMax);
     setStockById(initialStock);
   }, [cartList]);
 
@@ -104,7 +105,7 @@ const Cart = ({
     if (!id) return;
 
     const currentStock = stockById[id] ?? 1;
-    if (currentStock > max - 1) return;
+    if (currentStock > stockMaxById[id] - 1) return;
 
     const nextStock = stockById[id] + 1;
     setStockById((prev) => ({
@@ -164,8 +165,8 @@ const Cart = ({
     setGetUserAfterSignIN(updateCurrentUser);
   };
 
-  const handleDeleteCart = (id) => {
-    if (!id) return;
+  const handleDeleteCart = (product) => {
+    if (!product) return;
 
     let minusCart = addToCart;
     if (addToCart > 0 && cartList.length <= 9) {
@@ -173,68 +174,140 @@ const Cart = ({
       setAddToCart(minusCart);
     }
 
-    const deleteProduct = cartList.filter((product) => product.id !== id);
+    const deleteProduct = cartList.filter((cart) => cart.id !== product.id);
     setCartList(deleteProduct);
 
     handleCartUpdate(minusCart, deleteProduct);
-    setToast(true);
+    setToast({
+      countDown: 3,
+      header: "Product deleted from cart!",
+      message: "Click OK to continue exploring.",
+      title1: "OK",
+    });
     setDeleteCart(true);
   };
 
-  // Closes "Toast" after the "OK" button was clicked
-  const handleClosesToast = () => {
-    setToast(false);
-  };
-
-  // saved product
-  const handleUpdateSaved = (nextProduct) => {
+  // Save cleared cartList to localStorage
+  const handleSavedClearCartList = () => {
     if (!getUserAfterSignIN) return;
 
-    const userUpdate = createAccount.map((user) => {
+    const emptyCartList = createAccount.map((account) => {
+      if (
+        account.email.trim().toLowerCase() ===
+        getUserAfterSignIN.email.trim().toLowerCase()
+      ) {
+        return {
+          ...account,
+          cart: 0,
+          cartList: [],
+        };
+      }
+      return account;
+    });
+
+    // Saved the latest account details  to localStorage
+    localStorage.setItem("currentUser", JSON.stringify(emptyCartList));
+    setCreateAccount(emptyCartList);
+
+    // current user singed in
+    const updateCurrentUser = {
+      ...getUserAfterSignIN,
+      cart: 0,
+      cartList: [],
+    };
+    localStorage.setItem("user", JSON.stringify(updateCurrentUser));
+    setGetUserAfterSignIN(updateCurrentUser);
+  };
+
+  // Clear the cartList i.e ([])
+  const handleClearAll = () => {
+    s;
+    setCartList([]);
+    setAddToCart(0);
+    handleSavedClearCartList();
+  };
+
+  // saved product to localStorage
+  const handleSavedUpdateAndRemoveFromCartList = (
+    newSaved,
+    minusCart,
+    minusCartList,
+  ) => {
+    if (!getUserAfterSignIN) return;
+
+    const newDetails = createAccount.map((user) => {
       if (
         user.email.trim().toLowerCase() ===
         getUserAfterSignIN.email.trim().toLowerCase()
       ) {
         return {
           ...user,
-          saved: nextProduct,
+          cart: minusCart,
+          cartList: minusCartList,
+          saved: newSaved,
         };
       }
       return user;
     });
 
     // Saved the latest account details  to localStorage
-    localStorage.setItem("currentUser", JSON.stringify(userUpdate));
-    setCreateAccount(userUpdate);
+    localStorage.setItem("currentUser", JSON.stringify(newDetails));
+    setCreateAccount(newDetails);
 
-    const updateCurrent = {
+    const newCurrentUserDetails = {
       ...getUserAfterSignIN,
-      saved: nextProduct,
+      cart: minusCart,
+      cartList: minusCartList,
+      saved: newSaved,
     };
 
-    localStorage.setItem("user", JSON.stringify(updateCurrent));
-    setGetUserAfterSignIN(updateCurrent);
+    localStorage.setItem("user", JSON.stringify(newCurrentUserDetails));
+    setGetUserAfterSignIN(newCurrentUserDetails);
   };
 
-  const handleSaved = (id) => {
-    if (!id) return;
+  const handleSaved = (product) => {
+    if (!product) return;
 
     // find the selected product
-    const findProduct = todayDeals.find((product) => product.id === id);
-
+    // const findProduct = todayDeals.find((product) => product.id === id);
+    // if (!findProduct) return;
     // if selected product already exist
-    const productExist = saved.find((product) => product.id === findProduct.id);
+    const productExist = saved.find(
+      (savedProduct) => savedProduct.id === product.id,
+    );
 
-    if (findProduct) {
-      const newSaved = [findProduct, ...saved];
+    let minusCart = addToCart;
+    if (!productExist && addToCart > 0 && cartList.length <= 9) {
+      minusCart = minusCart - 1;
+      setAddToCart(minusCart);
+    }
+
+    if (!productExist) {
+      const newSaved = [product, ...saved];
+      const deleteProduct = cartList.filter((cart) => cart.id !== product.id);
       setSaved(newSaved);
+      setCartList(deleteProduct);
       setSuccessfullSaved(true);
-      setToast(true);
+      setToast({
+        countDown: 3,
+        header: "Product saved successfully!",
+        message: "Click OK to continue exploring.",
+        title1: "OK",
+      });
       setSavedExist(false);
-      handleUpdateSaved(newSaved);
+      handleSavedUpdateAndRemoveFromCartList(
+        newSaved,
+        minusCart,
+        deleteProduct,
+      );
     } else {
       setSuccessfullSaved(false);
-      setToast(true);
+      setToast({
+        countDown: 3,
+        header: "Product had been saved already!",
+        message: "Click OK to continue exploring.",
+        title1: "OK",
+      });
       setSavedExist(true);
     }
   };
@@ -242,7 +315,7 @@ const Cart = ({
   useEffect(() => {
     const handleTotalCost = (() => {
       return cartList.reduce((acc, item) => {
-        const wholePrice = Number(item.price.replace(/,/g, ""));
+        const wholePrice = Number(item.price);
         const priceRise = Number(item.priceRise) / 100;
         const numberOfStock = Number(item.stock) || 1;
 
@@ -252,71 +325,12 @@ const Cart = ({
 
         setTotalPrice(total.toLocaleString());
         return acc + totalPrice;
-
-        if (!getUserAfterSignIN) return;
-        const userUpdate = createAccount.map((user) => {
-          if (
-            user.email.trim().toLowerCase() ===
-            getUserAfterSignIN.email.trim().toLowerCase()
-          ) {
-            return {
-              ...user,
-              totalPrice: totalPrice,
-            };
-          }
-          return user;
-        });
-
-        // Saved the latest account details  to localStorage
-        localStorage.setItem("currentUser", JSON.stringify(userUpdate));
-        setCreateAccount(userUpdate);
-
-        const updateCurrent = {
-          ...getUserAfterSignIN,
-          totalPrice: totalPrice,
-        };
-
-        localStorage.setItem("user", JSON.stringify(userUpdate));
-        setGetUserAfterSignIN(updateCurrent);
       }, 0);
     })();
   }, [cartList]);
 
   return (
     <main>
-      {deleteCart && toast && (
-        <Toast
-          countDown={countDown}
-          header={"Product deleted from cart!"}
-          phrase={`Click "OK" to continue exploring`}
-          title1={"Ok"}
-          icon={<IoSearchSharp className="m-auto mb-3 w-full h-full" />}
-          handleFirstClick={handleClosesToast}
-        />
-      )}
-
-      {successfullSaved && toast && (
-        <Toast
-          countDown={countDown}
-          header={"Product saved successfully!"}
-          phrase={`Click "OK" to continue exploring`}
-          title1={"Ok"}
-          icon={<IoSearchSharp className="m-auto mb-3 w-full h-full" />}
-          handleFirstClick={handleClosesToast}
-        />
-      )}
-
-      {savedExist && toast && (
-        <Toast
-          countDown={countDown}
-          header={"Product had been saved already!"}
-          phrase={`Click "OK" to continue exploring`}
-          title1={"Ok"}
-          icon={<IoSearchSharp className="m-auto mb-3 w-full h-full" />}
-          handleFirstClick={handleClosesToast}
-        />
-      )}
-
       {
         <Header
           isSignedIn={isSignedIn}
@@ -329,6 +343,7 @@ const Cart = ({
           isSignedIn={isSignedIn}
           getUserAfterSignIN={getUserAfterSignIN}
           getUserName={getUserName}
+          sideMenu={sideMenu}
         />
       }
 
@@ -343,7 +358,6 @@ const Cart = ({
             <Button
               buttonTitle={`Proceed to checkout (${cartList.length || 0} ${cartList.length > 1 ? "items" : "item"} )`}
               className="bg-amber-300 lg:w-100 w-full py-1.5 text-[1.3rem] mb-4 font-medium rounded-lg "
-              handleClick={() => handleAddCart(item.id)}
             />
           </article>
         </section>
@@ -355,6 +369,7 @@ const Cart = ({
           <section
             className="bg-gray-100 mb-3 flex gap-3 lg:px-5 px-3 py-1"
             key={product.id}
+            
           >
             {/* product image */}
             <article className="rounded-lg mb-3 grid place-content-center w-[40%] md:w-[20%]">
@@ -362,6 +377,7 @@ const Cart = ({
                 className="w-full h-full"
                 src={product.image}
                 alt="category image"
+                onClick={() => navigate(`/product/${product.id}`)}
               />
               <div className="flex w-full justify-between items-center border-2 border-amber-700 rounded-2xl p-1.5 font-bold cursor-pointer">
                 <IoNotificationsSharp
@@ -385,14 +401,18 @@ const Cart = ({
                 <div className="flex items-center gap-3.5 text-[1.7rem]">
                   <p className="flex font-bold">
                     <span className="text-[.6rem]">{product.currency}</span>
-                    {product.price}
+                    {product.price.toLocaleString()}
                     <span className="text-[.6rem]">{product.priceRise}</span>
                   </p>
                 </div>
                 <p className="text-green-900 font-semibold">In Stock</p>
                 <p>
+                  <span className="font-semibold">Stock: </span>{product.max}
+                </p>
+                <p>
                   <span className="font-semibold">Color: </span>white
                 </p>
+                
                 <p className="text-blue-700 underline">
                   More details coming soon
                 </p>
@@ -402,15 +422,14 @@ const Cart = ({
                 <Button
                   buttonTitle="Delete"
                   className="border py-1.5 px-2.5 text-[1rem] mb-3 font-medium"
-                  handleClick={() => handleDeleteCart(product.id)}
+                  handleClick={() => handleDeleteCart(product)}
                 />
 
                 <Button
                   buttonTitle="Save for later"
                   className="border  py-1.5 px-2.5 text-[1rem] mb-3 font-medium whitespace-nowrap"
                   handleClick={() => {
-                    handleSaved(product.id);
-                    handleDeleteCart(product.id);
+                    handleSaved(product);
                   }}
                 />
               </div>
@@ -450,9 +469,15 @@ const Cart = ({
         </section>
       )}
 
-      {/* <h2>Saved work</h2>
-      <Saved />
- */}
+      {cartList.length > 0 && (
+        <p
+          className="text-blue-800 text-center cursor-pointer"
+          onClick={handleClearAll}
+        >
+          Clear All
+        </p>
+      )}
+
       <Footer />
     </main>
   );

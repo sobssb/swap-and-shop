@@ -12,9 +12,9 @@ const HomeCardBanner = ({ items }) => {
         </Link>
       </div>
 
-      <div className="flex flex-row gap-5 w-full overflow-auto ">
+      <div className="flex flex-row gap-5 w-full overflow-x-scroll [&::-webkit-scrollbar]:h-1 [&::-webkit-scrollbar-thumb]:bg-gray-400 [&::-webkit-scrollbar-thumb]:rounded-lg ">
         {items.img.map((image, index) => (
-          <div key={index} className="w-full">
+          <div key={index} className="w-full mb-3">
             <img className="lg:min-w-60 min-w-40"  src={image} alt="item images" />
           </div>
         ))}

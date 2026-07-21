@@ -19,13 +19,13 @@ const SideBar = ({
 
   return (
     <div
-      className={`${sideMenubar ? `flex` : `hidden`}  absolute bg-white h-screen shadow-2xl  w-75 flex-col p-5`}
+      className={`${sideMenubar ? `translate-x-0` : `-translate-x-full`}  absolute transition-all duration-300 ease-in-out bg-white h-screen shadow-2xl  w-75 flex-col p-5 z-100`}
     >
       {/* side menu bar */}
       {sideMenubar && (
         <section className="">
           <article
-            className="flex items-center justify-between mb-10"
+            className="flex items-center justify-between mb-5"
             onClick={() => setSideMenubar(!sideMenubar)}
           >
             <button className="rounded-2xl w-25">
@@ -46,11 +46,11 @@ const SideBar = ({
             className="flex flex-col "
             onClick={() => setSideMenubar(!sideMenubar)}
           >
-            <div>
+            <div className="mb-5 ">
               {isSignedIn &&
               getUserAfterSignIN &&
               Object.keys(getUserAfterSignIN).length > 0 ? (
-                <p className="font-bold">
+                <p className="font-bold bg-blue-800 text-white -mx-5 py-2 pl-5">
                   Hi,{" "}
                   <span
                     onClick={() => {
@@ -65,7 +65,7 @@ const SideBar = ({
               ) : (
                 <p>
                   Hi
-                  <span className="text-[#021cff] underline">
+                  <span className="text-[#021cff]  underline">
                     <Link to="/profile"> Sign in </Link>
                   </span>
                   or
@@ -76,23 +76,18 @@ const SideBar = ({
               )}
             </div>
 
-            <div className="flex gap-2 flex-col">
+            <div className="flex gap-2 flex-col border-b-2 border-slate-600 -mx-5 pl-5 mb-5 text-[1.3rem]">
               <Link to="/giftCards">Gift Cards</Link>
               <Link to="/brandOutlet">Brand Outlet</Link>
               <Link to="/deals">Deals</Link>
               <Link to="/helpContact">Help & Contact</Link>
+              <Link to="/swap">Swap</Link>
+              <Link to="/sell">Sell</Link>
             </div>
           </article>
 
           {/* Second group */}
-          <article className="flex gap-2 flex-col">
-            <Link
-              onClick={() => setSideMenubar(!sideMenubar)}
-              to="/sell"
-              className="mt-2"
-            >
-              Sell
-            </Link>
+          <article className="flex gap-2 flex-col border-b-2 border-slate-600 -mx-5 px-5 pb-2 text-[1.3rem]">
             <SideMenuBarSlide
               title={"Watch List"}
               watchListLinks={watchListLinks}

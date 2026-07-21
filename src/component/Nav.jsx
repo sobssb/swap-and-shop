@@ -24,6 +24,11 @@ const Nav = ({
   return (
     // For large screens
     <div>
+      {sideMenubar && (
+        <div
+          className="bg-black min-h-screen w-full opacity-60 fixed top-0 z-90"
+        ></div>
+      )}
       {/* TODO: add nav links and styling 
       These contains the logo and the nav
       links and a search bar */}

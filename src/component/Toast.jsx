@@ -1,22 +1,35 @@
-import React from "react";
 import { IoSearchSharp } from "react-icons/io5";
 
-const Toast = ({
-  countDown,
-  header,
-  phrase,
-  title1,
-  title2,
-  icon,
-  buttonIcon,
-  handleFirstClick,
-  handleSecondClick,
-  className,
-}) => {
+const Toast = ({ toast, onClose }) => {
+  if (!toast) return null;
+
+  const {
+    countDown = 0,
+    header = "Notification",
+    message = "",
+    title1 = "OK",
+    title2,
+    icon = <IoSearchSharp className="m-auto mb-3 w-full h-full" />,
+    buttonIcon,
+    onFirstClick,
+    onSecondClick,
+    className = "",
+  } = toast;
+
+  const handleFirstClick = () => {
+    onClose();
+    onFirstClick?.();
+  };
+
+  const handleSecondClick = () => {
+    onClose();
+    onSecondClick?.();
+  };
+
   return (
     // Toast component for different confirmation
     <main
-      className={`fixed w-73 h-fit bg-white shadow-2xl top-1/2 left-1/2 -translate-1/2 text-black p-2 z-10 grid place-content-center rounded-lg ${className}`}
+      className={`fixed w-73 h-fit bg-white shadow-2xl top-1/2 left-1/2 -translate-1/2 text-black p-2 z-1000 grid place-content-center rounded-lg ${className}`}
     >
       {/* Count down */}
       <div className="justify-self-end mt-2 -mb-5 bg-red-800  w-6 h-6 text-center text-white  rounded-[50%]">
@@ -25,7 +38,7 @@ const Toast = ({
       <button className="mx-auto w-7 mt-3">{icon}</button>
       <h2 className="text-[1rem] font-bold text-center">{header}</h2>
 
-      <p className="mx-auto">{phrase}</p>
+      <p className="mx-auto">{message}</p>
 
       <section
         className={`flex justify-between items-center  rounded-lg w-full f mb-3 mt-4 mx-auto ${title2 ? "gap-3" : null}`}
@@ -53,4 +66,3 @@ const Toast = ({
 };
 
 export default Toast;
-``;

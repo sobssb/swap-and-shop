@@ -6,9 +6,9 @@ const FooterLinkNames = ({ names }) => {
     <div>
       {names.map((link, index) => ( 
         <div key={index} className="flex flex-col">
-          <h2 className="mb-1 text-blue-700">{link.title}</h2>
+          <h2 className="mb-1 text-[#161515] font-semibold text-[1rem]">{link.title}</h2>
 
-          <Link to={link.url}>{link.name}</Link>
+          <Link className="hover:underline" to={link.url}>{link.name}</Link>
         </div>
       ))}
     </div>

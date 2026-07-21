@@ -26,7 +26,7 @@ const HelpContact = ({
 
   const navigate = useNavigate();
 
-  const handleSearchHelp = () => {
+  const handleSearchHelp = (e) => {
     e.preventDefault();
     if (searchHelp === "") return;
   };
@@ -90,11 +90,11 @@ const HelpContact = ({
           onSubmit={handleSearchHelp}
         >
           <input
-            className="border border-slate-500 w-full pr-49 pl-13 text-2xl focus:outline-none h-10  rounded-2xl bg-white"
+            className="border border-slate-500 w-full pr-2 pl-13 text-2xl focus:outline-none h-10  rounded-2xl bg-white"
             type="text"
             value={searchHelp}
             onChange={(e) => setSearchHelp(e.target.value)}
-            placeholder="Search Swap And Shop Help"
+            placeholder="Search Help"
           />
 
           <button

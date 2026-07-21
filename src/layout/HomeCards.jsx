@@ -39,7 +39,7 @@ const HomeCards = ({ data, fetchError, isLoading }) => {
   ];
 
   return (
-    <section className="bg-white mt-5 lg:bg-gray-200 lg:px-5 px-3">
+    <section className="bg-white mt-5 lg:bg-[#D5D9D9] lg:px-5 px-3">
       {isLoading && (
         <section className="grid lg:grid-cols-3 gap-3 ">
           {/* Skeletion Loading */}

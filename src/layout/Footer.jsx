@@ -12,13 +12,13 @@ const Footer = () => {
         onClick={() => {
           window.scrollTo({ top: 0, behavior: "smooth" });
         }}
-        className="bg-gray-500 grid place-content-center py-3 mt-5 text-2xl text-white cursor-pointer"
+        className="bg-[#C7C7C7] grid place-content-center py-3 mt-5 text-2xl text-[#292929] cursor-pointer"
       >
         <p>Back to top</p>
       </section>
 
-      <section className="bg-gray-950 grid sm:place-content-center lg:p-5 p-3">
-        <article className="text-white grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-x-10 gap-y-5">
+      <section className="bg-[#ddd9d9] grid sm:place-content-center lg:p-5 p-3">
+        <article className="text-[#424141] grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-x-10 gap-y-5 text-[.9rem]">
           <FooterLinkNames names={knowUs} />
           <FooterLinkNames names={makeMoney} />
           <FooterLinkNames names={paymentProducts} />
