@@ -40,7 +40,7 @@ const LogoNotification = ({
         <button className="w-6 h-6 relative">
           <IoNotificationsSharp className="w-full h-full text-center" />
           <div className="w-5 h-5 bg-[#F0C808] rounded-[50%] p-1 absolute -top-3.5 -right-1.5 grid place-content-center font-bold text-white text-[0.8rem]">
-            9+
+            0
           </div>
         </button>
         <button className="w-6 h-6 relative">

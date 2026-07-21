@@ -66,7 +66,7 @@ const LogoSearchbarNoti = ({
       <button className="w-9 h-9 relative">
         <IoNotificationsSharp className="w-full h-full text-center" />
         <div className="w-6 h-6 bg-[#F0C808] text-[0.8rem] rounded-[50%] p-1 absolute -top-3.5 -right-1.5 grid place-content-center font-bold text-white">
-          1+
+          0
         </div>
       </button>
 
