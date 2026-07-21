@@ -221,10 +221,7 @@ const SignIn = ({
         </form>
       </section>
 
-      <button
-        onClick={handleLogoutRequest}
-        className="mt-5"
-      >
+      <button onClick={handleLogoutRequest} className="mt-5">
         Log Out
       </button>
     </main>

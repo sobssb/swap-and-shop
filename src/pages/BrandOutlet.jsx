@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from "react";
 import UnderConstruction from "../component/UnderConstruction";
 import Header from "../layout/Header";
@@ -45,18 +44,18 @@ const BrandOutlet = ({
   const [sortedProduct, setSortedProduct] = useState(todayDeals);
   const [mobileFilter, setMobileFilter] = useState(false);
   const [mobileFilterOptionDrop, setMobileFilterOptionDrop] = useState({
-    container1 : false,
-    container2 : false,
-    container3 : false,
-    container4 : false,
+    container1: false,
+    container2: false,
+    container3: false,
+    container4: false,
   });
 
   const handleFilterCategory = (containerId) => {
     setMobileFilterOptionDrop((prev) => ({
       ...prev,
-      [containerId] : !mobileFilterOptionDrop[containerId]
-    }))
-  }
+      [containerId]: !mobileFilterOptionDrop[containerId],
+    }));
+  };
 
   const scrollContainerRef = useRef(null);
 
@@ -129,7 +128,7 @@ const BrandOutlet = ({
 
       {/* list of deals and sorting of deals */}
       <section className="lg:px-5 px-3">
-        <H2_Element text={"BrandOutlet"} className={"mt-3"}/>
+        <H2_Element text={"BrandOutlet"} className={"mt-3"} />
 
         {/* type radio */}
         <article className="my-5 sm:flex gap-2.5 relative">
@@ -157,9 +156,10 @@ const BrandOutlet = ({
                 </p>
                 <div className="min-w-[20%] ">
                   <div className="border-b-[.5px] border-slate-300">
-                    <h2 className="font-bold text-[1rem] flex gap-2 items-center justify-between my-2"
-                    
-                    onClick={() => handleFilterCategory("container1")}>
+                    <h2
+                      className="font-bold text-[1rem] flex gap-2 items-center justify-between my-2"
+                      onClick={() => handleFilterCategory("container1")}
+                    >
                       Department
                       <span>
                         <FaAngleDown />
@@ -231,124 +231,125 @@ const BrandOutlet = ({
 
                   {/* type checkbox */}
                   <div className="border-b-[.5px] border-slate-300">
-                    <h2 className="font-bold text-[1rem] flex gap-2 items-center justify-between my-2"
-                    
-                    onClick={() => handleFilterCategory("container2")}>
+                    <h2
+                      className="font-bold text-[1rem] flex gap-2 items-center justify-between my-2"
+                      onClick={() => handleFilterCategory("container2")}
+                    >
                       Brands
                       <span>
                         <FaAngleDown />
                       </span>
                     </h2>
-                    
+
                     {mobileFilterOptionDrop.container2 && (
                       <div>
-                    <form action="" className="text-[.9rem]">
-                      {!seeMoreCheckbox
-                        ? brandNames.slice(0, 6).map((list) => (
-                            <label
-                              key={list.id}
-                              htmlFor={list.id}
-                              className="flex items-center gap-1.5 accent-blue-700"
-                            >
-                              <input
-                                checked={list.checked}
-                                onChange={() =>
-                                  handleSortingByRadioAndCheckbox(
-                                    list.id,
-                                    brandNames,
-                                    setBrandNames,
-                                  )
-                                }
-                                type="checkbox"
-                                name={list.id}
-                                id={list.id}
-                              />
-                              {list.text}
-                            </label>
-                          ))
-                        : brandNames.map((list) => (
-                            <label
-                              key={list.id}
-                              htmlFor={list.id}
-                              className="flex items-center gap-1.5 accent-blue-700"
-                            >
-                              <input
-                                checked={list.checked}
-                                type="checkbox"
-                                name={list.id}
-                                id={list.id}
-                                onChange={() =>
-                                  handleSortingByRadioAndCheckbox(
-                                    list.id,
-                                    brandNames,
-                                    setBrandNames,
-                                  )
-                                }
-                              />
-                              {list.text}
-                            </label>
-                          ))}
-                    </form>
-                    <p
-                      className="flex items-center gap-1.5 cursor-pointer my-2"
-                      onClick={() => setSeeMoreCheckbox(!seeMoreCheckbox)}
-                    >
-                      <FaAngleDown />{" "}
-                      <span className="text-blue-700">See more</span>
-                    </p>
-                    </div>
+                        <form action="" className="text-[.9rem]">
+                          {!seeMoreCheckbox
+                            ? brandNames.slice(0, 6).map((list) => (
+                                <label
+                                  key={list.id}
+                                  htmlFor={list.id}
+                                  className="flex items-center gap-1.5 accent-blue-700"
+                                >
+                                  <input
+                                    checked={list.checked}
+                                    onChange={() =>
+                                      handleSortingByRadioAndCheckbox(
+                                        list.id,
+                                        brandNames,
+                                        setBrandNames,
+                                      )
+                                    }
+                                    type="checkbox"
+                                    name={list.id}
+                                    id={list.id}
+                                  />
+                                  {list.text}
+                                </label>
+                              ))
+                            : brandNames.map((list) => (
+                                <label
+                                  key={list.id}
+                                  htmlFor={list.id}
+                                  className="flex items-center gap-1.5 accent-blue-700"
+                                >
+                                  <input
+                                    checked={list.checked}
+                                    type="checkbox"
+                                    name={list.id}
+                                    id={list.id}
+                                    onChange={() =>
+                                      handleSortingByRadioAndCheckbox(
+                                        list.id,
+                                        brandNames,
+                                        setBrandNames,
+                                      )
+                                    }
+                                  />
+                                  {list.text}
+                                </label>
+                              ))}
+                        </form>
+                        <p
+                          className="flex items-center gap-1.5 cursor-pointer my-2"
+                          onClick={() => setSeeMoreCheckbox(!seeMoreCheckbox)}
+                        >
+                          <FaAngleDown />{" "}
+                          <span className="text-blue-700">See more</span>
+                        </p>
+                      </div>
                     )}
                   </div>
 
                   <div className="border-b-[.5px] border-slate-300">
-                    <h2 className="font-bold text-[1rem] flex gap-2 items-center justify-between my-2"
-                    
-                    onClick={() => handleFilterCategory("container3")}>
+                    <h2
+                      className="font-bold text-[1rem] flex gap-2 items-center justify-between my-2"
+                      onClick={() => handleFilterCategory("container3")}
+                    >
                       Customer Reviews
                       <span>
                         <FaAngleDown />
                       </span>
                     </h2>
-                    
 
                     {mobileFilterOptionDrop.container3 && (
-                      
-                    <form action="" className="text-[.9rem]">
-                      <label
-                        htmlFor="all"
-                        className="flex items-center gap-1.5 accent-blue-700"
-                      >
-                        <input type="radio" name="other" id="all" />
-                        All
-                      </label>
-                      <label
-                        htmlFor="rating"
-                        className="flex items-center gap-1.5 accent-blue-700"
-                      >
-                        <input type="radio" name="other" id="rating" />
-                        All & up (later work)
-                      </label>
-                    </form>
+                      <form action="" className="text-[.9rem]">
+                        <label
+                          htmlFor="all"
+                          className="flex items-center gap-1.5 accent-blue-700"
+                        >
+                          <input type="radio" name="other" id="all" />
+                          All
+                        </label>
+                        <label
+                          htmlFor="rating"
+                          className="flex items-center gap-1.5 accent-blue-700"
+                        >
+                          <input type="radio" name="other" id="rating" />
+                          All & up (later work)
+                        </label>
+                      </form>
                     )}
                   </div>
 
                   <div className="border-b-[.5px] border-slate-300">
-                    <h2 className="font-bold text-[1rem] flex gap-2 items-center justify-between my-2"
-                    
-                    onClick={() => handleFilterCategory("container4")}>
+                    <h2
+                      className="font-bold text-[1rem] flex gap-2 items-center justify-between my-2"
+                      onClick={() => handleFilterCategory("container4")}
+                    >
                       Discount
                       <span>
                         <FaAngleDown />
                       </span>
                     </h2>
-                    
+
                     {mobileFilterOptionDrop.container4 && (
                       <div>
-                    <p>10% - 100%</p>
+                        <p>10% - 100%</p>
 
-                    {/* range */}
-                    <div></div>
-                    </div>
+                        {/* range */}
+                        <div></div>
+                      </div>
                     )}
                   </div>
                 </div>
@@ -575,4 +576,3 @@ const BrandOutlet = ({
 };
 
 export default BrandOutlet;
-

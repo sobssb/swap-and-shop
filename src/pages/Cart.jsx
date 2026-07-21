@@ -29,7 +29,7 @@ const Cart = ({
   getUserName,
   sideMenubar,
   setSideMenubar,
-  sideMenu
+  sideMenu,
 }) => {
   const navigate = useNavigate();
 
@@ -369,7 +369,6 @@ const Cart = ({
           <section
             className="bg-gray-100 mb-3 flex gap-3 lg:px-5 px-3 py-1"
             key={product.id}
-            
           >
             {/* product image */}
             <article className="rounded-lg mb-3 grid place-content-center w-[40%] md:w-[20%]">
@@ -407,12 +406,13 @@ const Cart = ({
                 </div>
                 <p className="text-green-900 font-semibold">In Stock</p>
                 <p>
-                  <span className="font-semibold">Stock: </span>{product.max}
+                  <span className="font-semibold">Stock: </span>
+                  {product.max}
                 </p>
                 <p>
                   <span className="font-semibold">Color: </span>white
                 </p>
-                
+
                 <p className="text-blue-700 underline">
                   More details coming soon
                 </p>

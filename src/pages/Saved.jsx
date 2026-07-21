@@ -27,7 +27,7 @@ const Saved = ({
   createAccount,
   setCreateAccount,
   setGetUserAfterSignIN,
-  sideMenu
+  sideMenu,
 }) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [deleteSaved, setDeleteSaved] = useState(false);
@@ -244,7 +244,8 @@ const Saved = ({
                 </div>
                 <p className="text-green-900 font-semibold">In Stock</p>
                 <p>
-                  <span className="font-semibold">Stock: </span>{product.max}
+                  <span className="font-semibold">Stock: </span>
+                  {product.max}
                 </p>
                 <p>
                   <span className="font-semibold">Color: </span>white

@@ -91,34 +91,34 @@ const Product = ({
         </article>
 
         <section className="order-first md:order-0 mt-2 ">
-        {/* name of business(username) and ratings */}
-        <div className="flex items-center justify-between">
-          <Link to={"/"} className="whitespace-nowrap text-[.9rem]">
-            <div>
-              <p className="font-bold">Username</p>
-              <p className="text-[.8rem] text-blue-800">Visit the store</p>
-            </div>
-          </Link>
-          <p>
-            <span>rating</span>{" "}
-            <span className="text-blue-800 cursor-pointer">(85,858)</span>
-          </p>
-        </div>
+          {/* name of business(username) and ratings */}
+          <div className="flex items-center justify-between">
+            <Link to={"/"} className="whitespace-nowrap text-[.9rem]">
+              <div>
+                <p className="font-bold">Username</p>
+                <p className="text-[.8rem] text-blue-800">Visit the store</p>
+              </div>
+            </Link>
+            <p>
+              <span>rating</span>{" "}
+              <span className="text-blue-800 cursor-pointer">(85,858)</span>
+            </p>
+          </div>
 
-        {/* Details of the product */}
-        <div>
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nostrum
-            quas consequatur exercitationem adipisci ipsum unde numquam. Nihil,
-            est non explicabo voluptates aut repudiandae, a omnis nemo
-            recusandae cum reiciendis optio.
-          </p>
-          <p className="bg-black text-white py-1 px-2 rounded-lg mt-1 mb-3 flex w-fit">
-            Swap & Shop Choice
-          </p>
-        </div>
+          {/* Details of the product */}
+          <div>
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nostrum
+              quas consequatur exercitationem adipisci ipsum unde numquam.
+              Nihil, est non explicabo voluptates aut repudiandae, a omnis nemo
+              recusandae cum reiciendis optio.
+            </p>
+            <p className="bg-black text-white py-1 px-2 rounded-lg mt-1 mb-3 flex w-fit">
+              Swap & Shop Choice
+            </p>
+          </div>
 
-        <div className="hidden md:block">
+          <div className="hidden md:block">
             <p className="font-semibold bg-red-800 text-white py-1 px-2 text-[.9rem] rounded-lg w-fit">
               {findProduct.text}
             </p>
@@ -143,33 +143,37 @@ const Product = ({
             </p>
           </div>
 
-        <div className="mt-2 hidden md:block">
-                  <div className="flex items-center gap-9 mb-2">
-                    <p className="w-50 text-[1rem] font-semibold">Sold by</p>
-                    <p>TORRAS</p>
-                  </div>
+          <div className="mt-2 hidden md:block">
+            <div className="flex items-center gap-9 mb-2">
+              <p className="w-50 text-[1rem] font-semibold">Sold by</p>
+              <p>TORRAS</p>
+            </div>
 
-                  <div className="flex items-center gap-9  mb-2">
-                    <p className="w-50 text-[1rem] font-semibold">Compatible Phone models</p>
-                    <p>for iphone 17 Pro max 6.9 inch</p>
-                  </div>
+            <div className="flex items-center gap-9  mb-2">
+              <p className="w-50 text-[1rem] font-semibold">
+                Compatible Phone models
+              </p>
+              <p>for iphone 17 Pro max 6.9 inch</p>
+            </div>
 
-                  <div className="flex items-center gap-9 mb-2">
-                    <p className="w-50 text-[1rem] font-semibold">Color</p>
-                    <p>2-Blue</p>
-                  </div>
+            <div className="flex items-center gap-9 mb-2">
+              <p className="w-50 text-[1rem] font-semibold">Color</p>
+              <p>2-Blue</p>
+            </div>
 
-                  <div className="flex items-center gap-9 mb-2">
-                    <p className="w-50 text-[1rem] font-semibold">Compatible Devices</p>
-                    <p>2-for iphone 17 Pro max 6.9 inch</p>
-                  </div>
+            <div className="flex items-center gap-9 mb-2">
+              <p className="w-50 text-[1rem] font-semibold">
+                Compatible Devices
+              </p>
+              <p>2-for iphone 17 Pro max 6.9 inch</p>
+            </div>
 
-                  <div className="flex items-center gap-9 mb-2">
-                    <p className="w-50 text-[1rem] font-semibold">Material</p>
-                    <p>Polycarbonate</p>
-                  </div>
-                </div>
-      </section>
+            <div className="flex items-center gap-9 mb-2">
+              <p className="w-50 text-[1rem] font-semibold">Material</p>
+              <p>Polycarbonate</p>
+            </div>
+          </div>
+        </section>
 
         {/* texts */}
         <article className="md:w-[60%] w-full">
@@ -303,7 +307,9 @@ const Product = ({
                   </div>
 
                   <div className="flex items-center gap-9  mb-2">
-                    <p className="w-50 text-[1rem] font-semibold">Compatible Phone models</p>
+                    <p className="w-50 text-[1rem] font-semibold">
+                      Compatible Phone models
+                    </p>
                     <p>for iphone 17 Pro max 6.9 inch</p>
                   </div>
 
@@ -313,7 +319,9 @@ const Product = ({
                   </div>
 
                   <div className="flex items-center gap-9 mb-2">
-                    <p className="w-50 text-[1rem] font-semibold">Compatible Devices</p>
+                    <p className="w-50 text-[1rem] font-semibold">
+                      Compatible Devices
+                    </p>
                     <p>2-for iphone 17 Pro max 6.9 inch</p>
                   </div>
 

@@ -40,9 +40,9 @@ const CreateAccount = ({
   // Handle errors
   const handleDetailsError = () => {
     const newErrors = {};
-    /* const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/; */
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
 
     if (logInUserName.trim() === "") {
       newErrors.userName = "Please enter a username";
@@ -55,18 +55,18 @@ const CreateAccount = ({
     if (logInEmail.trim() === "") {
       newErrors.email = "Please enter your email";
     }
-    /* if (!emailRegex.test(logInEmail.trim())) {
+    if (!emailRegex.test(logInEmail.trim())) {
       newErrors.wrongEmailRegex = "Invalid email";
-    } */
+    }
 
     if (logInPassword.trim() === "") {
       newErrors.password = "Please enter a password";
     }
 
-    /* if (!passwordRegex.test(logInPassword.trim())) {
+    if (!passwordRegex.test(logInPassword.trim())) {
       newErrors.wrongPasswordRegex =
         "Weak password, password must contain at least a uppercase, a lowercase, a number, a special character and at least 8 characters";
-    } */
+    }
 
     if (isExistingAccountDetails) {
       newErrors.existingAccount =
@@ -171,24 +171,24 @@ const CreateAccount = ({
               {!isCompleteLogin.existingAccount && isCompleteLogin.email && (
                 <p className="text-[1rem]">{isCompleteLogin.email}</p>
               )}
-              {/* {!isCompleteLogin.existingAccount &&
+              {!isCompleteLogin.existingAccount &&
                 !isCompleteLogin.email &&
                 isCompleteLogin.wrongEmailRegex && (
                   <p className="text-[1rem]">
                     {isCompleteLogin.wrongEmailRegex}
                   </p>
-                )} */}
+                )}
 
               {!isCompleteLogin.existingAccount && isCompleteLogin.password && (
                 <p className="text-[1rem]">{isCompleteLogin.password}</p>
               )}
-              {/* {!isCompleteLogin.existingAccount &&
+              {!isCompleteLogin.existingAccount &&
                 !isCompleteLogin.password &&
                 isCompleteLogin.wrongPasswordRegex && (
                   <p className="text-[1rem]">
                     {isCompleteLogin.wrongPasswordRegex}
                   </p>
-                )} */}
+                )}
             </section>
           </div>
         )}

@@ -181,218 +181,223 @@ function App() {
   return (
     <>
       <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route
-          index
-          element={
-            <Home
-              isSignedIn={isSignedIn}
-              getUserAfterSignIN={getUserAfterSignIN}
-              data={data}
-              fetchError={fetchError}
-              isLoading={isLoading}
-              addToCart={addToCart}
-              cartList={cartList}
-              searchResult={searchResult}
-              setSearchResult={setSearchResult}
-              sideMenubar={sideMenubar}
-              setSideMenubar={setSideMenubar}
-              handleSearchSubmit={handleSearchSubmit}
-              getUserName={getUserName}
-              sideMenu={sideMenu}
-            />
-          }
-        />
-
-        <Route path="profile">
+        <Route path="/" element={<Layout />}>
           <Route
             index
             element={
-              <SignIn
+              <Home
+                isSignedIn={isSignedIn}
+                getUserAfterSignIN={getUserAfterSignIN}
+                data={data}
+                fetchError={fetchError}
+                isLoading={isLoading}
+                addToCart={addToCart}
+                cartList={cartList}
+                searchResult={searchResult}
+                setSearchResult={setSearchResult}
+                sideMenubar={sideMenubar}
+                setSideMenubar={setSideMenubar}
+                handleSearchSubmit={handleSearchSubmit}
+                getUserName={getUserName}
+                sideMenu={sideMenu}
+              />
+            }
+          />
+
+          <Route path="profile">
+            <Route
+              index
+              element={
+                <SignIn
+                  setToast={setToast}
+                  showPassword={showPassword}
+                  setShowPassword={setShowPassword}
+                  createAccount={createAccount}
+                  isCompleteLogin={isCompleteLogin}
+                  setIsCompleteLogin={setIsCompleteLogin}
+                  setIsSignedIn={setIsSignedIn}
+                  setGetUserAfterSignIN={setGetUserAfterSignIN}
+                  setAddToCart={setAddToCart}
+                  setCartList={setCartList}
+                />
+              }
+            />
+            <Route
+              path="/profile/createAccount"
+              element={
+                <CreateAccount
+                  showPassword={showPassword}
+                  setShowPassword={setShowPassword}
+                  setCreateAccount={setCreateAccount}
+                  createAccount={createAccount}
+                  isCompleteLogin={isCompleteLogin}
+                  setIsCompleteLogin={setIsCompleteLogin}
+                  setToast={setToast}
+                  addToCart={addToCart}
+                  cartList={cartList}
+                />
+              }
+            />
+          </Route>
+
+          <Route
+            path="deals"
+            element={
+              <Deals
+                isSignedIn={isSignedIn}
+                getUserAfterSignIN={getUserAfterSignIN}
+                todayDeals={todayDeals}
+                addToCart={addToCart}
+                handleAddCart={handleAddCart}
                 setToast={setToast}
-                showPassword={showPassword}
-                setShowPassword={setShowPassword}
+                addCartSuccessfully={addCartSuccessfully}
+                addCartExist={addCartExist}
+                cartList={cartList}
+                getUserName={getUserName}
+                sideMenubar={sideMenubar}
+                setSideMenubar={setSideMenubar}
+                sideMenu={sideMenu}
+              />
+            }
+          />
+
+          <Route
+            path="cart"
+            element={
+              <Cart
+                isSignedIn={isSignedIn}
+                getUserAfterSignIN={getUserAfterSignIN}
+                addToCart={addToCart}
+                cartList={cartList}
+                setCartList={setCartList}
                 createAccount={createAccount}
-                isCompleteLogin={isCompleteLogin}
-                setIsCompleteLogin={setIsCompleteLogin}
-                setIsSignedIn={setIsSignedIn}
+                setCreateAccount={setCreateAccount}
+                setGetUserAfterSignIN={setGetUserAfterSignIN}
+                setAddToCart={setAddToCart}
+                setToast={setToast}
+                todayDeals={todayDeals}
+                saved={saved}
+                setSaved={setSaved}
+                getUserName={getUserName}
+                sideMenubar={sideMenubar}
+                setSideMenubar={setSideMenubar}
+                sideMenu={sideMenu}
+              />
+            }
+          />
+
+          <Route
+            path="saved"
+            element={
+              <Saved
+                isSignedIn={isSignedIn}
+                getUserAfterSignIN={getUserAfterSignIN}
+                addToCart={addToCart}
+                saved={saved}
+                setSaved={setSaved}
+                cartList={cartList}
+                getUserName={getUserName}
+                sideMenubar={sideMenubar}
+                setSideMenubar={setSideMenubar}
+                handleAddCart={handleAddCart}
+                createAccount={createAccount}
+                setCreateAccount={setCreateAccount}
                 setGetUserAfterSignIN={setGetUserAfterSignIN}
                 setAddToCart={setAddToCart}
                 setCartList={setCartList}
+                setToast={setToast}
+                sideMenu={sideMenu}
               />
             }
           />
+
           <Route
-            path="/profile/createAccount"
+            path="brandOutlet"
             element={
-              <CreateAccount
-                showPassword={showPassword}
-                setShowPassword={setShowPassword}
-                setCreateAccount={setCreateAccount}
-                createAccount={createAccount}
-                isCompleteLogin={isCompleteLogin}
-                setIsCompleteLogin={setIsCompleteLogin}
+              <BrandOutlet
+                isSignedIn={isSignedIn}
+                getUserAfterSignIN={getUserAfterSignIN}
+                todayDeals={todayDeals}
+                addToCart={addToCart}
+                handleAddCart={handleAddCart}
                 setToast={setToast}
+                addCartSuccessfully={addCartSuccessfully}
+                addCartExist={addCartExist}
+                cartList={cartList}
+                getUserName={getUserName}
+                sideMenubar={sideMenubar}
+                setSideMenubar={setSideMenubar}
+                sideMenu={sideMenu}
+              />
+            }
+          />
+
+          <Route path="giftCards" element={<GiftCards />} />
+
+          <Route
+            path="helpContact"
+            element={
+              <HelpContact
+                getUserName={getUserName}
+                isSignedIn={isSignedIn}
+                getUserAfterSignIN={getUserAfterSignIN}
                 addToCart={addToCart}
                 cartList={cartList}
+                sideMenubar={sideMenubar}
+                setSideMenubar={setSideMenubar}
+                sideMenu={sideMenu}
+                sideMenubar={sideMenubar}
+                setSideMenubar={setSideMenubar}
               />
             }
           />
-        </Route>
 
-        <Route
-          path="deals"
-          element={
-            <Deals
-              isSignedIn={isSignedIn}
-              getUserAfterSignIN={getUserAfterSignIN}
-              todayDeals={todayDeals}
-              addToCart={addToCart}
-              handleAddCart={handleAddCart}
-              setToast={setToast}
-              addCartSuccessfully={addCartSuccessfully}
-              addCartExist={addCartExist}
-              cartList={cartList}
-              getUserName={getUserName}
-              sideMenubar={sideMenubar}
-              setSideMenubar={setSideMenubar}
-              sideMenu={sideMenu}
-            />
-          }
-        />
-
-        <Route
-          path="cart"
-          element={
-            <Cart
-              isSignedIn={isSignedIn}
-              getUserAfterSignIN={getUserAfterSignIN}
-              addToCart={addToCart}
-              cartList={cartList}
-              setCartList={setCartList}
-              createAccount={createAccount}
-              setCreateAccount={setCreateAccount}
-              setGetUserAfterSignIN={setGetUserAfterSignIN}
-              setAddToCart={setAddToCart}
-              setToast={setToast}
-              todayDeals={todayDeals}
-              saved={saved}
-              setSaved={setSaved}
-              getUserName={getUserName}
-              sideMenubar={sideMenubar}
-              setSideMenubar={setSideMenubar}
-              sideMenu={sideMenu}
-            />
-          }
-        />
-
-        <Route
-          path="saved"
-          element={
-            <Saved
-              isSignedIn={isSignedIn}
-              getUserAfterSignIN={getUserAfterSignIN}
-              addToCart={addToCart}
-              saved={saved}
-              setSaved={setSaved}
-              cartList={cartList}
-              getUserName={getUserName}
-              sideMenubar={sideMenubar}
-              setSideMenubar={setSideMenubar}
-              handleAddCart={handleAddCart}
-              createAccount={createAccount}
-              setCreateAccount={setCreateAccount}
-              setGetUserAfterSignIN={setGetUserAfterSignIN}
-              setAddToCart={setAddToCart}
-              setCartList={setCartList}
-              setToast={setToast}
-              sideMenu={sideMenu}
-            />
-          }
-        />
-
-        <Route
-          path="brandOutlet"
-          element={
-            <BrandOutlet
-              isSignedIn={isSignedIn}
-              getUserAfterSignIN={getUserAfterSignIN}
-              todayDeals={todayDeals}
-              addToCart={addToCart}
-              handleAddCart={handleAddCart}
-              setToast={setToast}
-              addCartSuccessfully={addCartSuccessfully}
-              addCartExist={addCartExist}
-              cartList={cartList}
-              getUserName={getUserName}
-              sideMenubar={sideMenubar}
-              setSideMenubar={setSideMenubar}
-              sideMenu={sideMenu}
-            />
-          }
-        />
-
-        <Route path="giftCards" element={<GiftCards />} />
-
-        <Route
-          path="helpContact"
-          element={
-            <HelpContact
-              getUserName={getUserName}
-              isSignedIn={isSignedIn}
-              getUserAfterSignIN={getUserAfterSignIN}
-              addToCart={addToCart}
-              cartList={cartList}
-              sideMenubar={sideMenubar}
-              setSideMenubar={setSideMenubar}
-              sideMenu={sideMenu}
-              sideMenubar={sideMenubar}
-              setSideMenubar={setSideMenubar}
-            />
-          }
-        />
-
-        <Route path="sell" element={<Sell 
-          addToCart={addToCart}
+          <Route
+            path="sell"
+            element={
+              <Sell
+                addToCart={addToCart}
                 isSignedIn={isSignedIn}
                 getUserAfterSignIN={getUserAfterSignIN}
                 cartList={cartList}
                 getUserName={getUserName}
                 sideMenubar={sideMenubar}
-                    setSideMenubar={setSideMenubar}
-                    sideMenu={sideMenu}
-        />} />
+                setSideMenubar={setSideMenubar}
+                sideMenu={sideMenu}
+              />
+            }
+          />
 
-        <Route path="/swap" element={<Swap />} />
+          <Route path="/swap" element={<Swap />} />
 
-        <Route
-          path="/product/:id"
-          element={
-            <Product
-              isSignedIn={isSignedIn}
-              getUserAfterSignIN={getUserAfterSignIN}
-              todayDeals={todayDeals}
-              addToCart={addToCart}
-              handleAddCart={handleAddCart}
-              setToast={setToast}
-              addCartSuccessfully={addCartSuccessfully}
-              addCartExist={addCartExist}
-              cartList={cartList}
-              getUserName={getUserName}
-              sideMenubar={sideMenubar}
-              setSideMenubar={setSideMenubar}
-              sideMenu={sideMenu}
-            />
-          }
-        />
+          <Route
+            path="/product/:id"
+            element={
+              <Product
+                isSignedIn={isSignedIn}
+                getUserAfterSignIN={getUserAfterSignIN}
+                todayDeals={todayDeals}
+                addToCart={addToCart}
+                handleAddCart={handleAddCart}
+                setToast={setToast}
+                addCartSuccessfully={addCartSuccessfully}
+                addCartExist={addCartExist}
+                cartList={cartList}
+                getUserName={getUserName}
+                sideMenubar={sideMenubar}
+                setSideMenubar={setSideMenubar}
+                sideMenu={sideMenu}
+              />
+            }
+          />
 
-        <Route path="/listItem" element={<ListItem />}/>
+          <Route path="/listItem" element={<ListItem />} />
 
-        <Route path="searchedProduct" element={<SearchedProduct />} />
+          <Route path="searchedProduct" element={<SearchedProduct />} />
 
-        <Route path="*" element={<NotFound404 />} />
-        {/* <Route path="about" element={<About />} /> */}
-      </Route>
+          <Route path="*" element={<NotFound404 />} />
+          {/* <Route path="about" element={<About />} /> */}
+        </Route>
       </Routes>
       <Toast toast={toast} onClose={() => setToast(null)} />
     </>

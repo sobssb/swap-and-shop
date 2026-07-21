@@ -451,7 +451,7 @@ const Deals = ({
                   </div>
                 </div>
 
-                <div className="sticky -bottom-1 z-100 w-full " >
+                <div className="sticky -bottom-1 z-100 w-full ">
                   <Button
                     buttonTitle="Apply"
                     className="bg-blue-700 text-white w-full py-1.5 text-[1.3rem] font-medium rounded-lg"
