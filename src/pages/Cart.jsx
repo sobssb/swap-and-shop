@@ -9,7 +9,8 @@ import Footer from "../layout/Footer";
 import Saved from "./Saved";
 // icons
 import { IoSearchSharp } from "react-icons/io5";
-import { CiLocationOn } from "react-icons/ci";
+import { FaPlus } from "react-icons/fa6";
+import { FaMinus } from "react-icons/fa6";
 import { IoNotificationsSharp } from "react-icons/io5";
 
 const Cart = ({
@@ -379,12 +380,12 @@ const Cart = ({
                 onClick={() => navigate(`/product/${product.id}`)}
               />
               <div className="flex w-full justify-between items-center border-2 border-amber-700 rounded-2xl p-1.5 font-bold cursor-pointer">
-                <IoNotificationsSharp
+                <FaMinus
                   className=""
                   onClick={() => handleDecreaseStock(product.id)}
                 />
                 <p>{stockById[product.id]}</p>
-                <CiLocationOn onClick={() => handleIncreaseStock(product.id)} />
+                <FaPlus onClick={() => handleIncreaseStock(product.id)} />
               </div>
             </article>
 

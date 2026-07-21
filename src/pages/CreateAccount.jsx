@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import background from "../assets/logo.png";
 import { v4 as uuid } from "uuid";
 import { IoSearchSharp } from "react-icons/io5";
+import { IoEyeOutline } from "react-icons/io5";
+import { IoEyeOffOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 
 const CreateAccount = ({
@@ -248,10 +250,13 @@ const CreateAccount = ({
               value={logInPassword}
               onChange={(e) => setLogInPassword(e.target.value)}
             />
-            <IoSearchSharp
+            {showPassword ? <IoEyeOutline
               className="absolute top-[50%] -translate-y-[50%] right-5 cursor-pointer text-2xl"
               onClick={() => setShowPassword((prev) => !prev)}
-            />
+            /> : <IoEyeOffOutline
+              className="absolute top-[50%] -translate-y-[50%] right-5 cursor-pointer text-2xl"
+              onClick={() => setShowPassword((prev) => !prev)}
+            />}
           </label>
 
           <label className="my-3">

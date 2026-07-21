@@ -616,7 +616,7 @@ const Deals = ({
               <section className="min-w-50  bg-white mb-3" key={item.id}>
                 {/* featured deals */}
                 <Link to={`/product/${item.id}`}>
-                  <article className="bg-[#C7C7C7] rounded-lg mb-3 grid place-content-center h-60">
+                  <article className="bg-gray-200 rounded-lg mb-3 grid place-content-center h-60">
                     <img
                       className="h-55"
                       src={item.image}

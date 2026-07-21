@@ -17,7 +17,7 @@ const Footer = () => {
         <p>Back to top</p>
       </section>
 
-      <section className="bg-[#ddd9d9] grid sm:place-content-center lg:p-5 p-3">
+      <section className="bg-gray-200 grid sm:place-content-center lg:p-5 p-3">
         <article className="text-[#424141] grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-x-10 gap-y-5 text-[.9rem]">
           <FooterLinkNames names={knowUs} />
           <FooterLinkNames names={makeMoney} />
