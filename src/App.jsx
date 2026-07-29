@@ -20,8 +20,29 @@ import Product from "./pages/Product";
 import SearchedProduct from "./pages/SearchedProduct";
 import AllProducts from "./data/AllProducts";
 import useDetectOutsideClick from "./hooks/useDetectOutsideClick";
+import Summary from "./pages/Summary";
+import RecentView from "./pages/RecentView";
+import BidsOffers from "./pages/BidsOffers";
+import Watchlist from "./pages/Watchlist";
+import PurchaseHistory from "./pages/PurchaseHistory";
+import BuyAgain from "./pages/BuyAgain";
+import Selling from "./pages/Selling";
+import SavedFeed from "./pages/SavedFeed";
+import SavedSearches from "./pages/SavedSearches";
+import SavedSellers from "./pages/SavedSellers";
+import Payments from "./pages/Payments";
+import MyGarage from "./pages/MyGarage";
+import Preferences from "./pages/Preferences";
+import MyCollection from "./pages/MyCollection";
+import Messages from "./pages/Messages";
+import PsaVault from "./pages/PsaVault";
+import IssueResolutionCenter from "./pages/IssueResolutionCenter";
 import { useNavigate } from "react-router-dom";
 import img from "./assets/pending1777314335pngwing.com.png";
+
+import { RxHamburgerMenu } from "react-icons/rx";
+
+import { MdAddShoppingCart } from "react-icons/md";
 
 function App() {
   const { data, fetchError, isLoading } = useFetchData(
@@ -142,6 +163,7 @@ function App() {
         header: "Added to cart successfully!",
         message: "The product was added to your cart.",
         title1: "OK",
+        icon: <MdAddShoppingCart className="m-auto mb-3 w-full h-full" />,
       });
       setAddCartSuccessfully(true);
       setAddCartExist(false);
@@ -151,6 +173,7 @@ function App() {
         header: "Product already in cart",
         message: "This product is already in your cart.",
         title1: "OK",
+        icon: <MdAddShoppingCart className="m-auto mb-3 w-full h-full" />,
       });
       setAddCartExist(true);
       setAddCartSuccessfully(false);
@@ -299,7 +322,6 @@ function App() {
                 getUserName={getUserName}
                 sideMenubar={sideMenubar}
                 setSideMenubar={setSideMenubar}
-                handleAddCart={handleAddCart}
                 createAccount={createAccount}
                 setCreateAccount={setCreateAccount}
                 setGetUserAfterSignIN={setGetUserAfterSignIN}
@@ -397,6 +419,29 @@ function App() {
 
           <Route path="*" element={<NotFound404 />} />
           {/* <Route path="about" element={<About />} /> */}
+
+          {/* this are for the dropdown of my shop */}
+          <Route path="summary" element={<Summary />} />
+          <Route path="recentView" element={<RecentView />} />
+          <Route path="bidsOffers" element={<BidsOffers />} />
+          <Route path="watchlist" element={<Watchlist />} />
+          <Route path="purchaseHistory" element={<PurchaseHistory />} />
+          <Route path="buyAgain" element={<BuyAgain />} />
+          <Route path="selling" element={<Selling />} />
+          <Route path="savedFeed" element={<SavedFeed />} />
+          <Route path="savedSearches" element={<SavedSearches />} />
+          <Route path="savedSellers" element={<SavedSellers />} />
+          <Route path="payments" element={<Payments />} />
+          <Route path="myGarage" element={<MyGarage />} />
+          <Route path="preferences" element={<Preferences />} />
+          <Route path="myCollection" element={<MyCollection />} />
+          <Route path="messages" element={<Messages />} />
+          <Route path="psaVault" element={<PsaVault />} />
+          <Route
+            path="issueResolutionCenter"
+            element={<IssueResolutionCenter />}
+          />
+          {/* /////////////////////////// */}
         </Route>
       </Routes>
       <Toast toast={toast} onClose={() => setToast(null)} />

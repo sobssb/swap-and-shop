@@ -14,7 +14,7 @@ import { FaTimes } from "react-icons/fa";
 const SearchBar = ({ searchResult, setSearchResult, handleSearchSubmit }) => {
   const { allCategories } = NavBarLinkListNames();
   return (
-    <div className="px-3 my-1 flex grow relative border-y-[.5px] border-slate-200 py-2">
+    <div className="px-3 my-1 flex grow relative border-y-[.5px] border-slate-200 py-2 z-50">
       <form action="" className=" flex grow" onSubmit={handleSearchSubmit}>
         <input
           className="border border-slate-500 h-10 w-full pr-35 pl-13 rounded-2xl focus:outline-none"

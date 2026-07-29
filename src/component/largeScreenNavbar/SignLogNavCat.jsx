@@ -5,11 +5,10 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const SignLogNavCat = ({ isSignedIn, getUserAfterSignIN, getUserName }) => {
-
   const { watchListLinks, myShopLinks } = NavBarLinkListNames();
 
   const navigate = useNavigate();
-  
+
   return (
     <section className="mt-2 flex justify-between items-center px-5 text-[#1A1D2F]">
       {/* First section has two group of links which are justified between them */}
@@ -54,12 +53,15 @@ const SignLogNavCat = ({ isSignedIn, getUserAfterSignIN, getUserName }) => {
           <Link to="/swap">Swap</Link>
         </div>
       </article>
-
       {/* Second group */}
       <article className="flex space-x-4 ml-5">
         <Link to="/sell">Sell</Link>
         <ArrowDropDown title="Watch List" watchListLinks={watchListLinks} />
-        <ArrowDropDown title="My shop" watchListLinks={myShopLinks} />
+        <ArrowDropDown
+          className="-left-35"
+          title="My shop"
+          watchListLinks={myShopLinks}
+        />
       </article>
     </section>
   );

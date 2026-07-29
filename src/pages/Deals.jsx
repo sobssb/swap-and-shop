@@ -136,7 +136,7 @@ const Deals = ({
           {imgArray.map((img, index) => (
             <div key={index} className="min-w-30 lg:min-w-40">
               <div className="bg-blue-300 w-full rounded-lg ">
-                <img src={img.image} alt="category image" />
+                <img src={img.image} alt="category image" loading="lazy" />
               </div>
               <p className="text-center whitespace-nowrap text-[.9rem]">
                 {img.text}
@@ -156,7 +156,12 @@ const Deals = ({
             <section key={index} className="min-w-50 bg-white rounded-lg mb-3">
               {/* featured deals */}
               <article className="bg-gray-300 rounded-t-lg mb-3 h-50 grid place-content-center overflow-hidden ">
-                <img className="h-45" src={item.image} alt="category image" />
+                <img
+                  className="h-45"
+                  loading="lazy"
+                  src={item.image}
+                  alt="category image"
+                />
               </article>
 
               {/* texts */}
@@ -611,14 +616,18 @@ const Deals = ({
           </div>
 
           {/* right side showing the items cards sorted i.e products */}
-          <div className="gap-2.5 grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 ">
+          <div className="gap-3.5 grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 ">
             {sortedProduct.map((item) => (
-              <section className="min-w-50  bg-white mb-3" key={item.id}>
+              <section
+                className="min-w-50 bg-white mb-3 h-full flex flex-col"
+                key={item.id}
+              >
                 {/* featured deals */}
                 <Link to={`/product/${item.id}`}>
                   <article className="bg-gray-200 rounded-lg mb-3 grid place-content-center h-60">
                     <img
                       className="h-55"
+                      loading="lazy"
                       src={item.image}
                       alt="category image"
                     />
@@ -626,7 +635,7 @@ const Deals = ({
                 </Link>
 
                 {/* texts */}
-                <article>
+                <article className="flex flex-col flex-1">
                   <div className="flex justify-start items-center gap-2 my-2">
                     <p className="bg-red-800 text-white py-[.1rem] px-[.2rem] text-[.9rem] rounded-lg">
                       {item.percentage}
@@ -653,7 +662,7 @@ const Deals = ({
                     </p>
                   </div>
 
-                  <div className="my-2 text-[.8rem]">
+                  <div className="my-2 text-[.8rem] flex-1">
                     <p className="flex">
                       {item.shortDetails.length > 40
                         ? `${item.shortDetails.slice(0, 40)}...`
@@ -666,7 +675,7 @@ const Deals = ({
                 </article>
                 <Button
                   buttonTitle="Add to cart"
-                  className="bg-amber-300 w-full py-1.5 text-[1.3rem] mb-3 font-medium rounded-lg"
+                  className="bg-amber-300 w-full py-1.5 text-[1.3rem] mb-3 font-medium rounded-lg mt-auto"
                   handleClick={() => handleAddCart(item)}
                 />
               </section>

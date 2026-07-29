@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import background from "../../assets/logo.png";
 
 // icons
@@ -14,6 +14,7 @@ const LogoNotification = ({
   sideMenubar,
   setSideMenubar,
 }) => {
+  const navigate = useNavigate();
   return (
     <section className="mt-5 flex justify-between items-center px-3 text-[#1A1D2F]">
       {/* First section has two group of links which are justified between them */}
@@ -27,14 +28,19 @@ const LogoNotification = ({
 
         <button className="rounded-2xl w-25 ">
           <Link to={"/"}>
-            <img src={background} alt="logo" />
+            <img src={background} alt="logo" loading="lazy" />
           </Link>
         </button>
       </article>
 
       {/* Second segment */}
       <article className="flex gap-2 items-center">
-        <button className="w-6 h-6">
+        <button
+          onClick={() => {
+            navigate("/profile");
+          }}
+          className="w-6 h-6"
+        >
           <RiContactsLine className="w-full h-full" />
         </button>
         <button className="w-6 h-6 relative">

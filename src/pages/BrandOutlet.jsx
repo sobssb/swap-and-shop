@@ -514,6 +514,7 @@ const BrandOutlet = ({
                   <article className="bg-gray-200 rounded-lg mb-3 grid place-content-center h-60">
                     <img
                       className="h-55"
+                      loading="lazy"
                       src={item.image}
                       alt="category image"
                     />

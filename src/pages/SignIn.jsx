@@ -1,7 +1,9 @@
 import { useState } from "react";
 import background from "../assets/logo.png";
 import { Link } from "react-router-dom";
-import { IoSearchSharp } from "react-icons/io5";
+// icons
+import { FiLogIn } from "react-icons/fi";
+import { PiSignOutBold } from "react-icons/pi";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
@@ -91,6 +93,7 @@ const SignIn = ({
       title1: "OK",
       onFirstClick: () => navigate("/"),
       navigateTo: "/",
+      icon: <FiLogIn className="m-auto mb-3 w-full h-full" />,
     });
 
     // reset states
@@ -104,12 +107,14 @@ const SignIn = ({
     setIsSignedIn(false);
     setAddToCart(0);
     setCartList([]);
+    PiSignOutBold;
     setToast({
       countDown: 3,
       header: "Logged out successfully!",
       message: "Click OK to go back to the home page.",
       title1: "OK",
       navigateTo: "/",
+      icon: <PiSignOutBold className="m-auto mb-3 w-full h-full" />,
     });
   };
 
@@ -120,8 +125,9 @@ const SignIn = ({
       message: "Are you sure you want to logout?",
       title1: "Cancel",
       title2: "Logout",
-      buttonIcon: <IoSearchSharp />,
+      buttonIcon: <PiSignOutBold />,
       onSecondClick: handleLogOut,
+      icon: <PiSignOutBold className="m-auto mb-3 w-full h-full" />,
     });
   };
 
@@ -129,7 +135,7 @@ const SignIn = ({
     <main className="p-3 lg:p-5 flex flex-col min-h-screen">
       <button className="rounded-2xl w-25 mt-1">
         <Link to={"/"}>
-          <img src={background} alt="logo" />
+          <img src={background} alt="logo" loading="lazy" />
         </Link>
       </button>
       <section
@@ -208,14 +214,17 @@ const SignIn = ({
               value={signInPassword}
               onChange={(e) => setSignInPassword(e.target.value)}
             />
-            {showPassword ? <IoEyeOutline
-              className="absolute top-[50%] -translate-y-[50%] right-5 cursor-pointer text-2xl"
-              onClick={() => setShowPassword((prev) => !prev)}
-            /> : <IoEyeOffOutline
-              className="absolute top-[50%] -translate-y-[50%] right-5 cursor-pointer text-2xl"
-              onClick={() => setShowPassword((prev) => !prev)}
-            />}
-            
+            {showPassword ? (
+              <IoEyeOutline
+                className="absolute top-[50%] -translate-y-[50%] right-5 cursor-pointer text-2xl"
+                onClick={() => setShowPassword((prev) => !prev)}
+              />
+            ) : (
+              <IoEyeOffOutline
+                className="absolute top-[50%] -translate-y-[50%] right-5 cursor-pointer text-2xl"
+                onClick={() => setShowPassword((prev) => !prev)}
+              />
+            )}
           </label>
 
           <button

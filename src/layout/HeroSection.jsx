@@ -104,6 +104,7 @@ const HeroSection = ({ data, fetchError, isLoading }) => {
                 <div className="lg:w-1/2 w-full mx-5 lg:mx-0 text-center ml-20">
                   <img
                     className="lg:w-[80%] min-w-[75%] max-w-[75%] lg:ml-30"
+                    loading="lazy"
                     src={item.img}
                     alt="item picture"
                   />

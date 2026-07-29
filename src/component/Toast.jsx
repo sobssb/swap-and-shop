@@ -9,7 +9,7 @@ const Toast = ({ toast, onClose }) => {
     message = "",
     title1 = "OK",
     title2,
-    icon = <IoSearchSharp className="m-auto mb-3 w-full h-full" />,
+    icon,
     buttonIcon,
     onFirstClick,
     onSecondClick,
@@ -38,7 +38,7 @@ const Toast = ({ toast, onClose }) => {
       <button className="mx-auto w-7 mt-3">{icon}</button>
       <h2 className="text-[1rem] font-bold text-center">{header}</h2>
 
-      <p className="mx-auto">{message}</p>
+      <p className="mx-auto text-center">{message}</p>
 
       <section
         className={`flex justify-between items-center  rounded-lg w-full f mb-3 mt-4 mx-auto ${title2 ? "gap-3" : null}`}

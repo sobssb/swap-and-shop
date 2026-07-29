@@ -12,6 +12,8 @@ import { IoSearchSharp } from "react-icons/io5";
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa6";
 import { IoNotificationsSharp } from "react-icons/io5";
+import { MdAutoDelete } from "react-icons/md";
+import { MdAddShoppingCart } from "react-icons/md";
 
 const Cart = ({
   addToCart,
@@ -184,6 +186,7 @@ const Cart = ({
       header: "Product deleted from cart!",
       message: "Click OK to continue exploring.",
       title1: "OK",
+      icon: <MdAutoDelete className="m-auto mb-3 w-full h-full" />,
     });
     setDeleteCart(true);
   };
@@ -222,7 +225,6 @@ const Cart = ({
 
   // Clear the cartList i.e ([])
   const handleClearAll = () => {
-    s;
     setCartList([]);
     setAddToCart(0);
     handleSavedClearCartList();
@@ -269,10 +271,6 @@ const Cart = ({
   const handleSaved = (product) => {
     if (!product) return;
 
-    // find the selected product
-    // const findProduct = todayDeals.find((product) => product.id === id);
-    // if (!findProduct) return;
-    // if selected product already exist
     const productExist = saved.find(
       (savedProduct) => savedProduct.id === product.id,
     );
@@ -294,6 +292,7 @@ const Cart = ({
         header: "Product saved successfully!",
         message: "Click OK to continue exploring.",
         title1: "OK",
+        icon: <FaPlus className="m-auto mb-3 w-full h-full" />,
       });
       setSavedExist(false);
       handleSavedUpdateAndRemoveFromCartList(
@@ -308,6 +307,7 @@ const Cart = ({
         header: "Product had been saved already!",
         message: "Click OK to continue exploring.",
         title1: "OK",
+        icon: <MdAddShoppingCart className="m-auto mb-3 w-full h-full" />,
       });
       setSavedExist(true);
     }
@@ -375,6 +375,7 @@ const Cart = ({
             <article className="rounded-lg mb-3 grid place-content-center w-[40%] md:w-[20%]">
               <img
                 className="w-full h-full"
+                loading="lazy"
                 src={product.image}
                 alt="category image"
                 onClick={() => navigate(`/product/${product.id}`)}
@@ -442,7 +443,12 @@ const Cart = ({
           {/* the image */}
           <div>
             <article>
-              <img className="" src={noCartimg} alt="no cart list" />
+              <img
+                className=""
+                loading="lazy"
+                src={noCartimg}
+                alt="no cart list"
+              />
             </article>
             {/* text/details */}
             <article className="text-center">

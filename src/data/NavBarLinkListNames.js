@@ -7,9 +7,23 @@ const NavBarLinkListNames = () => {
     { name: "Link three", url: "/" },
   ];
   const myShopLinks = [
-    { name: "Text one", url: "/" },
-    { name: "Text two", url: "/" },
-    { name: "Text three", url: "/" },
+    { name: "Summary", url: "/summary" },
+    { name: "Recently Viewed", url: "/recentView" },
+    { name: "Bids/Offers", url: "/bidsOffers" },
+    { name: "Watchlist", url: "/watchlist" },
+    { name: "Purchase History", url: "/purchaseHistory" },
+    { name: "Buy Again", url: "/buyAgain" },
+    { name: "Selling", url: "/selling" },
+    { name: "Saved Feed", url: "/savedFeed" },
+    { name: "Saved Searches", url: "/savedSearches" },
+    { name: "Saved Sellers", url: "/savedSellers" },
+    { name: "Payments", url: "/payments" },
+    { name: "My Garage", url: "/myGarage" },
+    { name: "Preferences", url: "/preferences" },
+    { name: "My Collection", url: "/myCollection" },
+    { name: "Messages", url: "/messages" },
+    { name: "PSA Vault", url: "/psaVault" },
+    { name: "Issue Resolution Center", url: "/issueResolutionCenter" },
   ];
 
   const allCategories = [

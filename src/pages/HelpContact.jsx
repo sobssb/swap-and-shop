@@ -9,8 +9,23 @@ import SideBar from "../component/smallScreenNavbar/SideBar";
 import Footer from "../layout/Footer";
 import HelpSuggestion from "../component/HelpSuggestion";
 import Button from "../component/Button";
+// icons
 import { IoSearchSharp } from "react-icons/io5";
 import { FaAngleDown } from "react-icons/fa";
+// cart
+import { FiShoppingCart } from "react-icons/fi";
+// buying
+import { GoTag } from "react-icons/go";
+// account
+import { MdOutlineAccountCircle } from "react-icons/md";
+// refund
+import { HiOutlineReceiptRefund } from "react-icons/hi2";
+// shipping
+import { LiaShippingFastSolid } from "react-icons/lia";
+// fee
+import { MdOutlineFeed } from "react-icons/md";
+// contact us
+import { TiMessages } from "react-icons/ti";
 
 const HelpContact = ({
   addToCart,
@@ -72,7 +87,7 @@ const HelpContact = ({
       <section className="py-3.5 lg:px-5 px-3 my-1 flex flex-col md:flex-row">
         <button className="rounded-2xl w-25 mt-1 lg:block hidden">
           <Link to={"/"}>
-            <img src={background} alt="logo" />
+            <img src={background} alt="logo" loading="lazy" />
           </Link>
         </button>
 
@@ -177,30 +192,54 @@ const HelpContact = ({
           text="Browse help articles"
           className="font-light text-[1rem]"
         />
-        <article className="p-5 grid place-content-center">
-          <div className="grid grid-cols-3  md:gap-x-100 sm:gap-x-50 gap-x-10  gap-y-5">
-            <div className="bg-gray-100  grid place-content-center w-20 rounded-[50%] h-20">
-              <IoSearchSharp />
+        <article className="p-5 flex justify-center">
+          <div className="grid sm:grid-cols-3 grid-cols-2 md:gap-x-16 sm:gap-x-10 gap-x-6 gap-y-6 w-full max-w-3xl">
+            <div className="flex flex-col items-center text-center">
+              <div className="bg-gray-100 grid place-content-center w-20 rounded-full h-20">
+                <FiShoppingCart className="mx-auto" />
+              </div>
+              <p className="mt-2 text-[0.7rem] whitespace-nowrap">Buying</p>
             </div>
 
-            <div className="bg-gray-100  grid place-content-center w-20 rounded-[50%] h-20">
-              <IoSearchSharp />
+            <div className="flex flex-col items-center text-center">
+              <div className="bg-gray-100 grid place-content-center w-20 rounded-full h-20">
+                <GoTag className="mx-auto" />
+              </div>
+              <p className="mt-2 text-[0.7rem] whitespace-nowrap">Selling</p>
             </div>
 
-            <div className="bg-gray-100  grid place-content-center w-20 rounded-[50%] h-20">
-              <IoSearchSharp />
+            <div className="flex flex-col items-center text-center">
+              <div className="bg-gray-100 grid place-content-center w-20 rounded-full h-20">
+                <MdOutlineAccountCircle className="mx-auto" />
+              </div>
+              <p className="mt-2 text-[0.7rem] whitespace-nowrap">Account</p>
             </div>
 
-            <div className="bg-gray-100  grid place-content-center w-20 rounded-[50%] h-20">
-              <IoSearchSharp />
+            <div className="flex flex-col items-center text-center">
+              <div className="bg-gray-100 grid place-content-center w-20 rounded-full h-20">
+                <HiOutlineReceiptRefund className="mx-auto" />
+              </div>
+              <p className="mt-2 text-[0.7rem] whitespace-nowrap">
+                Return and refunds
+              </p>
             </div>
 
-            <div className="bg-gray-100  grid place-content-center w-20 rounded-[50%] h-20">
-              <IoSearchSharp />
+            <div className="flex flex-col items-center text-center">
+              <div className="bg-gray-100 grid place-content-center w-20 rounded-full h-20">
+                <LiaShippingFastSolid className="mx-auto" />
+              </div>
+              <p className="mt-2 text-[0.7rem] whitespace-nowrap">
+                Shipping and tracking
+              </p>
             </div>
 
-            <div className="bg-gray-100  grid place-content-center w-20 rounded-[50%] h-20">
-              <IoSearchSharp />
+            <div className="flex flex-col items-center text-center">
+              <div className="bg-gray-100 grid place-content-center w-20 rounded-full h-20">
+                <MdOutlineFeed className="mx-auto" />
+              </div>
+              <p className="mt-2 text-[0.7rem] whitespace-nowrap">
+                Fees and billing
+              </p>
             </div>
           </div>
         </article>
@@ -213,11 +252,14 @@ const HelpContact = ({
           agent
         </p>
 
-        <Button
-          buttonTitle="Contact"
-          className="bg-[#021cff] px-3 py-1.5 text-[1.3rem] my-3 font-medium rounded-4xl text-white w-55"
-          handleClick={() => navigate("/profile")}
-        />
+        <div className="grid place-content-center">
+          <Button
+            buttonTitle="Contact"
+            icon={<TiMessages />}
+            className="bg-[#021cff] px-3 py-1.5 text-[1.3rem] my-3 font-medium rounded-4xl text-white w-55"
+            handleClick={() => navigate("/profile")}
+          />
+        </div>
       </section>
 
       <section className="py-4 my-1 bg-gray-200 lg:mx-5 mx-3 mt-5 rounded-lg text-center">

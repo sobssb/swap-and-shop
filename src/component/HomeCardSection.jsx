@@ -27,6 +27,7 @@ const HomeCardSection = ({
                     >
                       <img
                         className=" w-full"
+                        loading="lazy"
                         src={image.img}
                         alt="item picture"
                       />

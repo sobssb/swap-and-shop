@@ -9,6 +9,9 @@ import noCartimg from "../assets/pngwing.com (2) (5).png";
 import { IoSearchSharp } from "react-icons/io5";
 import { CiLocationOn, CiSaveDown2 } from "react-icons/ci";
 import { IoNotificationsSharp } from "react-icons/io5";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { MdAutoDelete } from "react-icons/md";
+import { MdAddShoppingCart } from "react-icons/md";
 
 const Saved = ({
   addToCart,
@@ -23,7 +26,6 @@ const Saved = ({
   getUserName,
   sideMenubar,
   setSideMenubar,
-  handleAddCart,
   createAccount,
   setCreateAccount,
   setGetUserAfterSignIN,
@@ -101,6 +103,7 @@ const Saved = ({
         header: "Added to cart successfully!",
         message: "Click OK to continue exploring.",
         title1: "OK",
+        icon: <MdAddShoppingCart className="m-auto mb-3 w-full h-full" />,
       });
     } else {
       setDeleteSaved(false);
@@ -111,6 +114,7 @@ const Saved = ({
         header: "Product has been added before!",
         message: "Click OK to continue exploring.",
         title1: "OK",
+        icon: <MdAddShoppingCart className="m-auto mb-3 w-full h-full" />,
       });
     }
   };
@@ -163,6 +167,7 @@ const Saved = ({
       header: "Product deleted from saved!",
       message: "Click OK to continue exploring.",
       title1: "OK",
+      icon: <MdAutoDelete className="m-auto mb-3 w-full h-full" />,
     });
     handleDeleteSavedUpdate(updateSaved);
   };
@@ -221,6 +226,7 @@ const Saved = ({
             <article className="rounded-lg mb-3 grid place-content-center w-[40%] md:w-[20%]">
               <img
                 className="w-full h-full"
+                loading="lazy"
                 src={product.image}
                 alt="category image"
               />
@@ -278,7 +284,12 @@ const Saved = ({
           {/* the image */}
           <div>
             <article>
-              <img className="" src={noCartimg} alt="no cart list" />
+              <img
+                className=""
+                loading="lazy"
+                src={noCartimg}
+                alt="no cart list"
+              />
             </article>
             {/* text/details */}
             <article className="text-center">
@@ -291,13 +302,11 @@ const Saved = ({
                   <Button
                     buttonTitle="Sign in to your account"
                     className="bg-amber-300 w-full py-1.5 text-[1.3rem] mb-3 font-medium rounded-lg"
-                    // handleClick={() => navigate("/profile")}
                   />
 
                   <Button
                     buttonTitle="Create account now"
                     className="border w-full py-1.5 text-[1.3rem] mb-3 font-medium rounded-lg"
-                    // handleClick={() => navigate("/profile/createAccount")}
                   />
                 </div>
               )}

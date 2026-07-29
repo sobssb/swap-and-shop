@@ -87,7 +87,7 @@ const Product = ({
       >
         {/* product image */}
         <article className="bg-gray-100 md:w-[50%] w-full rounded-lg mb-3 grid place-content-center">
-          <img src={findProduct.image} alt="category image" />
+          <img src={findProduct.image} alt="category image" loading="lazy" />
         </article>
 
         <section className="order-first md:order-0 mt-2 ">

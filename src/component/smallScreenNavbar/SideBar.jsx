@@ -30,7 +30,7 @@ const SideBar = ({
           >
             <button className="rounded-2xl w-25">
               <Link to={"/"}>
-                <img src={background} alt="logo" />
+                <img src={background} alt="logo" loading="lazy" />
               </Link>
             </button>
             <button

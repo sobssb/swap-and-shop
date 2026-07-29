@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import background from "../assets/logo.png";
 import { v4 as uuid } from "uuid";
+// icons
+import { MdOutlineAccountBox } from "react-icons/md";
 import { IoSearchSharp } from "react-icons/io5";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
@@ -110,6 +112,7 @@ const CreateAccount = ({
       title1: "OK",
       onFirstClick: () => navigate("/profile"),
       navigateTo: "/profile",
+      icon: <MdOutlineAccountBox className="m-auto mb-3 w-full h-full" />,
     });
 
     // reset states
@@ -124,7 +127,7 @@ const CreateAccount = ({
       <section className="flex flex-row justify-between items-center mt-1">
         <button className="rounded-2xl w-25">
           <Link to={"/"}>
-            <img src={background} alt="logo" />
+            <img src={background} alt="logo" loading="lazy" />
           </Link>
         </button>
 
@@ -250,13 +253,17 @@ const CreateAccount = ({
               value={logInPassword}
               onChange={(e) => setLogInPassword(e.target.value)}
             />
-            {showPassword ? <IoEyeOutline
-              className="absolute top-[50%] -translate-y-[50%] right-5 cursor-pointer text-2xl"
-              onClick={() => setShowPassword((prev) => !prev)}
-            /> : <IoEyeOffOutline
-              className="absolute top-[50%] -translate-y-[50%] right-5 cursor-pointer text-2xl"
-              onClick={() => setShowPassword((prev) => !prev)}
-            />}
+            {showPassword ? (
+              <IoEyeOutline
+                className="absolute top-[50%] -translate-y-[50%] right-5 cursor-pointer text-2xl"
+                onClick={() => setShowPassword((prev) => !prev)}
+              />
+            ) : (
+              <IoEyeOffOutline
+                className="absolute top-[50%] -translate-y-[50%] right-5 cursor-pointer text-2xl"
+                onClick={() => setShowPassword((prev) => !prev)}
+              />
+            )}
           </label>
 
           <label className="my-3">

@@ -23,7 +23,7 @@ const LogoSearchbarNoti = ({
       {/* this is the logo */}
       <button className="rounded-2xl w-25">
         <Link to={"/"}>
-          <img src={background} alt="logo" />
+          <img src={background} alt="logo" loading="lazy" />
         </Link>
       </button>
 
@@ -32,7 +32,7 @@ const LogoSearchbarNoti = ({
       </button>
 
       {/* search bar */}
-      <div className="flex grow relative">
+      <div className="flex grow relative z-100">
         <form action="" className=" flex grow" onSubmit={handleSearchSubmit}>
           <input
             className="border border-slate-500 w-full pr-49 pl-13 text-2xl focus:outline-none h-10  rounded-2xl"

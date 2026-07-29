@@ -66,7 +66,12 @@ const LinkCategories = () => {
             </div>
 
             <div className="w-[50%] border border-solid border-blue-300">
-              <img className="w-full" src={showCategory.img} alt="category images" />
+              <img
+                className="w-full"
+                loading="lazy"
+                src={showCategory.img}
+                alt="category images"
+              />
             </div>
           </div>
         )}
