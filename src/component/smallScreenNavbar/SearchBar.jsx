@@ -2,6 +2,7 @@ import { useState } from "react";
 import ArrowDropDown from "../ArrowDropDown";
 import NavBarLinkListNames from "../../data/NavBarLinkListNames";
 import AllProducts from "../../data/AllProducts";
+import useDetectOutsideClick from "../../hooks/useDetectOutsideClick";
 // icons
 import { GoArrowUpLeft } from "react-icons/go";
 import { IoSearchSharp } from "react-icons/io5";
@@ -18,6 +19,13 @@ const SearchBar = ({ searchResult, setSearchResult, handleSearchSubmit }) => {
   const { allCategories } = NavBarLinkListNames();
   const { todayDeals } = AllProducts();
 
+  const [isSearch, setIsSearch] = useState(false);
+
+  const closeSearch = useDetectOutsideClick(() => {
+    setIsSearch(false);
+    setSearchResult("");
+  });
+
   const matchedBrand = todayDeals?.map((product) => product.brand);
 
   const uniqueBrand = [...new Set(matchedBrand)];
@@ -25,8 +33,13 @@ const SearchBar = ({ searchResult, setSearchResult, handleSearchSubmit }) => {
   const filterResult = uniqueBrand?.filter((product) =>
     product?.toLowerCase().includes(searchResult?.toLowerCase()),
   );
+
   return (
-    <div className="px-3 my-1 flex grow relative border-y-[.5px] border-slate-200 py-2 z-50 w-full">
+    <div
+      className="px-3 my-1 flex grow relative border-y-[.5px] border-slate-200 py-2 z-50 w-full"
+      ref={closeSearch}
+      onClick={() => setIsSearch(true)}
+    >
       <form action="" className=" flex grow" onSubmit={handleSearchSubmit}>
         <input
           className="border border-slate-500 h-10 w-full pr-35 pl-13 rounded-2xl focus:outline-none"
@@ -52,13 +65,13 @@ const SearchBar = ({ searchResult, setSearchResult, handleSearchSubmit }) => {
         />
       </div>
 
-      {searchResult?.length > 0 && (
-        <div className="max-h-100 h-fit bg-gray-100 absolute top-14 p-4 w-[calc(100%-24px)] rounded-2xl text-gray-900 break-all left-[50%] right-[50%] -translate-x-[50%]">
+      {searchResult?.length > 0 && isSearch && (
+        <div className="max-h-100 h-fit bg-white shadow-2xl absolute top-14 p-4 w-[calc(100%-24px)] rounded-2xl text-gray-900 break-all left-[50%] right-[50%] -translate-x-[50%] overflow-y-scroll [&::-webkit-scrollbar]:w-0">
           <ul>
             <li className="flex items-center gap-2.5 justify-start py-2 text-red-950 font-bold">
               Only brand for now, Search bar still under development.
             </li>
-            <li className="flex items-center gap-4 justify-start py-2">
+            <li className="flex items-center gap-4 justify-start py-2 cursor-pointer">
               <IoSearchSharp className="text-2xl" />
 
               {searchResult?.length < 100
@@ -69,7 +82,7 @@ const SearchBar = ({ searchResult, setSearchResult, handleSearchSubmit }) => {
             {filterResult?.length > 0 &&
               filterResult?.map((product, index) => (
                 <li
-                  className="flex items-center gap-2.5 justify-between py-2 -mx-4 px-4 border-t border-slate-300"
+                  className="flex items-center gap-2.5 justify-between py-2 -mx-4 px-4 border-t border-slate-300 cursor-pointer"
                   key={index}
                 >
                   <div className="flex gap-4 items-center justify-between">
