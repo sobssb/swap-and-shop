@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ArrowDropDown from "../ArrowDropDown";
 import NavBarLinkListNames from "../../data/NavBarLinkListNames";
 import AllProducts from "../../data/AllProducts";
 import useDetectOutsideClick from "../../hooks/useDetectOutsideClick";
+import { Link } from "react-router-dom";
 // icons
 import { GoArrowUpLeft } from "react-icons/go";
 import { IoSearchSharp } from "react-icons/io5";
@@ -20,19 +21,35 @@ const SearchBar = ({ searchResult, setSearchResult, handleSearchSubmit }) => {
   const { todayDeals } = AllProducts();
 
   const [isSearch, setIsSearch] = useState(false);
+  const [filteredResult, setFilteredResult] = useState([])
 
   const closeSearch = useDetectOutsideClick(() => {
     setIsSearch(false);
     setSearchResult("");
   });
 
-  const matchedBrand = todayDeals?.map((product) => product.brand);
+  useEffect(() => {
+  const matchedBrand = todayDeals?.map((product) => product?.brand);
 
-  const uniqueBrand = [...new Set(matchedBrand)];
+  c;
+
+  const uniqueBrand = [
+    ...new Set(
+      todayDeals.flatMap((product) => [
+        product.brand,
+        product.name,
+        product.category,
+        product.brandType,
+      ]),
+    ),
+  ];
+
 
   const filterResult = uniqueBrand?.filter((product) =>
     product?.toLowerCase().includes(searchResult?.toLowerCase()),
   );
+  setFilteredResult(filterResult)
+  }, [searchResult]);
 
   return (
     <div
@@ -66,12 +83,11 @@ const SearchBar = ({ searchResult, setSearchResult, handleSearchSubmit }) => {
       </div>
 
       {searchResult?.length > 0 && isSearch && (
-        <div className="max-h-100 h-fit bg-white shadow-2xl absolute top-14 p-4 w-[calc(100%-24px)] rounded-2xl text-gray-900 break-all left-[50%] right-[50%] -translate-x-[50%] overflow-y-scroll [&::-webkit-scrollbar]:w-0">
+        <div className="max-h-[calc(100vh-155px)] h-fit bg-white shadow-2xl absolute top-14 p-4 w-[calc(100%-24px)] rounded-2xl text-gray-900 break-all left-[50%] right-[50%] -translate-x-[50%] overflow-y-scroll [&::-webkit-scrollbar]:w-0">
           <ul>
-            <li className="flex items-center gap-2.5 justify-start py-2 text-red-950 font-bold">
-              Only brand for now, Search bar still under development.
-            </li>
-            <li className="flex items-center gap-4 justify-start py-2 cursor-pointer">
+            
+            <li className="flex items-center gap-4 justify-start py-2 cursor-pointer -mx-4 px-4 hover:bg-gray-200 
+                        active:bg-gray-300">
               <IoSearchSharp className="text-2xl" />
 
               {searchResult?.length < 100
@@ -79,10 +95,11 @@ const SearchBar = ({ searchResult, setSearchResult, handleSearchSubmit }) => {
                 : `${searchResult?.slice(0, 500)}...`}
             </li>
 
-            {filterResult?.length > 0 &&
-              filterResult?.map((product, index) => (
+            {filteredResult?.length > 0 &&
+              filteredResult?.map((product, index) => (
                 <li
-                  className="flex items-center gap-2.5 justify-between py-2 -mx-4 px-4 border-t border-slate-300 cursor-pointer"
+                  className="flex items-center gap-2.5 justify-between py-2 -mx-4 px-4 border-t border-slate-300 cursor-pointer hover:bg-gray-200 
+                        active:bg-gray-300"
                   key={index}
                 >
                   <div className="flex gap-4 items-center justify-between">

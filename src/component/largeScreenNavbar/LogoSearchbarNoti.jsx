@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ArrowDropDown from "../ArrowDropDown";
 import NavBarLinkListNames from "../../data/NavBarLinkListNames";
@@ -25,18 +25,35 @@ const LogoSearchbarNoti = ({
   const { todayDeals } = AllProducts();
 
   const [isSearch, setIsSearch] = useState(false);
-  const closeSearch = useDetectOutsideClick(() => {
-    setIsSearch(false);
-    setSearchResult("");
-  });
-
-  const matchedBrand = todayDeals?.map((product) => product.brand);
-
-  const uniqueBrand = [...new Set(matchedBrand)];
-
-  const filterResult = uniqueBrand?.filter((product) =>
-    product?.toLowerCase().includes(searchResult?.toLowerCase()),
-  );
+  const [filteredResult, setFilteredResult] = useState([])
+  
+    const closeSearch = useDetectOutsideClick(() => {
+      setIsSearch(false);
+      setSearchResult("");
+    });
+  
+    useEffect(() => {
+    const matchedBrand = todayDeals?.map((product) => product?.brand);
+  
+    c;
+  
+    const uniqueBrand = [
+      ...new Set(
+        todayDeals.flatMap((product) => [
+          product.brand,
+          product.name,
+          product.category,
+          product.brandType,
+        ]),
+      ),
+    ];
+  
+  
+    const filterResult = uniqueBrand?.filter((product) =>
+      product?.toLowerCase().includes(searchResult?.toLowerCase()),
+    );
+    setFilteredResult(filterResult)
+    }, [searchResult]);
 
   return (
     <section className="flex gap-3 items-center border-y-[.5px] border-slate-200 py-3.5 px-5 my-1">
@@ -83,36 +100,36 @@ const LogoSearchbarNoti = ({
         </div>
 
         {searchResult?.length > 0 && isSearch && (
-          <div className="max-h-100 h-fit bg-white shadow-2xl absolute top-13 w-full p-4 rounded-2xl text-gray-900 break-all overflow-y-scroll [&::-webkit-scrollbar]:w-0">
-            <ul>
-              <li className="flex items-center gap-2.5 justify-start py-2 text-red-950 font-bold">
-                Only brand for now, Search bar still under development.
-              </li>
-              <li className="flex items-center gap-4 justify-start py-2 cursor-pointer">
-                <IoSearchSharp className="text-2xl" />
+        <div className="max-h-[calc(100vh-155px)] h-fit bg-white shadow-2xl absolute top-14 p-4 w-full rounded-2xl text-gray-900 break-all left-[50%] right-[50%] -translate-x-[50%] overflow-y-scroll [&::-webkit-scrollbar]:w-0">
+          <ul>
+            
+            <li className="flex items-center gap-4 justify-start py-2 cursor-pointer -mx-4 px-4 hover:bg-gray-200 
+                        active:bg-gray-300">
+              <IoSearchSharp className="text-2xl" />
 
-                {searchResult?.length < 100
-                  ? `${searchResult}`
-                  : `${searchResult?.slice(0, 500)}...`}
-              </li>
+              {searchResult?.length < 100
+                ? `${searchResult}`
+                : `${searchResult?.slice(0, 500)}...`}
+            </li>
 
-              {filterResult?.length > 0 &&
-                filterResult?.map((product, index) => (
-                  <li
-                    className="flex items-center gap-2.5 justify-between py-2 -mx-4 px-4 border-t border-slate-300 cursor-pointer"
-                    key={index}
-                  >
-                    <div className="flex gap-4 items-center justify-between">
-                      <IoSearchSharp className="text-2xl" />
-                      {product}
-                    </div>
+            {filteredResult?.length > 0 &&
+              filteredResult?.map((product, index) => (
+                <li
+                  className="flex items-center gap-2.5 justify-between py-2 -mx-4 px-4 border-t border-slate-300 cursor-pointer hover:bg-gray-200 
+                        active:bg-gray-300"
+                  key={index}
+                >
+                  <div className="flex gap-4 items-center justify-between">
+                    <IoSearchSharp className="text-2xl" />
+                    {product}
+                  </div>
 
-                    <GoArrowUpLeft className="text-2xl" />
-                  </li>
-                ))}
-            </ul>
-          </div>
-        )}
+                  <GoArrowUpLeft className="text-2xl" />
+                </li>
+              ))}
+          </ul>
+        </div>
+      )}
       </div>
 
       <button className="w-9 h-9">

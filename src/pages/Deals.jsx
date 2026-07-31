@@ -54,7 +54,7 @@ const Deals = ({
   const handleFilterCategory = (containerId) => {
     setMobileFilterOptionDrop((prev) => ({
       ...prev,
-      [containerId]: !mobileFilterOptionDrop[containerId],
+      [containerId]: !mobileFilterOptionDropklddk[containerId],
     }));
   };
 

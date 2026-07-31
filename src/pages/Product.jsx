@@ -241,7 +241,7 @@ const Product = ({
                       number.map((items, index) => (
                         <div
                           className=" border-t-[.5px] border-slate-200 
-                        cursor-context-menu py-2 pl-5 hover:bg-gray-200 
+                        cursor-pointer py-2 pl-5 hover:bg-gray-200 
                         active:bg-gray-300 
                         last:rounded-bl-lg first:border-t-0 text-left"
                           key={index}
