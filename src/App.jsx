@@ -91,6 +91,7 @@ function App() {
     e.preventDefault();
     if (searchResult === "") return;
     navigate("/searchedProduct");
+    setSearchResult("");
   };
 
   const getUserName = getUserAfterSignIN?.userName?.trim()?.toUpperCase() || "";

@@ -3,11 +3,14 @@ import { Link } from "react-router-dom";
 import ArrowDropDown from "../ArrowDropDown";
 import NavBarLinkListNames from "../../data/NavBarLinkListNames";
 import background from "../../assets/logo.png";
+import AllProducts from "../../data/AllProducts";
 // icons
+import { GoArrowUpLeft } from "react-icons/go";
 import { IoSearchSharp } from "react-icons/io5";
 import { IoNotificationsSharp } from "react-icons/io5";
 import { BsCart4 } from "react-icons/bs";
 import { CiLocationOn, CiMoneyCheck1 } from "react-icons/ci";
+import { TfiEmail } from "react-icons/tfi";
 // ///////////////////////////
 
 const LogoSearchbarNoti = ({
@@ -18,6 +21,16 @@ const LogoSearchbarNoti = ({
   handleSearchSubmit,
 }) => {
   const { allCategories } = NavBarLinkListNames();
+  const { todayDeals } = AllProducts();
+
+  const matchedBrand = todayDeals?.map((product) => product.brand);
+
+  const uniqueBrand = [...new Set(matchedBrand)];
+
+  const filterResult = uniqueBrand?.filter((product) =>
+    product?.toLowerCase().includes(searchResult?.toLowerCase()),
+  );
+
   return (
     <section className="flex gap-3 items-center border-y-[.5px] border-slate-200 py-3.5 px-5 my-1">
       {/* this is the logo */}
@@ -57,6 +70,38 @@ const LogoSearchbarNoti = ({
             className="overflow-y-scroll [&::-webkit-scrollbar]:w-0.5 [&::-webkit-scrollbar-thumb]:bg-gray-400  z-1000 -left-15 min-w-50"
           />
         </div>
+
+        {searchResult?.length > 0 && (
+          <div className="max-h-100 h-fit bg-gray-100 absolute top-13 w-full p-4 rounded-2xl text-gray-900 break-all">
+            <ul>
+              <li className="flex items-center gap-2.5 justify-start py-2 text-red-950 font-bold">
+                Only brand for now, Search bar still under development.
+              </li>
+              <li className="flex items-center gap-4 justify-start py-2">
+                <IoSearchSharp className="text-2xl" />
+
+                {searchResult?.length < 100
+                  ? `${searchResult}`
+                  : `${searchResult?.slice(0, 500)}...`}
+              </li>
+
+              {filterResult?.length > 0 &&
+                filterResult?.map((product, index) => (
+                  <li
+                    className="flex items-center gap-2.5 justify-between py-2 -mx-4 px-4 border-t border-slate-300"
+                    key={index}
+                  >
+                    <div className="flex gap-4 items-center justify-between">
+                      <IoSearchSharp className="text-2xl" />
+                      {product}
+                    </div>
+
+                    <GoArrowUpLeft className="text-2xl" />
+                  </li>
+                ))}
+            </ul>
+          </div>
+        )}
       </div>
 
       <button className="w-9 h-9">
