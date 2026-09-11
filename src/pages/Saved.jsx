@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Button from "../component/Button";
 import Footer from "../layout/Footer";
 import H2_Element from "../component/H2_Element";
+import { useStoreActions, useStoreState } from "easy-peasy";
 import noCartimg from "../assets/pngwing.com (2) (5).png";
 // icons
 import { IoSearchSharp } from "react-icons/io5";
@@ -13,24 +14,23 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { MdAutoDelete } from "react-icons/md";
 import { MdAddShoppingCart } from "react-icons/md";
 
-const Saved = ({
-  addToCart,
-  getUserAfterSignIN,
-  saved,
-  setToast,
-  setSaved,
-  isSignedIn,
-  setAddToCart,
-  cartList,
-  setCartList,
-  getUserName,
-  sideMenubar,
-  setSideMenubar,
-  createAccount,
-  setCreateAccount,
-  setGetUserAfterSignIN,
-  sideMenu,
-}) => {
+const Saved = () => {
+  const createAccount = useStoreState((state) => state.createAccount);
+  const setCreateAccount = useStoreActions(
+    (actions) => actions.setCreateAccount,
+  );
+  const getUserAfterSignIN = useStoreState((state) => state.getUserAfterSignIN);
+  const setGetUserAfterSignIN = useStoreActions(
+    (actions) => actions.setGetUserAfterSignIN,
+  );
+  const addToCart = useStoreState((state) => state.addToCart);
+  const saved = useStoreState((state) => state.saved);
+  const setSaved = useStoreActions((actions) => actions.setSaved);
+  const setToast = useStoreActions((actions) => actions.setToast);
+  const setAddToCart = useStoreActions((actions) => actions.setAddToCart);
+  const cartList = useStoreState((state) => state.cartList);
+  const setCartList = useStoreActions((actions) => actions.setCartList);
+
   const [totalPrice, setTotalPrice] = useState(0);
   const [deleteSaved, setDeleteSaved] = useState(false);
   const [successfullCart, setSuccessfullCart] = useState(false);
@@ -189,16 +189,7 @@ const Saved = ({
 
   return (
     <main>
-      <Header
-        isSignedIn={isSignedIn}
-        getUserAfterSignIN={getUserAfterSignIN}
-        addToCart={addToCart}
-        cartList={cartList}
-        getUserName={getUserName}
-        sideMenubar={sideMenubar}
-        setSideMenubar={setSideMenubar}
-        sideMenu={sideMenu}
-      />
+      <Header />
 
       {
         // subTotal of all carts amount

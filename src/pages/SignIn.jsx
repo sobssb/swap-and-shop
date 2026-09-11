@@ -1,6 +1,7 @@
 import { useState } from "react";
 import background from "../assets/logo.png";
 import { Link } from "react-router-dom";
+import { useStoreActions, useStoreState } from "easy-peasy";
 // icons
 import { FiLogIn } from "react-icons/fi";
 import { PiSignOutBold } from "react-icons/pi";
@@ -8,19 +9,29 @@ import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 
-const SignIn = ({
-  showPassword,
-  setShowPassword,
-  createAccount,
-  setCreateAccount,
-  isCompleteLogin,
-  setIsCompleteLogin,
-  setGetUserAfterSignIN,
-  setIsSignedIn,
-  setToast,
-  setAddToCart,
-  setCartList,
-}) => {
+const SignIn = () => {
+  // Easy-peasy
+  const showPassword = useStoreState((state) => state.showPassword);
+  const setIsSignedIn = useStoreActions((actions) => actions.setIsSignedIn);
+
+  const createAccount = useStoreState((state) => state.createAccount);
+  const setGetUserAfterSignIN = useStoreActions(
+    (actions) => actions.setGetUserAfterSignIN,
+  );
+  const isCompleteLogin = useStoreState((state) => state.isCompleteLogin);
+  const setIsCompleteLogin = useStoreActions(
+    (actions) => actions.setIsCompleteLogin,
+  );
+
+  const setToast = useStoreActions((actions) => actions.setToast);
+
+  const setCartList = useStoreActions((actions) => actions.setCartList);
+  const setAddToCart = useStoreActions((actions) => actions.setAddToCart);
+
+  const toggleShowPassword = useStoreActions(
+    (actions) => actions.toggleShowPassword,
+  );
+
   // States
   const [signInUserNameEmail, setSignInUserNameEmail] = useState("");
   const [signInPassword, setSignInPassword] = useState("");
@@ -217,12 +228,12 @@ const SignIn = ({
             {showPassword ? (
               <IoEyeOutline
                 className="absolute top-[50%] -translate-y-[50%] right-5 cursor-pointer text-2xl"
-                onClick={() => setShowPassword((prev) => !prev)}
+                onClick={() => toggleShowPassword()}
               />
             ) : (
               <IoEyeOffOutline
                 className="absolute top-[50%] -translate-y-[50%] right-5 cursor-pointer text-2xl"
-                onClick={() => setShowPassword((prev) => !prev)}
+                onClick={() => toggleShowPassword()}
               />
             )}
           </label>

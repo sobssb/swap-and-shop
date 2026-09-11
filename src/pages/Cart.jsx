@@ -7,6 +7,8 @@ import noCartimg from "../assets/pngwing.com (2) (5).png";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../layout/Footer";
 import Saved from "./Saved";
+import AllProducts from "../data/AllProducts";
+import { useStoreActions, useStoreState } from "easy-peasy";
 // icons
 import { IoSearchSharp } from "react-icons/io5";
 import { FaPlus } from "react-icons/fa6";
@@ -15,26 +17,29 @@ import { IoNotificationsSharp } from "react-icons/io5";
 import { MdAutoDelete } from "react-icons/md";
 import { MdAddShoppingCart } from "react-icons/md";
 
-const Cart = ({
-  addToCart,
-  setAddToCart,
-  isSignedIn,
-  getUserAfterSignIN,
-  cartList,
-  setCartList,
-  createAccount,
-  setCreateAccount,
-  setGetUserAfterSignIN,
-  setToast,
-  todayDeals,
-  saved,
-  setSaved,
-  getUserName,
-  sideMenubar,
-  setSideMenubar,
-  sideMenu,
-}) => {
+const Cart = () => {
   const navigate = useNavigate();
+  const { todayDeals } = AllProducts();
+  const addToCart = useStoreState((state) => state.addToCart);
+  const setAddToCart = useStoreActions((actions) => actions.setAddToCart);
+
+  const createAccount = useStoreState((state) => state.createAccount);
+  const setCreateAccount = useStoreActions(
+    (actions) => actions.setCreateAccount,
+  );
+
+  const getUserAfterSignIN = useStoreState((state) => state.getUserAfterSignIN);
+  const setGetUserAfterSignIN = useStoreActions(
+    (actions) => actions.setGetUserAfterSignIN,
+  );
+
+  const setToast = useStoreActions((actions) => actions.setToast);
+
+  const cartList = useStoreState((state) => state.cartList);
+  const setCartList = useStoreActions((actions) => actions.setCartList);
+
+  const saved = useStoreState((state) => state.saved);
+  const setSaved = useStoreActions((actions) => actions.setSaved);
 
   const [deleteCart, setDeleteCart] = useState(false);
   const [stockById, setStockById] = useState({});
@@ -332,21 +337,7 @@ const Cart = ({
 
   return (
     <main>
-      {
-        <Header
-          isSignedIn={isSignedIn}
-          getUserAfterSignIN={getUserAfterSignIN}
-          addToCart={addToCart}
-          cartList={cartList}
-          getUserName={getUserName}
-          sideMenubar={sideMenubar}
-          setSideMenubar={setSideMenubar}
-          isSignedIn={isSignedIn}
-          getUserAfterSignIN={getUserAfterSignIN}
-          getUserName={getUserName}
-          sideMenu={sideMenu}
-        />
-      }
+      {<Header />}
 
       {
         // subTotal of all carts amount

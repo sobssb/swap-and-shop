@@ -5,6 +5,7 @@ import Button from "../component/Button";
 import H2_Element from "../component/H2_Element";
 import Footer from "../layout/Footer";
 import useDetectOutsideClick from "../hooks/useDetectOutsideClick";
+import AllProducts from "../data/AllProducts";
 import background from "../assets/logo.png";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoSearchSharp } from "react-icons/io5";
@@ -16,7 +17,6 @@ const Product = ({
   isSignedIn,
   cartList,
   getUserAfterSignIN,
-  todayDeals,
   handleAddCart,
   setToast,
   addCartExist,
@@ -26,6 +26,7 @@ const Product = ({
   setSideMenubar,
   sideMenu,
 }) => {
+  const { todayDeals } = AllProducts();
   const show = useDetectOutsideClick(() => setIsQuantityClick(false));
   const { id } = useParams();
   const findProduct = todayDeals.find((item) => item.id === id);
@@ -53,6 +54,7 @@ const Product = ({
   };
 
   useEffect(() => {
+    if (!findProduct) return;
     const handleGetListOfStockNumber = (() => {
       const numberOfStock = findProduct.max;
       const totalArray = [];
@@ -62,7 +64,7 @@ const Product = ({
 
       setNumber(totalArray);
     })();
-  }, [findProduct, setNumber]);
+  }, []);
 
   return (
     <main className={`relative `}>

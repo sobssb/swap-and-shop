@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from "react";
-import UnderConstruction from "../component/UnderConstruction";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import Button from "../component/Button";
 import DealsArrayProducts from "../data/DealsArrayProducts";
-import { Link, useParams } from "react-router-dom";
+import AllProducts from "../data/AllProducts";
+import { Link, } from "react-router-dom";
 // import H2_Ele
 // icons
 import { IoIosArrowBack } from "react-icons/io";
@@ -13,27 +13,14 @@ import { FaAngleDown } from "react-icons/fa";
 import { IoSearchSharp } from "react-icons/io5";
 import { FaTimes } from "react-icons/fa";
 
-const Deals = ({
-  addToCart,
-  isSignedIn,
-  cartList,
-  getUserAfterSignIN,
-  todayDeals,
-  handleAddCart,
-  setToast,
-  addCartExist,
-  addCartSuccessfully,
-  getUserName,
-  sideMenubar,
-  setSideMenubar,
-  sideMenu,
-}) => {
+const Deals = ({ handleAddCart }) => {
   const {
     imgArray,
     namesOfCat,
     initialBrandNames,
     initialDepartmentRadioType,
   } = DealsArrayProducts();
+  const { todayDeals } = AllProducts();
   const [seeMoreCheckbox, setSeeMoreCheckbox] = useState(false);
   const [seeMoreRadio, setSeeMoreRadio] = useState(false);
   const [departmentRadioType, setDepartmentRadioType] = useState(
@@ -54,7 +41,7 @@ const Deals = ({
   const handleFilterCategory = (containerId) => {
     setMobileFilterOptionDrop((prev) => ({
       ...prev,
-      [containerId]: !mobileFilterOptionDropklddk[containerId],
+      [containerId]: !mobileFilterOptionDrop[containerId],
     }));
   };
 
@@ -114,18 +101,7 @@ const Deals = ({
         ></div>
       )}
 
-      {
-        <Header
-          addToCart={addToCart}
-          isSignedIn={isSignedIn}
-          getUserAfterSignIN={getUserAfterSignIN}
-          cartList={cartList}
-          getUserName={getUserName}
-          sideMenubar={sideMenubar}
-          setSideMenubar={setSideMenubar}
-          sideMenu={sideMenu}
-        />
-      }
+      {<Header />}
 
       {/* showing deals from different category */}
       <section className="lg:px-5 px-3 py-7 ">
@@ -246,7 +222,7 @@ const Deals = ({
             </button>
 
             {mobileFilter && (
-              <div className="fixed bottom-0 h-[95vh] w-[94%] bg-white z-100 left-1/2 top-1/2 -translate-1/2 shadow-2xs px-4  py-2 overflow-y-scroll rounded-3xl">
+              <div className="fixed bottom-0 h-[95vh] w-[94%] bg-white z-100 left-1/2 top-1/2 -translate-1/2 shadow-2xs px-4  py-2 overflow-y-scroll [&::-webkit-scrollbar]:w-0 rounded-3xl">
                 <p
                   className="font-semibold text-[1.5rem] flex justify-between items-center mt-2 border-b-[.5px] border-slate-300 pb-2 gap-2"
                   onClick={() => setMobileFilter(!mobileFilter)}

@@ -6,6 +6,7 @@ import H2_Element from "../component/H2_Element";
 import Button from "../component/Button";
 import DealsArrayProducts from "../data/DealsArrayProducts";
 import { Link, useParams } from "react-router-dom";
+import AllProducts from "../data/AllProducts";
 // import H2_Ele
 // icons
 import { IoIosArrowBack } from "react-icons/io";
@@ -14,27 +15,14 @@ import { FaAngleDown } from "react-icons/fa";
 import { IoSearchSharp } from "react-icons/io5";
 import { FaTimes } from "react-icons/fa";
 
-const BrandOutlet = ({
-  addToCart,
-  isSignedIn,
-  cartList,
-  getUserAfterSignIN,
-  todayDeals,
-  handleAddCart,
-  setToast,
-  addCartExist,
-  addCartSuccessfully,
-  getUserName,
-  sideMenubar,
-  setSideMenubar,
-  sideMenu,
-}) => {
+const BrandOutlet = ({ handleAddCart }) => {
   const {
     imgArray,
     namesOfCat,
     initialBrandNames,
     initialDepartmentRadioType,
   } = DealsArrayProducts();
+  const { todayDeals } = AllProducts();
   const [seeMoreCheckbox, setSeeMoreCheckbox] = useState(false);
   const [seeMoreRadio, setSeeMoreRadio] = useState(false);
   const [departmentRadioType, setDepartmentRadioType] = useState(
@@ -113,18 +101,7 @@ const BrandOutlet = ({
         ></div>
       )}
 
-      {
-        <Header
-          addToCart={addToCart}
-          isSignedIn={isSignedIn}
-          getUserAfterSignIN={getUserAfterSignIN}
-          cartList={cartList}
-          getUserName={getUserName}
-          sideMenubar={sideMenubar}
-          setSideMenubar={setSideMenubar}
-          sideMenu={sideMenu}
-        />
-      }
+      {<Header />}
 
       {/* list of deals and sorting of deals */}
       <section className="lg:px-5 px-3">

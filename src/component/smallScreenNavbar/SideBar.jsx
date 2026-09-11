@@ -4,18 +4,22 @@ import SideMenuBarSlide from "../SideMenuBarSlide";
 import NavBarLinkListNames from "../../data/NavBarLinkListNames";
 import background from "../../assets/logo.png";
 import { useNavigate } from "react-router-dom";
+import { useStoreActions, useStoreState } from "easy-peasy";
 // icons
 import { FaTimes } from "react-icons/fa";
 
-const SideBar = ({
-  sideMenubar,
-  setSideMenubar,
-  isSignedIn,
-  getUserAfterSignIN,
-  getUserName,
-}) => {
+const SideBar = () => {
   const { watchListLinks, myShopLinks } = NavBarLinkListNames();
   const navigate = useNavigate();
+
+  const getUserAfterSignIN = useStoreState((state) => state.getUserAfterSignIN);
+
+  const getUserName = getUserAfterSignIN?.userName?.trim()?.toUpperCase() || "";
+
+  const isSignedIn = useStoreState((state) => state.isSignedIn);
+
+  const sideMenubar = useStoreState((state) => state.sideMenubar);
+  const setSideMenubar = useStoreActions((actions) => actions.setSideMenubar);
 
   return (
     <div
@@ -26,7 +30,6 @@ const SideBar = ({
         <section className="">
           <article
             className="flex items-center justify-between mb-5"
-            onClick={() => setSideMenubar(!sideMenubar)}
           >
             <button className="rounded-2xl w-25">
               <Link to={"/"}>
@@ -35,7 +38,7 @@ const SideBar = ({
             </button>
             <button
               className="w-6 h-6 relative"
-              onClick={() => setSideMenubar(!sideMenubar)}
+              onClick={() => setSideMenubar(false)}
             >
               <FaTimes className="w-full h-full text-center" />
             </button>
@@ -44,7 +47,7 @@ const SideBar = ({
           {/* first group */}
           <article
             className="flex flex-col "
-            onClick={() => setSideMenubar(!sideMenubar)}
+            onClick={() => setSideMenubar(false)}
           >
             <div className="mb-5 ">
               {isSignedIn &&

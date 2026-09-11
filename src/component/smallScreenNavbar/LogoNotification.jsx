@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import background from "../../assets/logo.png";
-
+import { useStoreActions, useStoreState } from "easy-peasy";
 // icons
 import { IoNotificationsSharp } from "react-icons/io5";
 import { BsCart4 } from "react-icons/bs";
@@ -8,20 +8,22 @@ import { RiContactsLine } from "react-icons/ri";
 import { RxHamburgerMenu } from "react-icons/rx";
 // ///////////////////////////
 
-const LogoNotification = ({
-  addToCart,
-  cartList,
-  sideMenubar,
-  setSideMenubar,
-}) => {
+const LogoNotification = () => {
   const navigate = useNavigate();
+
+  const cartList = useStoreState((state) => state.cartList);
+
+  const addToCart = useStoreState((state) => state.addToCart);
+
+  const setSideMenubar = useStoreActions((actions) => actions.setSideMenubar);
+
   return (
     <section className="mt-5 flex justify-between items-center px-3 text-[#1A1D2F]">
       {/* First section has two group of links which are justified between them */}
       <article className="flex gap-2 items-center">
         <button
           className="w-6 h-6 relative"
-          onClick={() => setSideMenubar(!sideMenubar)}
+          onClick={() => setSideMenubar(true)}
         >
           <RxHamburgerMenu className="w-full h-full text-center" />
         </button>

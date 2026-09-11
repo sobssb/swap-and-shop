@@ -18,7 +18,6 @@ import ListItem from "./pages/ListItem";
 import useFetchData from "./hooks/useFetchData";
 import Product from "./pages/Product";
 import SearchedProduct from "./pages/SearchedProduct";
-import AllProducts from "./data/AllProducts";
 import useDetectOutsideClick from "./hooks/useDetectOutsideClick";
 import Summary from "./pages/Summary";
 import RecentView from "./pages/RecentView";
@@ -37,66 +36,76 @@ import MyCollection from "./pages/MyCollection";
 import Messages from "./pages/Messages";
 import PsaVault from "./pages/PsaVault";
 import IssueResolutionCenter from "./pages/IssueResolutionCenter";
+import { useStoreActions, useStoreState } from "easy-peasy";
 import { useNavigate } from "react-router-dom";
 import img from "./assets/pending1777314335pngwing.com.png";
 
 import { RxHamburgerMenu } from "react-icons/rx";
-
 import { MdAddShoppingCart } from "react-icons/md";
 
 function App() {
+  const setData = useStoreActions((actions) => actions.setData);
+
+  const createAccount = useStoreState((state) => state.createAccount);
+  const setCreateAccount = useStoreActions(
+    (actions) => actions.setCreateAccount,
+  );
+  const getUserAfterSignIN = useStoreState((state) => state.getUserAfterSignIN);
+  const setGetUserAfterSignIN = useStoreActions(
+    (actions) => actions.setGetUserAfterSignIN,
+  );
+  const isSignedIn = useStoreState((state) => state.isSignedIn);
+
+  const toast = useStoreState((state) => state.toast);
+  const setToast = useStoreActions((actions) => actions.setToast);
+  const decrementToast = useStoreActions((actions) => actions.decrementToast);
+
+  const saved = useStoreState((state) => state.saved);
+  const setSaved = useStoreActions((actions) => actions.setSaved);
+  const cartList = useStoreState((state) => state.cartList);
+  const setCartList = useStoreActions((actions) => actions.setCartList);
+  // This is to the addition of carts
+  const addToCart = useStoreState((state) => state.addToCart);
+  const setAddToCart = useStoreActions((actions) => actions.setAddToCart);
+  const addCartSuccessfully = useStoreState(
+    (state) => state.addCartSuccessfully,
+  );
+  const setAddCartSuccessfully = useStoreActions(
+    (actions) => actions.setAddCartSuccessfully,
+  );
+  const addCartExist = useStoreState((state) => state.addCartExist);
+  const setAddCartExist = useStoreActions((actions) => actions.setAddCartExist);
+  const sideMenubar = useStoreState((state) => state.sideMenubar);
+  const setSideMenubar = useStoreActions((actions) => actions.setSideMenubar);
+
   const { data, fetchError, isLoading } = useFetchData(
     "http://localhost:3500/products",
   );
 
-  // This is for the login and signUp
-  const [showPassword, setShowPassword] = useState(false);
-  const [createAccount, setCreateAccount] = useState(
-    JSON.parse(localStorage.getItem("currentUser")) || [],
-  );
-  const [isCompleteLogin, setIsCompleteLogin] = useState({});
-  const [isSignedIn, setIsSignedIn] = useState(true);
-  const [getUserAfterSignIN, setGetUserAfterSignIN] = useState(
-    JSON.parse(localStorage.getItem("user")) || null,
-  );
+  useEffect(() => {
+    setData(data);
+  }, [data, setData]);
 
-  // for the deals page
-  const { todayDeals } = AllProducts();
+  useEffect(() => {
+    setCreateAccount(JSON.parse(localStorage.getItem("allUsers")) || []);
+  }, [setCreateAccount]);
+
+  useEffect(() => {
+    setGetUserAfterSignIN(JSON.parse(localStorage.getItem("user")) || null);
+  }, [setGetUserAfterSignIN]);
+
+  useEffect(() => {
+    setCartList(getUserAfterSignIN ? getUserAfterSignIN.cartList : []);
+    setAddToCart(getUserAfterSignIN ? getUserAfterSignIN.cart : 0);
+    setSaved(getUserAfterSignIN ? getUserAfterSignIN.saved : []);
+  }, [setCartList, setAddToCart, setSaved]);
+
+  // This is for the login and signUp
 
   const navigate = useNavigate();
 
-  // null means hidden; an object contains the complete toast configuration.
-  const [toast, setToast] = useState(null);
-
-  // This is to the addition of carts
-  const [addToCart, setAddToCart] = useState(
-    getUserAfterSignIN ? getUserAfterSignIN.cart : 0,
-  );
-  const [cartList, setCartList] = useState(
-    getUserAfterSignIN ? getUserAfterSignIN.cartList : [],
-  );
-  const [addCartSuccessfully, setAddCartSuccessfully] = useState(false);
-  const [addCartExist, setAddCartExist] = useState(false);
-
-  // saved products
-  const [saved, setSaved] = useState(
-    getUserAfterSignIN ? getUserAfterSignIN.saved : [],
-  );
-
-  // for the nav
-  const [searchResult, setSearchResult] = useState("");
-  const [sideMenubar, setSideMenubar] = useState(false);
-
-  const handleSearchSubmit = (e) => {
-    e.preventDefault();
-    if (searchResult === "") return;
-    navigate("/searchedProduct");
-    setSearchResult("");
-  };
-
   const getUserName = getUserAfterSignIN?.userName?.trim()?.toUpperCase() || "";
 
-  const sideMenu = useDetectOutsideClick(() => setSideMenubar(false));
   //  ///////////////
 
   // Load cart data from signed-in user when they sign in
@@ -127,7 +136,7 @@ function App() {
     });
 
     // Saved the latest account details  to localStorage
-    localStorage.setItem("currentUser", JSON.stringify(userFullDetails));
+    localStorage.setItem("allUsers", JSON.stringify(userFullDetails));
     setCreateAccount(userFullDetails);
 
     // update the current user signed in
@@ -186,21 +195,17 @@ function App() {
     if (!toast) return;
 
     const timer = setInterval(() => {
-      setToast((currentToast) => {
-        if (!currentToast) return null;
-        if (currentToast.countDown <= 1) {
-          if (currentToast.navigateTo) navigate(currentToast.navigateTo);
-          return null;
-        }
-        return {
-          ...currentToast,
-          countDown: currentToast.countDown - 1,
-        };
-      });
+      if (toast.countDown <= 1) {
+        if (toast.navigateTo) navigate(toast.navigateTo);
+        setToast(null);
+        return;
+      }
+
+      decrementToast();
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [toast, navigate]);
+  }, [toast, navigate, setToast, decrementToast]);
 
   return (
     <>
@@ -209,151 +214,26 @@ function App() {
           <Route
             index
             element={
-              <Home
-                isSignedIn={isSignedIn}
-                getUserAfterSignIN={getUserAfterSignIN}
-                data={data}
-                fetchError={fetchError}
-                isLoading={isLoading}
-                addToCart={addToCart}
-                cartList={cartList}
-                searchResult={searchResult}
-                setSearchResult={setSearchResult}
-                sideMenubar={sideMenubar}
-                setSideMenubar={setSideMenubar}
-                handleSearchSubmit={handleSearchSubmit}
-                getUserName={getUserName}
-                sideMenu={sideMenu}
-              />
+              <Home data={data} fetchError={fetchError} isLoading={isLoading} />
             }
           />
 
           <Route path="profile">
-            <Route
-              index
-              element={
-                <SignIn
-                  setToast={setToast}
-                  showPassword={showPassword}
-                  setShowPassword={setShowPassword}
-                  createAccount={createAccount}
-                  isCompleteLogin={isCompleteLogin}
-                  setIsCompleteLogin={setIsCompleteLogin}
-                  setIsSignedIn={setIsSignedIn}
-                  setGetUserAfterSignIN={setGetUserAfterSignIN}
-                  setAddToCart={setAddToCart}
-                  setCartList={setCartList}
-                />
-              }
-            />
-            <Route
-              path="/profile/createAccount"
-              element={
-                <CreateAccount
-                  showPassword={showPassword}
-                  setShowPassword={setShowPassword}
-                  setCreateAccount={setCreateAccount}
-                  createAccount={createAccount}
-                  isCompleteLogin={isCompleteLogin}
-                  setIsCompleteLogin={setIsCompleteLogin}
-                  setToast={setToast}
-                  addToCart={addToCart}
-                  cartList={cartList}
-                />
-              }
-            />
+            <Route index element={<SignIn />} />
+
+            <Route path="/profile/createAccount" element={<CreateAccount />} />
           </Route>
 
           <Route
             path="deals"
-            element={
-              <Deals
-                isSignedIn={isSignedIn}
-                getUserAfterSignIN={getUserAfterSignIN}
-                todayDeals={todayDeals}
-                addToCart={addToCart}
-                handleAddCart={handleAddCart}
-                setToast={setToast}
-                addCartSuccessfully={addCartSuccessfully}
-                addCartExist={addCartExist}
-                cartList={cartList}
-                getUserName={getUserName}
-                sideMenubar={sideMenubar}
-                setSideMenubar={setSideMenubar}
-                sideMenu={sideMenu}
-              />
-            }
+            element={<Deals handleAddCart={handleAddCart} />}
           />
 
-          <Route
-            path="cart"
-            element={
-              <Cart
-                isSignedIn={isSignedIn}
-                getUserAfterSignIN={getUserAfterSignIN}
-                addToCart={addToCart}
-                cartList={cartList}
-                setCartList={setCartList}
-                createAccount={createAccount}
-                setCreateAccount={setCreateAccount}
-                setGetUserAfterSignIN={setGetUserAfterSignIN}
-                setAddToCart={setAddToCart}
-                setToast={setToast}
-                todayDeals={todayDeals}
-                saved={saved}
-                setSaved={setSaved}
-                getUserName={getUserName}
-                sideMenubar={sideMenubar}
-                setSideMenubar={setSideMenubar}
-                sideMenu={sideMenu}
-              />
-            }
-          />
+          <Route path="cart" element={<Cart />} />
 
-          <Route
-            path="saved"
-            element={
-              <Saved
-                isSignedIn={isSignedIn}
-                getUserAfterSignIN={getUserAfterSignIN}
-                addToCart={addToCart}
-                saved={saved}
-                setSaved={setSaved}
-                cartList={cartList}
-                getUserName={getUserName}
-                sideMenubar={sideMenubar}
-                setSideMenubar={setSideMenubar}
-                createAccount={createAccount}
-                setCreateAccount={setCreateAccount}
-                setGetUserAfterSignIN={setGetUserAfterSignIN}
-                setAddToCart={setAddToCart}
-                setCartList={setCartList}
-                setToast={setToast}
-                sideMenu={sideMenu}
-              />
-            }
-          />
+          <Route path="saved" element={<Saved />} />
 
-          <Route
-            path="brandOutlet"
-            element={
-              <BrandOutlet
-                isSignedIn={isSignedIn}
-                getUserAfterSignIN={getUserAfterSignIN}
-                todayDeals={todayDeals}
-                addToCart={addToCart}
-                handleAddCart={handleAddCart}
-                setToast={setToast}
-                addCartSuccessfully={addCartSuccessfully}
-                addCartExist={addCartExist}
-                cartList={cartList}
-                getUserName={getUserName}
-                sideMenubar={sideMenubar}
-                setSideMenubar={setSideMenubar}
-                sideMenu={sideMenu}
-              />
-            }
-          />
+          <Route path="brandOutlet" element={<BrandOutlet />} />
 
           <Route path="giftCards" element={<GiftCards />} />
 
@@ -366,9 +246,6 @@ function App() {
                 getUserAfterSignIN={getUserAfterSignIN}
                 addToCart={addToCart}
                 cartList={cartList}
-                sideMenubar={sideMenubar}
-                setSideMenubar={setSideMenubar}
-                sideMenu={sideMenu}
                 sideMenubar={sideMenubar}
                 setSideMenubar={setSideMenubar}
               />
@@ -386,7 +263,6 @@ function App() {
                 getUserName={getUserName}
                 sideMenubar={sideMenubar}
                 setSideMenubar={setSideMenubar}
-                sideMenu={sideMenu}
               />
             }
           />
@@ -399,7 +275,6 @@ function App() {
               <Product
                 isSignedIn={isSignedIn}
                 getUserAfterSignIN={getUserAfterSignIN}
-                todayDeals={todayDeals}
                 addToCart={addToCart}
                 handleAddCart={handleAddCart}
                 setToast={setToast}
@@ -409,14 +284,13 @@ function App() {
                 getUserName={getUserName}
                 sideMenubar={sideMenubar}
                 setSideMenubar={setSideMenubar}
-                sideMenu={sideMenu}
               />
             }
           />
 
           <Route path="/listItem" element={<ListItem />} />
 
-          <Route path="searchedProduct" element={<SearchedProduct />} />
+          <Route path="/searchedProduct" element={<SearchedProduct />} />
 
           <Route path="*" element={<NotFound404 />} />
           {/* <Route path="about" element={<About />} /> */}

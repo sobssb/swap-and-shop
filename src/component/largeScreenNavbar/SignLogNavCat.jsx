@@ -3,11 +3,18 @@ import NavBarLinkListNames from "../../data/NavBarLinkListNames";
 import ArrowDropDown from "../ArrowDropDown";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useStoreActions, useStoreState } from "easy-peasy";
 
-const SignLogNavCat = ({ isSignedIn, getUserAfterSignIN, getUserName }) => {
+const SignLogNavCat = () => {
   const { watchListLinks, myShopLinks } = NavBarLinkListNames();
 
   const navigate = useNavigate();
+
+  const isSignedIn = useStoreState((state) => state.isSignedIn);
+
+  const getUserAfterSignIN = useStoreState((state) => state.getUserAfterSignIN);
+
+  const getUserName = getUserAfterSignIN?.userName?.trim()?.toUpperCase() || "";
 
   return (
     <section className="mt-2 flex justify-between items-center px-5 text-[#1A1D2F]">
