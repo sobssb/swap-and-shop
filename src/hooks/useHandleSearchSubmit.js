@@ -27,6 +27,7 @@ export const useHandleSearchSubmit = () => {
           product.name,
           product.category,
           product.brandType,
+          product.mainCategory,
         ]),
       ),
     ];

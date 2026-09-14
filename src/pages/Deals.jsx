@@ -4,16 +4,17 @@ import Footer from "../layout/Footer";
 import Button from "../component/Button";
 import DealsArrayProducts from "../data/DealsArrayProducts";
 import AllProducts from "../data/AllProducts";
-import { Link, } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useHandleCart } from "../hooks/useHandleCart";
 // import H2_Ele
 // icons
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { FaAngleDown } from "react-icons/fa";
-import { IoSearchSharp } from "react-icons/io5";
 import { FaTimes } from "react-icons/fa";
 
-const Deals = ({ handleAddCart }) => {
+const Deals = () => {
+  const { handleAddCart } = useHandleCart();
   const {
     imgArray,
     namesOfCat,

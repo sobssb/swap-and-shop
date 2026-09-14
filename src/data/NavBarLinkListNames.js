@@ -27,7 +27,7 @@ const NavBarLinkListNames = () => {
   ];
 
   const allCategories = [
-    { name: "Saved", url: "/" },
+    { name: "Saved", url: "/saved" },
     { name: "Electronics", url: "/" },
     { name: "Motors", url: "/" },
     { name: "Fashion", url: "/" },
@@ -50,15 +50,29 @@ const NavBarLinkListNames = () => {
   const navCategories = [
     {
       name: "Electronics",
-      url: "/",
+      url: `/searchedProduct?q=${encodeURIComponent("electronics")}`,
       img: "/assets/backgroundBanner.png",
       categories: [
-        "Apple",
-        "Samsung",
-        "Portable audio and headphones",
-        "Smart watches",
-        "Deals",
-        "Sell on ebay",
+        {
+          text: "Apple",
+          url: `/searchedProduct?q=${encodeURIComponent("apple")}`,
+        },
+        {
+          text: "Samsung",
+          url: `/searchedProduct?q=${encodeURIComponent("samsung")}`,
+        },
+        {
+          text: "Portable audio and headphones",
+          url: `/searchedProduct?q=${encodeURIComponent("head-phone")}`,
+        },
+        {
+          text: "Smart watches",
+          url: `/searchedProduct?q=${encodeURIComponent("/")}`,
+        },
+        {
+          text: "Sell on ebay",
+          url: `/searchedProduct?q=${encodeURIComponent("/")}`,
+        },
       ],
       popular: [
         "Smartphones and accessories",
@@ -75,12 +89,26 @@ const NavBarLinkListNames = () => {
       url: "/",
       img: "/assets/backgroundBanner.png",
       categories: [
-        "Apple",
-        "Samsung",
-        "Portable audio and headphones",
-        "Smart watches",
-        "Deals",
-        "Sell on ebay",
+        {
+          text: "Apple",
+          url: `/searchedProduct?q=${encodeURIComponent("apple")}`,
+        },
+        {
+          text: "Samsung",
+          url: `/searchedProduct?q=${encodeURIComponent("samsung")}`,
+        },
+        {
+          text: "Portable audio and headphones",
+          url: `/`,
+        },
+        {
+          text: "Smart watches",
+          url: `/searchedProduct?q=${encodeURIComponent("/")}`,
+        },
+        {
+          text: "Sell on ebay",
+          url: `/searchedProduct?q=${encodeURIComponent("/")}`,
+        },
       ],
       popular: [
         "Smartphones and accessories",
@@ -94,15 +122,29 @@ const NavBarLinkListNames = () => {
     },
     {
       name: "Fashion",
-      url: "/",
+      url: `/searchedProduct?q=${encodeURIComponent("fashion")}`,
       img: "/assets/backgroundBanner.png",
       categories: [
-        "Apple",
-        "Samsung",
-        "Portable audio and headphones",
-        "Smart watches",
-        "Deals",
-        "Sell on ebay",
+        {
+          text: "Apple",
+          url: `/searchedProduct?q=${encodeURIComponent("apple")}`,
+        },
+        {
+          text: "Samsung",
+          url: `/searchedProduct?q=${encodeURIComponent("samsung")}`,
+        },
+        {
+          text: "Portable audio and headphones",
+          url: `/`,
+        },
+        {
+          text: "Smart watches",
+          url: `/searchedProduct?q=${encodeURIComponent("/")}`,
+        },
+        {
+          text: "Sell on ebay",
+          url: `/searchedProduct?q=${encodeURIComponent("/")}`,
+        },
       ],
       popular: [
         "Smartphones and accessories",
@@ -119,12 +161,26 @@ const NavBarLinkListNames = () => {
       url: "/",
       img: "/assets/backgroundBanner.png",
       categories: [
-        "Apple",
-        "Samsung",
-        "Portable audio and headphones",
-        "Smart watches",
-        "Deals",
-        "Sell on ebay",
+        {
+          text: "Apple",
+          url: `/searchedProduct?q=${encodeURIComponent("apple")}`,
+        },
+        {
+          text: "Samsung",
+          url: `/searchedProduct?q=${encodeURIComponent("samsung")}`,
+        },
+        {
+          text: "Portable audio and headphones",
+          url: `/`,
+        },
+        {
+          text: "Smart watches",
+          url: `/searchedProduct?q=${encodeURIComponent("/")}`,
+        },
+        {
+          text: "Sell on ebay",
+          url: `/searchedProduct?q=${encodeURIComponent("/")}`,
+        },
       ],
       popular: [
         "Smartphones and accessories",
@@ -141,12 +197,26 @@ const NavBarLinkListNames = () => {
       url: "/",
       img: "/assets/backgroundBanner.png",
       categories: [
-        "Apple",
-        "Samsung",
-        "Portable audio and headphones",
-        "Smart watches",
-        "Deals",
-        "Sell on ebay",
+        {
+          text: "Apple",
+          url: `/searchedProduct?q=${encodeURIComponent("apple")}`,
+        },
+        {
+          text: "Samsung",
+          url: `/searchedProduct?q=${encodeURIComponent("samsung")}`,
+        },
+        {
+          text: "Portable audio and headphones",
+          url: `/`,
+        },
+        {
+          text: "Smart watches",
+          url: `/searchedProduct?q=${encodeURIComponent("/")}`,
+        },
+        {
+          text: "Sell on ebay",
+          url: `/searchedProduct?q=${encodeURIComponent("/")}`,
+        },
       ],
       popular: [
         "Smartphones and accessories",
@@ -160,15 +230,29 @@ const NavBarLinkListNames = () => {
     },
     {
       name: "Health & Beauty",
-      url: "/",
+      url: `/searchedProduct?q=${encodeURIComponent("Health & Safety")}`,
       img: "/assets/backgroundBanner.png",
       categories: [
-        "Apple",
-        "Samsung",
-        "Portable audio and headphones",
-        "Smart watches",
-        "Deals",
-        "Sell on ebay",
+        {
+          text: "Apple",
+          url: `/searchedProduct?q=${encodeURIComponent("apple")}`,
+        },
+        {
+          text: "Samsung",
+          url: `/searchedProduct?q=${encodeURIComponent("samsung")}`,
+        },
+        {
+          text: "Portable audio and headphones",
+          url: `/`,
+        },
+        {
+          text: "Smart watches",
+          url: `/searchedProduct?q=${encodeURIComponent("/")}`,
+        },
+        {
+          text: "Sell on ebay",
+          url: `/searchedProduct?q=${encodeURIComponent("/")}`,
+        },
       ],
       popular: [
         "Smartphones and accessories",
@@ -185,12 +269,26 @@ const NavBarLinkListNames = () => {
       url: "/",
       img: "/assets/backgroundBanner.png",
       categories: [
-        "Apple is here",
-        "Samsung",
-        "Portable audio and headphones",
-        "Smart watches",
-        "Deals",
-        "Sell on ebay",
+        {
+          text: "Apple",
+          url: `/searchedProduct?q=${encodeURIComponent("apple")}`,
+        },
+        {
+          text: "Samsung",
+          url: `/searchedProduct?q=${encodeURIComponent("samsung")}`,
+        },
+        {
+          text: "Portable audio and headphones",
+          url: `/`,
+        },
+        {
+          text: "Smart watches",
+          url: `/searchedProduct?q=${encodeURIComponent("/")}`,
+        },
+        {
+          text: "Sell on ebay",
+          url: `/searchedProduct?q=${encodeURIComponent("/")}`,
+        },
       ],
       popular: [
         "Smartphones and accessories isn't it",
@@ -207,12 +305,26 @@ const NavBarLinkListNames = () => {
       url: "/",
       img: "/assets/backgroundBanner.png",
       categories: [
-        "Apple is not",
-        "Samsung",
-        "Portable audio and headphones",
-        "Smart watches",
-        "Deals",
-        "Sell on ebay",
+        {
+          text: "Apple",
+          url: `/searchedProduct?q=${encodeURIComponent("apple")}`,
+        },
+        {
+          text: "Samsung",
+          url: `/searchedProduct?q=${encodeURIComponent("samsung")}`,
+        },
+        {
+          text: "Portable audio and headphones",
+          url: `/`,
+        },
+        {
+          text: "Smart watches",
+          url: `/searchedProduct?q=${encodeURIComponent("/")}`,
+        },
+        {
+          text: "Sell on ebay",
+          url: `/searchedProduct?q=${encodeURIComponent("/")}`,
+        },
       ],
       popular: [
         "Smartphones and accessories for try",

@@ -1,36 +1,22 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Header from "../layout/Header";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Button from "../component/Button";
 import H2_Element from "../component/H2_Element";
 import Footer from "../layout/Footer";
 import useDetectOutsideClick from "../hooks/useDetectOutsideClick";
 import AllProducts from "../data/AllProducts";
-import background from "../assets/logo.png";
-import { IoIosArrowBack } from "react-icons/io";
-import { IoSearchSharp } from "react-icons/io5";
+import { useHandleCart } from "../hooks/useHandleCart";
+// icons
 import { FaAngleDown } from "react-icons/fa";
 import { FaTimes } from "react-icons/fa";
 
-const Product = ({
-  addToCart,
-  isSignedIn,
-  cartList,
-  getUserAfterSignIN,
-  handleAddCart,
-  setToast,
-  addCartExist,
-  addCartSuccessfully,
-  getUserName,
-  sideMenubar,
-  setSideMenubar,
-  sideMenu,
-}) => {
+const Product = () => {
+  const { handleAddCart } = useHandleCart();
   const { todayDeals } = AllProducts();
   const show = useDetectOutsideClick(() => setIsQuantityClick(false));
   const { id } = useParams();
   const findProduct = todayDeals.find((item) => item.id === id);
-  const navigate = useNavigate();
 
   const [quantity, setQuantity] = useState(1);
   const [number, setNumber] = useState([]);
@@ -55,15 +41,15 @@ const Product = ({
 
   useEffect(() => {
     if (!findProduct) return;
-    const handleGetListOfStockNumber = (() => {
-      const numberOfStock = findProduct.max;
-      const totalArray = [];
-      for (let i = 1; i <= numberOfStock; i++) {
-        totalArray.push(i);
-      }
 
-      setNumber(totalArray);
-    })();
+    const numberOfStock = findProduct.max;
+    const totalArray = [];
+
+    for (let i = 1; i <= numberOfStock; i++) {
+      totalArray.push(i);
+    }
+
+    setNumber(totalArray);
   }, []);
 
   return (
@@ -72,16 +58,7 @@ const Product = ({
         <div className="bg-black min-h-screen w-full opacity-60 fixed top-0 z-90"></div>
       )}
 
-      <Header
-        addToCart={addToCart}
-        isSignedIn={isSignedIn}
-        getUserAfterSignIN={getUserAfterSignIN}
-        cartList={cartList}
-        getUserName={getUserName}
-        sideMenubar={sideMenubar}
-        setSideMenubar={setSideMenubar}
-        sideMenu={sideMenu}
-      />
+      <Header />
 
       <section
         className="bg-white mb-3 flex items-start gap-3 md:flex-row flex-col lg:px-5 px-3 md:mt-2"

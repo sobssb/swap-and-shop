@@ -9,6 +9,8 @@ import SideBar from "../component/smallScreenNavbar/SideBar";
 import Footer from "../layout/Footer";
 import HelpSuggestion from "../component/HelpSuggestion";
 import Button from "../component/Button";
+import { useStoreState, useStoreActions } from "easy-peasy";
+import useDetectOutsideClick from "../hooks/useDetectOutsideClick";
 // icons
 import { IoSearchSharp } from "react-icons/io5";
 import { FaAngleDown } from "react-icons/fa";
@@ -27,16 +29,13 @@ import { MdOutlineFeed } from "react-icons/md";
 // contact us
 import { TiMessages } from "react-icons/ti";
 
-const HelpContact = ({
-  addToCart,
-  cartList,
-  sideMenubar,
-  setSideMenubar,
-  isSignedIn,
-  getUserAfterSignIN,
-  getUserName,
-  sideMenu,
-}) => {
+const HelpContact = () => {
+  const sideMenubar = useStoreState((state) => state.sideMenubar);
+  const setSideMenubar = useStoreActions((actions) => actions.setSideMenubar);
+
+  const getUserAfterSignIN = useStoreState((state) => state.getUserAfterSignIN);
+
+  const sideMenu = useDetectOutsideClick(() => setSideMenubar(false));
   const [searchHelp, setSearchHelp] = useState("");
 
   const navigate = useNavigate();
@@ -48,13 +47,12 @@ const HelpContact = ({
   return (
     <main>
       <nav className="sticky top-0 bg-white z-20 border-b-[.5px] border-slate-200 pb-1">
+        {sideMenubar && (
+          <div className=" bg-black min-h-screen w-full opacity-60 fixed top-0 z-90"></div>
+        )}
         {/* large screen */}
         <section className="hidden lg:flex justify-between flex-col">
-          <SignLogNavCat
-            getUserName={getUserName}
-            isSignedIn={isSignedIn}
-            getUserAfterSignIN={getUserAfterSignIN}
-          />
+          <SignLogNavCat />
         </section>
 
         {/* mobile screen */}
@@ -62,25 +60,9 @@ const HelpContact = ({
           className="lg:hidden flex justify-between flex-col relative"
           ref={sideMenu}
         >
-          <LogoNotification
-            addToCart={addToCart}
-            cartList={cartList}
-            sideMenubar={sideMenubar}
-            setSideMenubar={setSideMenubar}
-            sideMenubar={sideMenubar}
-            setSideMenubar={setSideMenubar}
-            isSignedIn={isSignedIn}
-            getUserAfterSignIN={getUserAfterSignIN}
-            getUserName={getUserName}
-          />
+          <LogoNotification />
 
-          <SideBar
-            sideMenubar={sideMenubar}
-            setSideMenubar={setSideMenubar}
-            isSignedIn={isSignedIn}
-            getUserAfterSignIN={getUserAfterSignIN}
-            getUserName={getUserName}
-          />
+          <SideBar />
         </section>
       </nav>
 

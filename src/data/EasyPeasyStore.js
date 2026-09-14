@@ -92,4 +92,5 @@ export default createStore({
   setSideMenubar: action((state, payload) => {
     state.sideMenubar = payload;
   }),
+
 });

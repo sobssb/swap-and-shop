@@ -7,10 +7,6 @@ import H2_Element from "../component/H2_Element";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import noCartimg from "../assets/pngwing.com (2) (5).png";
 // icons
-import { IoSearchSharp } from "react-icons/io5";
-import { CiLocationOn, CiSaveDown2 } from "react-icons/ci";
-import { IoNotificationsSharp } from "react-icons/io5";
-import { RxHamburgerMenu } from "react-icons/rx";
 import { MdAutoDelete } from "react-icons/md";
 import { MdAddShoppingCart } from "react-icons/md";
 

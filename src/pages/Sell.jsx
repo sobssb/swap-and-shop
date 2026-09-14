@@ -15,29 +15,13 @@ import background from "../assets/backgroundBanner.png";
 import { FaAngleDown } from "react-icons/fa";
 
 const Sell = ({
-  addToCart,
-  isSignedIn,
-  getUserAfterSignIN,
-  cartList,
-  getUserName,
-  sideMenubar,
-  setSideMenubar,
-  sideMenu,
+  
 }) => {
   const navigate = useNavigate();
 
   return (
     <main>
-      <Header
-        addToCart={addToCart}
-        isSignedIn={isSignedIn}
-        getUserAfterSignIN={getUserAfterSignIN}
-        cartList={cartList}
-        getUserName={getUserName}
-        sideMenubar={sideMenubar}
-        setSideMenubar={setSideMenubar}
-        sideMenu={sideMenu}
-      />
+      <Header />
 
       <section className="flex gap-2 justify-between lg:px-5 px-3 items-center my-3">
         <H2_Element text="Sell" />

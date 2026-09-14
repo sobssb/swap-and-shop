@@ -42,7 +42,7 @@ const LogoNotification = () => {
             navigate("/profile");
           }}
           className="w-6 h-6"
-        >
+        > 
           <RiContactsLine className="w-full h-full" />
         </button>
         <button className="w-6 h-6 relative">

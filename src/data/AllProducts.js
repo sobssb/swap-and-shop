@@ -46,6 +46,7 @@ const AllProducts = () => {
       oldPrice: "60,240.04",
       percentage: "30%",
       condition: "Used - Like New",
+      mainCategory: "health",
       category: "Health & Safety",
       sellerName: "Adebayo Supplies",
       location: {
@@ -140,6 +141,7 @@ const AllProducts = () => {
       oldPrice: "60,240.04",
       percentage: "36%",
       condition: "Refurbished",
+      mainCategory: "Electronics",
       category: "Computers",
       sellerName: "Tech Hub Centre",
       location: {
@@ -223,7 +225,7 @@ const AllProducts = () => {
       shortDetails:
         "Premium smartphone with a strong camera system, fast processor, and titanium finish.",
       text: "Limited time deal",
-      brand: "iphone",
+      brand: "apple",
       time: "recent",
       linkText: "Shop iPhone deals",
       price: 41113,
@@ -234,6 +236,7 @@ const AllProducts = () => {
       oldPrice: "60,240.04",
       percentage: "20%",
       condition: "Used - Like New",
+      mainCategory: "Electronics",
       category: "Mobile Phones",
       sellerName: "MobiWorld",
       location: {
@@ -276,6 +279,7 @@ const AllProducts = () => {
       oldPrice: "60,240.04",
       percentage: "10%",
       condition: "Brand New",
+      mainCategory: "Electronics",
       category: "Mobile Phones",
       sellerName: "Gadget Plaza",
       location: {
@@ -323,6 +327,7 @@ const AllProducts = () => {
       oldPrice: "60,240.04",
       percentage: "25%",
       condition: "Refurbished",
+      mainCategory: "Electronics",
       category: "Mobile Phones",
       sellerName: "Vivo Connect",
       location: {
@@ -370,6 +375,7 @@ const AllProducts = () => {
       oldPrice: "60,240.04",
       percentage: "35%",
       condition: "Used - Good",
+      mainCategory: "Electronics",
       category: "Computers",
       sellerName: "Byte Market",
       location: {
@@ -412,6 +418,7 @@ const AllProducts = () => {
       oldPrice: "65,240.04",
       percentage: "5%",
       condition: "Brand New",
+      mainCategory: "Electronics",
       category: "Computers",
       sellerName: "Digital Nest",
       location: {
@@ -459,6 +466,7 @@ const AllProducts = () => {
       oldPrice: "20,240.04",
       percentage: "15%",
       condition: "Used - Like New",
+      mainCategory: "Electronics",
       category: "Mobile Phones",
       sellerName: "Pixel Point",
       location: {
@@ -506,6 +514,7 @@ const AllProducts = () => {
       oldPrice: "100,240.04",
       percentage: "35%",
       condition: "Open Box",
+      mainCategory: "Electronics",
       category: "Computers",
       sellerName: "Laptop Alley",
       location: {
@@ -553,6 +562,7 @@ const AllProducts = () => {
       oldPrice: "60,240.04",
       percentage: "45%",
       condition: "Used - Good",
+      mainCategory: "Electronics",
       category: "Photography",
       sellerName: "Lens Masters",
       location: {
@@ -600,6 +610,7 @@ const AllProducts = () => {
       oldPrice: "60,240.04",
       percentage: "35%",
       condition: "Brand New",
+      mainCategory: "Electronics",
       category: "Mobile Phones",
       sellerName: "OneStop Mobile",
       location: {
@@ -647,6 +658,7 @@ const AllProducts = () => {
       oldPrice: "60,240.04",
       percentage: "35%",
       condition: "Used - Good",
+      mainCategory: "Electronics",
       category: "Computers",
       sellerName: "PC Essentials",
       location: {
@@ -694,6 +706,7 @@ const AllProducts = () => {
       oldPrice: "60,240.04",
       percentage: "35%",
       condition: "Brand New",
+      mainCategory: "Electronics",
       category: "Audio",
       sellerName: "Sound Wave",
       location: {
@@ -741,6 +754,7 @@ const AllProducts = () => {
       oldPrice: "60,240.04",
       percentage: "35%",
       condition: "Open Box",
+      mainCategory: "Electronics",
       category: "Audio",
       sellerName: "Audio House",
       location: {
@@ -788,6 +802,7 @@ const AllProducts = () => {
       oldPrice: "60,240.04",
       percentage: "35%",
       condition: "Used - Like New",
+      mainCategory: "Electronics",
       category: "Mobile Phones",
       sellerName: "Mobile Market",
       location: {
@@ -835,6 +850,7 @@ const AllProducts = () => {
       oldPrice: "60,240.04",
       percentage: "35%",
       condition: "Used - Good",
+      mainCategory: "Fashion",
       category: "Fashion",
       sellerName: "Sneaker Spot",
       location: {
@@ -882,6 +898,7 @@ const AllProducts = () => {
       oldPrice: "60,240.04",
       percentage: "4%",
       condition: "Brand New",
+      mainCategory: "Fashion",
       category: "Fashion",
       sellerName: "Urban Footwear",
       location: {
@@ -929,6 +946,7 @@ const AllProducts = () => {
       oldPrice: "60,240.04",
       percentage: "35%",
       condition: "Used - Like New",
+      mainCategory: "Fashion",
       category: "Fashion",
       sellerName: "Sporty Styles",
       location: {
@@ -976,6 +994,7 @@ const AllProducts = () => {
       oldPrice: "60,240.04",
       percentage: "42%",
       condition: "Used - Good",
+      mainCategory: "Electronics",
       category: "Computers",
       sellerName: "Desk Tech",
       location: {
@@ -1023,6 +1042,7 @@ const AllProducts = () => {
       oldPrice: "60,240.04",
       percentage: "35%",
       condition: "Refurbished",
+      mainCategory: "Electronics",
       category: "Computers",
       sellerName: "PC Point",
       location: {
@@ -1059,7 +1079,7 @@ const AllProducts = () => {
       shortDetails:
         "Modern desktop computer bundle with a sleek display and smooth multitasking ability.",
       text: "Limited time deal",
-      brand: "iphone",
+      brand: "apple",
       time: "recent",
       linkText: "Shop iMac deals",
       price: 41113,
@@ -1070,6 +1090,7 @@ const AllProducts = () => {
       oldPrice: "60,240.04",
       percentage: "35%",
       condition: "Open Box",
+      mainCategory: "Electronics",
       category: "Computers",
       sellerName: "Apple Lane",
       location: {
@@ -1117,6 +1138,7 @@ const AllProducts = () => {
       oldPrice: "60,240.04",
       percentage: "35%",
       condition: "Used - Good",
+      mainCategory: "Electronics",
       category: "Computers",
       sellerName: "Workstation Goods",
       location: {

@@ -22,7 +22,7 @@ const SearchForm = () => {
 
   return (
     <div
-      className="px-3 lg:px-0 my-1 lg:my-0 flex grow relative border-y-[.5px] lg:border-y-0 border-slate-200 lg:border-0 py-2 lg:py-0 w-full z-100"
+      className="px-3 lg:px-0 my-1 lg:my-0 flex grow relative border-y-[.5px] lg:border-y-0 border-slate-200 lg:border-0 py-2 lg:py-0 w-full z-50"
       // ref={closeSearch}
     >
       <form action="" className=" flex grow" onSubmit={handleSearchSubmit}>

@@ -5,12 +5,14 @@ import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import Button from "../component/Button";
 import DealsArrayProducts from "../data/DealsArrayProducts";
+import { useHandleCart } from "../hooks/useHandleCart";
 import { useStoreState, useStoreActions } from "easy-peasy";
 
 // icons
 import { FaAngleDown } from "react-icons/fa";
 
 const SearchedProduct = () => {
+  const {handleAddCart} =useHandleCart()
   const collectSearchResult = useStoreState(
     (state) => state.collectSearchResult,
   );
@@ -30,10 +32,11 @@ const SearchedProduct = () => {
 
   const getSearchedProducts = todayDeals.filter(
     (product) =>
-      product.name.toLowerCase().includes(query) ||
-      product.brand.toLowerCase().includes(query) ||
-      product.category.toLowerCase().includes(query) ||
-      product.brandType.toLowerCase().includes(query),
+      product.name?.toLowerCase().includes(query) ||
+      product.brand?.toLowerCase().includes(query) ||
+      product.mainCategory?.toLowerCase().includes(query) ||
+      product.category?.toLowerCase().includes(query) ||
+      product.brandType?.toLowerCase().includes(query),
   );
 
   const { initialBrandNames, initialDepartmentRadioType } =
@@ -565,8 +568,11 @@ const SearchedProduct = () => {
               ))
             ) : (
               <h2 className="text-center col-span-full mt-[10%] md:ml-[15%]">
-                Can't find any product with the name <span className="text-black font-bold">"{collectSearchResult.toUpperCase()}"</span> in
-                our store
+                Can't find any product with the name{" "}
+                <span className="text-black font-bold">
+                  "{collectSearchResult.toUpperCase()}"
+                </span>{" "}
+                in our store
               </h2>
             )}
           </div>

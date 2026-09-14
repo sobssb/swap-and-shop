@@ -55,12 +55,12 @@ const LinkCategories = () => {
               <h2 className="mb-2 text-2xl">More Categories</h2>
               {showCategory.categories.map((category, index) => (
                 <Link
-                  to={"/"}
+                  to={category.url}
                   key={index}
                   className="hover:bg-[#021cff] hover:text-white p-1"
                   onClick={() => setShowCategoryHidden(false)}
                 >
-                  {category}
+                  {category.text}
                 </Link>
               ))}
             </div>
